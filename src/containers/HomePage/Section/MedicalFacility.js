@@ -2,45 +2,45 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Slider from "react-slick";
-import specialityImg from '../../../assets/speciality/viem-gan.jpg';
-class Speciality extends Component {
+import facilityImg from '../../../assets/medical-facility/facility.jpg';
+class MedicalFacility extends Component {
     render () {
 
         return (
-            <div className="section section-specialty">
+            <div className="section section-medical-facility">
                 <div className="section-content">
                     <div className="section-header">
-                        <div className="section-title"> Chuyên khoa phổ biến</div>
-                        <a href="#" className="section-button">xem thêm</a>
+                        <div className="section-title">Cơ sở y tế nổi bật</div>
+                        <a href="#" className="section-button">tìm kiếm</a>
                     </div>
                     <Slider { ...this.props.settings }>
                         <div>
-                            <div className="section-img" style={ { backgroundImage: `url(${specialityImg})` } }>
+                            <div className="section-img" style={ { backgroundImage: `url(${facilityImg})` } }>
 
                             </div>
                         </div>
                         <div>
-                            <div className="section-img" style={ { backgroundImage: `url(${specialityImg})` } }>
+                            <div className="section-img" style={ { backgroundImage: `url(${facilityImg})` } }>
 
                             </div>
                         </div>
                         <div>
-                            <div className="section-img" style={ { backgroundImage: `url(${specialityImg})` } }>
+                            <div className="section-img" style={ { backgroundImage: `url(${facilityImg})` } }>
 
                             </div>
                         </div>
                         <div>
-                            <div className="section-img" style={ { backgroundImage: `url(${specialityImg})` } }>
+                            <div className="section-img" style={ { backgroundImage: `url(${facilityImg})` } }>
 
                             </div>
                         </div>
                         <div>
-                            <div className="section-img" style={ { backgroundImage: `url(${specialityImg})` } }>
+                            <div className="section-img" style={ { backgroundImage: `url(${facilityImg})` } }>
 
                             </div>
                         </div>
                         <div>
-                            <div className="section-img" style={ { backgroundImage: `url(${specialityImg})` } }>
+                            <div className="section-img" style={ { backgroundImage: `url(${facilityImg})` } }>
 
                             </div>
                         </div>
@@ -63,4 +63,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Speciality);
+export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);

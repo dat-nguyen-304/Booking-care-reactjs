@@ -1,0 +1,163 @@
+.section {
+
+    &.section-specialty {
+        background: #fafafa;
+        border: 1px solid red;
+    }
+
+    &.section-doctor {
+        background: #fafafa;
+        border: 1px solid red;
+
+        .slick-slide {
+
+            padding: 0 10px;
+
+            .section-img-container {
+                border: 1px solid red;
+                height: 160px;
+                display: flex !important;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .section-img {
+                border-radius: 50%;
+                width: 100px;
+                height: 100px !important;
+                background-color: #fff;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center center;
+                border: 1px solid #f7d800;
+            }
+        }
+    }
+
+    &.section-about {
+        .section-content {
+            display: flex;
+            align-items: center;
+
+            .section-video {
+                flex: 1;
+                padding: 0 40px;
+
+                iframe {
+                    width: 100%;
+                    height: 350px;
+                }
+            }
+
+            .section-about-description {
+                flex: 1;
+                font-size: 18px;
+                text-align: justify;
+                padding: 0 40px;
+                font-style: italic;
+                font-weight: 300;
+                color: #888;
+            }
+        }
+    }
+
+    .section-content {
+        padding: 40px 0 60px;
+        width: calc(100% - 100px);
+        margin: 0 auto;
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            position: relative;
+            height: 48px;
+            margin: 0 12px 14px;
+
+            .section-title {
+                font-size: 24px;
+                font-weight: 600;
+                letter-spacing: .5px;
+                color: #333;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+            }
+
+            .section-button {
+                position: absolute;
+                top: 0;
+                right: 0;
+                font-size: 12px;
+                display: block;
+                text-decoration: none;
+                text-transform: uppercase;
+                padding: 8px 12px;
+                background-color: #eee;
+                color: #666;
+            }
+        }
+
+
+
+        .section-img {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            height: 160px;
+            border: 1px solid #f7d800;
+            margin: 0 12px;
+        }
+
+        .slick-slider {
+
+            // background-color: #f5f5f5;
+            .slick-list {
+                // background-color: grey;
+
+            }
+
+            .slick-prev {
+                width: 44px;
+                height: 48px;
+                z-index: 1000;
+                left: -16px;
+                background-color: #fafafa;
+                border: 2px solid #ccc;
+
+                &:before {
+                    font-family: "Font Awesome";
+                    color: red;
+                    font-weight: 900;
+                }
+
+                &:hover {
+                    background-color: #ededed;
+                }
+            }
+
+            .slick-next {
+                width: 44px;
+                height: 48px;
+                z-index: 1000;
+                right: -16px;
+                background-color: #fafafa;
+                border: 2px solid #ccc;
+
+                &:before {
+                    font-family: "Font Awesome";
+                    color: red;
+                }
+
+                &:hover {
+                    background-color: #ededed;
+                }
+            }
+
+            .slick-dots {
+                display: none !important;
+            }
+        }
+    }
+
+}
