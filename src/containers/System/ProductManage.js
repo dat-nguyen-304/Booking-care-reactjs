@@ -7,13 +7,13 @@ class ProductManage extends Component {
 
     }
 
-    componentDidMount() {
+    componentDidMount () {
     }
 
 
-    render() {
+    render () {
         return (
-            <div className="text-center" >Manage products</div>
+            <div className="text-center" >Manage user using redux</div>
         )
     }
 

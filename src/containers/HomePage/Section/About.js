@@ -11,9 +11,9 @@ class About extends Component {
                         <iframe width="956" height="538"
                             src="https://www.youtube.com/embed/ek-672uRnhQ"
                             title="Worlds 2020 | Orchestral Theme - League of Legends"
-                            frameborder="0"
+                            frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
+                            allowFullScreen>
                         </iframe>
                     </div>
                     <div className="section-about-description">
