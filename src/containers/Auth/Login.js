@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from "connected-react-router";
-
 import * as actions from "../../store/actions";
 
 import userIcon from '../../../src/assets/images/user.svg';
@@ -10,6 +9,8 @@ import './Login.scss';
 import { FormattedMessage } from 'react-intl';
 
 import adminService from '../../services/adminService';
+import { handleLogin, handleLoginApi } from '../../services/userService';
+import { userLoginSuccess } from '../../store/actions';
 
 class Login extends Component {
     constructor (props) {
@@ -17,7 +18,8 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            isShowPassword: false
+            isShowPassword: false,
+            errMessage: '',
         }
     }
 
@@ -39,8 +41,31 @@ class Login extends Component {
         })
     }
 
-    handleLogin = () => {
-        alert(this.state.username + ' ' + this.state.password);
+    handleLogin = async () => {
+        this.setState({
+            errMessage: ''
+        })
+        try {
+            let response = await handleLogin(this.state.username, this.state.password);
+            console.log("response: ", response);
+            if (response && response.errCode !== 0) {
+                this.setState({
+                    errMessage: response.message,
+                })
+            } else if (response && response.errCode === 0) {
+                console.log("YES 1");
+                this.props.userLoginSuccess(response.user);
+                console.log("YES 2");
+
+            }
+        } catch (e) {
+            console.log(e);
+            if (e.response) {
+                this.setState({
+                    errMessage: e.response.data.message,
+                })
+            }
+        }
     }
 
     componentDidMount = () => {
@@ -48,7 +73,6 @@ class Login extends Component {
     }
 
     render () {
-        console.log('fucntion render');
         return (
 
             <div className="login-wrapper">
@@ -84,7 +108,7 @@ class Login extends Component {
                                 { this.state.isShowPassword ? 'Ẩn' : 'Hiện' }
                             </span>
                         </div>
-
+                        <p style={ { color: "red", marginBottom: "12px" } }>{ this.state.errMessage }</p>
                         <div className="form-group login">
                             <input
                                 ref={ this.btnLogin }
@@ -110,8 +134,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
-        adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
-        adminLoginFail: () => dispatch(actions.adminLoginFail()),
+        // userLoginFail: () => dispatch(actions.adminLoginFail()),
+        userLoginSuccess: (user) => dispatch(actions.userLoginSuccess(user))
     };
 };
 
