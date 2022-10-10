@@ -13,7 +13,7 @@ import { FormattedMessage } from 'react-intl';
 import adminService from '../services/adminService';
 
 class Login extends Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.btnLogin = React.createRef();
     }
@@ -44,7 +44,7 @@ class Login extends Component {
 
     redirectToSystemPage = () => {
         const { navigate } = this.props;
-        const redirectPath = '/system/user-manage';
+        const redirectPath = '/system/manage-user';
         navigate(`${redirectPath}`);
     }
 
@@ -84,11 +84,11 @@ class Login extends Component {
         }
     };
 
-    componentDidMount() {
+    componentDidMount () {
         document.addEventListener('keydown', this.handlerKeyDown);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         document.removeEventListener('keydown', this.handlerKeyDown);
         // fix Warning: Can't perform a React state update on an unmounted component
         this.setState = (state, callback) => {
@@ -96,7 +96,7 @@ class Login extends Component {
         };
     }
 
-    render() {
+    render () {
         const { username, password, loginError } = this.state;
         const { lang } = this.props;
 
@@ -108,45 +108,45 @@ class Login extends Component {
                             <FormattedMessage id="login.login" />
                         </h2>
                         <div className="form-group icon-true">
-                            <img className="icon" src={userIcon} alt="this" />
+                            <img className="icon" src={ userIcon } alt="this" />
                             <input
-                                placeholder={LanguageUtils.getMessageByKey("login.username", lang)}
+                                placeholder={ LanguageUtils.getMessageByKey("login.username", lang) }
                                 id="username"
                                 name="username"
                                 type="text"
                                 className="form-control"
-                                value={username}
-                                onChange={this.onUsernameChange}
+                                value={ username }
+                                onChange={ this.onUsernameChange }
                             />
                         </div>
 
                         <div id="phone-input-container" className="form-group icon-true">
-                            <img className="icon" src={passIcon} alt="this" />
+                            <img className="icon" src={ passIcon } alt="this" />
                             <input
-                                placeholder={LanguageUtils.getMessageByKey("login.password", lang)}
+                                placeholder={ LanguageUtils.getMessageByKey("login.password", lang) }
                                 id="password"
                                 name="password"
                                 type="password"
                                 className="form-control"
-                                value={password}
-                                onChange={this.onPasswordChange}
+                                value={ password }
+                                onChange={ this.onPasswordChange }
                             />
                         </div>
 
-                        {loginError !== '' && (
+                        { loginError !== '' && (
                             <div className='login-error'>
-                                <span className='login-error-message'>{loginError}</span>
+                                <span className='login-error-message'>{ loginError }</span>
                             </div>
-                        )}
+                        ) }
 
                         <div className="form-group login">
                             <input
-                                ref={this.btnLogin}
+                                ref={ this.btnLogin }
                                 id="btnLogin"
                                 type="submit"
                                 className="btn"
-                                value={LanguageUtils.getMessageByKey("login.login", lang)}
-                                onClick={this.processLogin}
+                                value={ LanguageUtils.getMessageByKey("login.login", lang) }
+                                onClick={ this.processLogin }
                             />
                         </div>
                     </div>

@@ -4,8 +4,10 @@ import Header from '../containers/Header/Header';
 
 import { Redirect, Route, Switch } from 'react-router-dom';
 import UserManage from '../containers/System/UserManage';
-import ProductManage from '../containers/System/ProductManage';
-import RegisterPackageGroupOrAcc from '../containers/System/RegisterPackageGroupOrAcc';
+import UserRedux from '../containers/System/UserRedux';
+import DoctorManage from '../containers/System/DoctorManage';
+import AdminManage from '../containers/System/AdminManage';
+
 
 class System extends Component {
     render () {
@@ -15,8 +17,11 @@ class System extends Component {
                 { isLoggedIn && <Header /> }
                 <div className="system-list">
                     <Switch>
-                        <Route path="/system/user-manage" component={ UserManage } />
-                        <Route path="/system/user-redux-manage" component={ ProductManage } />
+                        <Route path="/system/manage-user" component={ UserManage } />
+                        <Route path="/system/manage-user-redux" component={ UserRedux } />
+                        <Route path="/system/manage-doctor" component={ DoctorManage } />
+                        <Route path="/system/manage-admin" component={ AdminManage } />
+
                         {/* <Route path="/system/register-package-group-or-account" component={ RegisterPackageGroupOrAcc } /> */ }
                         <Route component={ () => { return (<Redirect to={ systemMenuPath } />) } } />
                     </Switch>

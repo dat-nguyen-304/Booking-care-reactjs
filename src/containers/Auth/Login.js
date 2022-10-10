@@ -53,10 +53,7 @@ class Login extends Component {
                     errMessage: response.message,
                 })
             } else if (response && response.errCode === 0) {
-                console.log("YES 1");
                 this.props.userLoginSuccess(response.user);
-                console.log("YES 2");
-
             }
         } catch (e) {
             console.log(e);

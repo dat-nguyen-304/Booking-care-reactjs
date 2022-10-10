@@ -2,7 +2,7 @@ export const adminMenu = [
     { //người dùng
         name: 'menu.admin.manage-user', menus: [
             {
-                name: 'menu.admin.crud', link: '/system/user-manage'
+                name: 'menu.admin.crud', link: '/system/manage-user'
 
                 // subMenus: [
                 //     { name: 'menu.system.system-administrator.user-manage', },
@@ -10,7 +10,7 @@ export const adminMenu = [
                 // ]
             },
             {
-                name: 'menu.admin.crud-redux', link: '/system/user-redux-manage'
+                name: 'menu.admin.crud-redux', link: '/system/manage-user-redux'
             },
             {
                 name: 'menu.admin.manage-doctor', link: '/system/manage-doctor'
