@@ -8,9 +8,8 @@ import passIcon from '../../../src/assets/images/pass.svg';
 import './Login.scss';
 import { FormattedMessage } from 'react-intl';
 
-import adminService from '../../services/adminService';
 import { handleLogin, handleLoginApi } from '../../services/userService';
-import { userLoginSuccess } from '../../store/actions';
+
 
 class Login extends Component {
     constructor (props) {

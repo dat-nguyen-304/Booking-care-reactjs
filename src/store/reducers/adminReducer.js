@@ -17,6 +17,24 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+        case actionTypes.FETCH_POSITION_SUCCESS:
+            return {
+                ...state,
+                positions: action.positions
+            }
+        case actionTypes.FETCH_POSITION_FAIL:
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_ROLE_SUCCESS:
+            return {
+                ...state,
+                roles: action.roles
+            }
+        case actionTypes.FETCH_ROLE_FAIL:
+            return {
+                ...state,
+            }
         default:
             return state;
     }

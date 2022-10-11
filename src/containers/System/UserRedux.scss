@@ -1,0 +1,23 @@
+.upload-img-container {
+    display: flex;
+    justify-content: space-between;
+
+    .upload-img {
+        width: 100px;
+    }
+
+    .upload-img-preview {
+        height: 40px;
+        margin-left: 20px;
+        flex: 1;
+        cursor: pointer;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+    }
+}
+
+.btn-submit {
+    width: 80px;
+    margin-top: 12px;
+}
