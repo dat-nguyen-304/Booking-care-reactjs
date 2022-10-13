@@ -42,9 +42,9 @@ class UserRedux extends Component {
             lastName: '',
             phoneNumber: '',
             address: '',
-            gender: this.props.genders && this.props.genders.length > 0 ? this.props.genders[0].key : '',
-            positionId: this.props.positions && this.props.positions.length > 0 ? this.props.positions[0].key : '',
-            roleId: this.props.roles && this.props.roles.length > 0 ? this.props.roles[0].key : '',
+            gender: this.props.genders && this.props.genders.length > 0 ? this.props.genders[0].keyMap : '',
+            positionId: this.props.positions && this.props.positions.length > 0 ? this.props.positions[0].keyMap : '',
+            roleId: this.props.roles && this.props.roles.length > 0 ? this.props.roles[0].keyMap : '',
             action: CRUD_ACTION.CREATE,
             imgUrl: '',
         })
@@ -88,21 +88,21 @@ class UserRedux extends Component {
         if (prevProps.genders !== this.props.genders) {
             this.setState({
                 allGender: this.props.genders,
-                gender: this.props.genders && this.props.genders.length > 0 ? this.props.genders[0].key : ''
+                gender: this.props.genders && this.props.genders.length > 0 ? this.props.genders[0].keyMap : ''
             })
         }
 
         if (prevProps.positions !== this.props.positions) {
             this.setState({
                 allPosition: this.props.positions,
-                positionId: this.props.positions && this.props.positions.length > 0 ? this.props.positions[0].key : ''
+                positionId: this.props.positions && this.props.positions.length > 0 ? this.props.positions[0].keyMap : ''
             })
         }
 
         if (prevProps.roles !== this.props.roles) {
             this.setState({
                 allRole: this.props.roles,
-                roleId: this.props.roles && this.props.roles.length > 0 ? this.props.roles[0].key : ''
+                roleId: this.props.roles && this.props.roles.length > 0 ? this.props.roles[0].keyMap : ''
             })
         }
     }
@@ -170,6 +170,7 @@ class UserRedux extends Component {
                 gender: this.state.gender,
                 positionId: this.state.positionId,
                 roleId: this.state.roleId,
+                avatar: this.state.avatar,
             });
             if (res && res.errCode !== 0) {
                 toast.error(res.errMessage);
@@ -249,7 +250,7 @@ class UserRedux extends Component {
                                     { allGender &&
                                         allGender.map((gender, index) => {
                                             return (
-                                                <option key={ index } value={ gender.key }>{ language === LANGUAGES.VI ? gender.valueVi : gender.valueEn }</option>
+                                                <option key={ index } value={ gender.keyMap }>{ language === LANGUAGES.VI ? gender.valueVi : gender.valueEn }</option>
                                             )
                                         })
                                     }
@@ -261,7 +262,7 @@ class UserRedux extends Component {
                                     { allPosition &&
                                         allPosition.map((position, index) => {
                                             return (
-                                                <option key={ index } value={ position.key }>{ this.props.language === LANGUAGES.VI ? position.valueVi : position.valueEn }</option>
+                                                <option key={ index } value={ position.keyMap }>{ this.props.language === LANGUAGES.VI ? position.valueVi : position.valueEn }</option>
                                             )
                                         })
                                     }
@@ -273,7 +274,7 @@ class UserRedux extends Component {
                                     { allRole &&
                                         allRole.map((role, index) => {
                                             return (
-                                                <option key={ index } value={ role.key }>{ this.props.language === LANGUAGES.VI ? role.valueVi : role.valueEn }</option>
+                                                <option key={ index } value={ role.keyMap }>{ this.props.language === LANGUAGES.VI ? role.valueVi : role.valueEn }</option>
                                             )
                                         })
                                     }

@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { getAllCode, getAllUsers } from '../../services/userService';
+import { getAllCode, getAllUsers, getTopDoctorHome } from '../../services/userService';
 
 
 //fetch gender
@@ -91,6 +91,8 @@ export const fetchAllUserStart = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllUsers('ALL');
+            let res1 = await getTopDoctorHome(3);
+            console.log('check doctor: ', res1);
             if (res && res.errCode === 0) {
                 dispatch(fetchAllUserSuccess(res.users));
             } else {
@@ -110,3 +112,26 @@ export const fetchAllUserSuccess = (users) => ({
 export const fetchAllUserFail = () => ({
     type: actionTypes.FETCH_ALL_USER_FAIL
 })
+
+//fetch top doctor
+export const fetchTopDoctor = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getTopDoctorHome(3);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_TOP_DOCTOR_SUCCESS,
+                    doctors: res.doctors
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.FETCH_TOP_DOCTOR_FAIL,
+                })
+            }
+        } catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_TOP_DOCTOR_FAIL,
+            })
+        }
+    }
+}

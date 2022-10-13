@@ -4,7 +4,8 @@ const initialState = {
     genders: [],
     roles: [],
     positions: [],
-    users: []
+    users: [],
+    topDoctors: []
 }
 
 const appReducer = (state = initialState, action) => {
@@ -46,6 +47,16 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: []
+            }
+        case actionTypes.FETCH_TOP_DOCTOR_SUCCESS:
+            return {
+                ...state,
+                topDoctors: action.doctors
+            }
+        case actionTypes.FETCH_TOP_DOCTOR_FAIL:
+            return {
+                ...state,
+                topDoctors: []
             }
         default:
             return state;
