@@ -1,13 +1,12 @@
 import actionTypes from './actionTypes';
-import { getAllCode } from '../../services/userService';
+import { getAllCode, getAllUsers } from '../../services/userService';
+
 
 //fetch gender
 export const fetchGenderStart = () => {
     return async (dispatch, getState) => {
-        // console.log('check getState: ', getState());
         try {
             let res = await getAllCode('GENDER');
-            console.log(res);
             if (res && res.errCode === 0) {
                 dispatch(fetchGenderSuccess(res.allCode));
             } else {
@@ -37,7 +36,6 @@ export const fetchPositionStart = () => {
         // console.log('check getState: ', getState());
         try {
             let res = await getAllCode('POSITION');
-            console.log(res);
             if (res && res.errCode === 0) {
                 dispatch(fetchPositionSuccess(res.allCode));
             } else {
@@ -61,13 +59,11 @@ export const fetchPositionFail = () => ({
 })
 
 //fetch role
-
 export const fetchRoleStart = () => {
     return async (dispatch, getState) => {
         // console.log('check getState: ', getState());
         try {
             let res = await getAllCode('ROLE');
-            console.log(res);
             if (res && res.errCode === 0) {
                 dispatch(fetchRoleSuccess(res.allCode));
             } else {
@@ -88,4 +84,29 @@ export const fetchRoleSuccess = (roles) => ({
 
 export const fetchRoleFail = () => ({
     type: actionTypes.FETCH_ROLE_FAIL
+})
+
+//fetch all user
+export const fetchAllUserStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllUsers('ALL');
+            if (res && res.errCode === 0) {
+                dispatch(fetchAllUserSuccess(res.users));
+            } else {
+                dispatch(fetchAllUserFail());
+            }
+        } catch (e) {
+            dispatch(fetchAllUserFail());
+        }
+    }
+}
+
+export const fetchAllUserSuccess = (users) => ({
+    type: actionTypes.FETCH_ALL_USER_SUCCESS,
+    users: users.reverse()
+})
+
+export const fetchAllUserFail = () => ({
+    type: actionTypes.FETCH_ALL_USER_FAIL
 })

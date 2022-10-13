@@ -75,6 +75,7 @@
         "position": "Chức danh",
         "role": "Vai trò",
         "avatar": "Ảnh đại diện",
-        "save": "Lưu user"
+        "save": "Lưu user",
+        "update": "Lưu thay đổi"
     }
 }
