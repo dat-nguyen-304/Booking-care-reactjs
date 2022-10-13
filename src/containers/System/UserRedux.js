@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import UsersTable from './UsersTable';
 
 import * as actions from '../../store/actions';
+import CommonUtils from '../../utils/CommonUtils';
 
 class UserRedux extends Component {
 
@@ -44,12 +45,16 @@ class UserRedux extends Component {
             gender: this.props.genders && this.props.genders.length > 0 ? this.props.genders[0].key : '',
             positionId: this.props.positions && this.props.positions.length > 0 ? this.props.positions[0].key : '',
             roleId: this.props.roles && this.props.roles.length > 0 ? this.props.roles[0].key : '',
-            action: CRUD_ACTION.CREATE
-
+            action: CRUD_ACTION.CREATE,
+            imgUrl: '',
         })
     }
 
     changeFormUpdate = (user) => {
+        let imageBase64 = '';
+        if (user.image) {
+            imageBase64 = Buffer(user.image, 'base64').toString('binary');
+        }
         this.setState({
             email: user.email,
             password: '*******',
@@ -60,7 +65,8 @@ class UserRedux extends Component {
             gender: user.gender,
             positionId: user.positionId,
             roleId: user.roleId,
-            action: CRUD_ACTION.UPDATE
+            action: CRUD_ACTION.UPDATE,
+            imgUrl: imageBase64
         })
     }
 
@@ -101,13 +107,14 @@ class UserRedux extends Component {
         }
     }
 
-    getImgUrl = (event) => {
+    getImgUrl = async (event) => {
         let file = event.target.files[0];
-        const objectUrl = URL.createObjectURL(file);
         if (file) {
+            let base64 = await CommonUtils.getBase64(file);
+            const objectUrl = URL.createObjectURL(file);
             this.setState({
                 imgUrl: objectUrl,
-                avatar: file
+                avatar: base64
             })
         }
     }
@@ -165,10 +172,11 @@ class UserRedux extends Component {
                 roleId: this.state.roleId,
             });
             if (res && res.errCode !== 0) {
-                toast.error(res.errMessage)
+                toast.error(res.errMessage);
             } else {
                 toast.success('Update user successfully');
                 this.props.getAllUserStart();
+                this.resetInput();
             }
         } catch (e) {
             console.log('>>> catch: ' + e);
@@ -187,6 +195,7 @@ class UserRedux extends Component {
                 gender: this.state.gender,
                 positionId: this.state.positionId,
                 roleId: this.state.roleId,
+                avatar: this.state.avatar,
             })
             if (res && res.errCode === 0) {
                 this.props.getAllUserStart();
