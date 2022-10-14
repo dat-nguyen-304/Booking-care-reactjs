@@ -14,7 +14,6 @@ class OutstandingDoctor extends Component {
     render () {
         console.log('check top doctor: ', this.props.topDoctors);
         let { topDoctors, language } = this.props;
-        topDoctors = topDoctors.concat(topDoctors);
         return (
             <div className="section section-doctor">
                 <div className="section-content"><div className="section-header">
@@ -29,14 +28,14 @@ class OutstandingDoctor extends Component {
                                 if (doctor.image) {
                                     imageBase64 = Buffer(doctor.image, 'base64').toString('binary');
                                 }
-                                let nameVi = `${doctor.positionData.valueVi}, ${doctor.firstName} ${doctor.lastName}`;
-                                let nameEn = `${doctor.positionData.valueEn}, ${doctor.firstName} ${doctor.lastName}`;
+                                let nameVi = `${doctor.positionData.valueVi}, ${doctor.lastName} ${doctor.firstName} `;
+                                let nameEn = `${doctor.positionData.valueEn}, ${doctor.firstName} ${doctor.lastName} `;
                                 return (
                                     <div className="section-img-container">
                                         <div className="section-doctor-img" style={ { backgroundImage: `url(${imageBase64})` } }>
                                         </div>
                                         <div className="section-doctor-info">
-                                            <p className="position-fullname">{ nameVi }</p>
+                                            <p className="position-fullname">{ language === LANGUAGES.EN ? nameEn : nameVi }</p>
                                             <p className="position-specialty">Cơ xương khớp</p>
                                         </div>
                                     </div>
