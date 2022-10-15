@@ -41,11 +41,11 @@ class UsersTable extends Component {
                 <table id="users">
                     <tbody>
                         <tr>
-                            <th>Email</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Address</th>
-                            <th>Action</th>
+                            <th><FormattedMessage id="manage-user.email" /></th>
+                            <th><FormattedMessage id="manage-user.first-name" /></th>
+                            <th><FormattedMessage id="manage-user.last-name" /></th>
+                            <th><FormattedMessage id="manage-user.address" /></th>
+                            <th><FormattedMessage id="manage-user.action" /></th>
                         </tr>
 
                         {

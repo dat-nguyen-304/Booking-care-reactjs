@@ -17,7 +17,7 @@ class About extends Component {
                         </iframe>
                     </div>
                     <div className="section-about-description">
-                        "...Ngôi đền đầu tiên do vua Solomon xây dựng vào khoảng thế kỷ 10 trước Công nguyên, là trung tâm phụng thờ của Do Thái giáo cổ. Ngôi đền này chính thức thay thế cho nơi mà Mô-sê hằng phụng thờ và những nơi khác tại Shiloh, Nov, và Givon, trở thành nơi tập trung cao độ của đức tin người Do Thái. Ngôi đền thứ nhất này bị phá hủy bởi những người Babylon vào năm 586 TCN, và được xây dựng lại (là ngôi đền thứ hai) bảy mươi năm sau tức 515 TCN..."
+                        <FormattedMessage id="home-section.description" />
                     </div>
                 </div>
             </div >

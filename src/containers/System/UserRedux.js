@@ -231,7 +231,7 @@ class UserRedux extends Component {
         return (
             <>
 
-                <div className="title" >Manage user using redux</div>
+                <div className="title" ><FormattedMessage id="manage-user.manage-user" /></div>
                 <div className="container">
 
                     <div>

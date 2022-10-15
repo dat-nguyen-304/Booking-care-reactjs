@@ -9,7 +9,9 @@ import About from './Section/About';
 import HomeFooter from './HomeFooter';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import HomeBanner from './HomeBanner';
 import './HomePage.scss';
+
 class HomePage extends Component {
 
     render () {
@@ -23,6 +25,7 @@ class HomePage extends Component {
         return (
             <div>
                 <HomeHeader />
+                <HomeBanner />
                 <Speciality settings={ settings } />
                 <MedicalFacility settings={ settings } />
                 <OutstandingDoctor settings={ settings } />

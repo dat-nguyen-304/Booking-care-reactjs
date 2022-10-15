@@ -13,6 +13,7 @@ import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select'
 import { LANGUAGES } from '../../utils/constant';
+import './DoctorManage.scss';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 class DoctorManage extends Component {
@@ -89,22 +90,33 @@ class DoctorManage extends Component {
         const { selectedDoctor, options } = this.state;
         console.log('all doctors: ', options);
         return (
-            <>
-                <div className="text-center" >Manage doctor</div>
-                <textarea className="form-control"
-                    onChange={ (e) => this.handleChangeDescription(e) }
-                    value={ this.state.description }></textarea>
-                <Select
-                    value={ selectedDoctor }
-                    onChange={ this.handleChange }
-                    options={ options }
-                />
+            <div className="manage-doctor-container">
+                <div className="text-center title" ><FormattedMessage id="manage-doctor.manage-doctor" /></div>
+                <div className="manage-doctor-input">
+                    <div className="doctor-description">
+                        <label><FormattedMessage id="manage-doctor.introduction" /></label>
+                        <textarea className="form-control "
+                            onChange={ (e) => this.handleChangeDescription(e) }
+                            rows='4' value={ this.state.description }></textarea>
+                    </div>
+
+                    <div className="doctor-select">
+                        <label><FormattedMessage id="manage-doctor.choose-doctor" /></label>
+                        <Select
+                            value={ selectedDoctor }
+                            onChange={ this.handleChange }
+                            options={ options }
+                        />
+                    </div>
+
+                </div>
+                <label><FormattedMessage id="manage-doctor.description" /></label>
 
                 <MdEditor style={ { height: '500px' } } renderHTML={ text => mdParser.render(text) } onChange={ this.handleEditorChange } />
-                <button onClick={ () => this.handleSaveContentMarkDown() }>
-                    Lưu thông tin
+                <button class="submit-btn btn btn-primary" onClick={ () => this.handleSaveContentMarkDown() }>
+                    <FormattedMessage id="manage-doctor.save" />
                 </button>
-            </>
+            </div >
         )
     }
 

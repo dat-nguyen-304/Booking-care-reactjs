@@ -1,0 +1,23 @@
+.manage-doctor-container {
+    margin: 0 100px 50px;
+
+    .manage-doctor-input {
+        display: flex;
+        margin: 20px 0;
+
+        .doctor-description {
+            margin-right: 100px;
+            flex: 1;
+        }
+
+        .doctor-select {
+            flex: 1;
+
+        }
+    }
+
+    .submit-btn {
+        padding: 0 20px;
+        margin-top: 20px;
+    }
+}

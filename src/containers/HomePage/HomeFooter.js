@@ -9,7 +9,7 @@ class HomeFooter extends Component {
         return (
             <div className="home-footer">
                 <div className="home-footer-left">
-                    &#169; Bản quyền thuộc về Booking care
+                    &#169; <FormattedMessage id="home-section.copyright" />
                 </div>
                 <div className="home-footer-right">
                     <a href="#"><i className="facebook-link fab fa-facebook-square"></i></a>

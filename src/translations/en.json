@@ -22,6 +22,17 @@
         "mental-health": "Mental health",
         "dental-exam": "Dental examination"
     },
+    "home-section": {
+        "popular-specialty": "Popular specialties",
+        "outstanding-medical-facility": "Outstanding medical facilities",
+        "outstanding-doctor": "Last week's outstanding doctor",
+        "handbook": "Handbook",
+        "see-more": "See more",
+        "search": "Search",
+        "all-post": "All posts",
+        "description": "... The first temple built by King Solomon around the 10th century BC, was the center of worship of ancient Judaism. This temple officially replaced the place of worship of Moses and other places at Shiloh, Nov, and Givon, becoming the high concentration of Jewish faith. This first temple was destroyed by the Babylonians in 586 BC, and rebuilt (as the second temple) seventy years later or 515 BC...",
+        "copyright": "Copyright belongs to Booking care"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
@@ -64,6 +75,7 @@
         }
     },
     "manage-user": {
+        "manage-user": "Manage user",
         "add": "Add new user",
         "email": "Email",
         "password": "Password",
@@ -76,6 +88,14 @@
         "role": "Role",
         "avatar": "Avatar",
         "save": "Save",
-        "update": "Save changes"
+        "update": "Save changes",
+        "action": "Action"
+    },
+    "manage-doctor": {
+        "manage-doctor": "Manage Doctor",
+        "introduction": "Introduction",
+        "choose-doctor": "Choose doctor",
+        "description": "Description",
+        "save": "Save"
     }
 }

@@ -10,8 +10,8 @@ class MedicalFacility extends Component {
             <div className="section section-medical-facility">
                 <div className="section-content">
                     <div className="section-header">
-                        <div className="section-title">Cơ sở y tế nổi bật</div>
-                        <a href="#" className="section-button">tìm kiếm</a>
+                        <div className="section-title"><FormattedMessage id="home-section.outstanding-medical-facility" /></div>
+                        <a href="#" className="section-button"><FormattedMessage id="home-section.search" /></a>
                     </div>
                     <Slider { ...this.props.settings }>
                         <div>

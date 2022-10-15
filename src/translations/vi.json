@@ -22,6 +22,18 @@
         "mental-health": "Sức khỏe tinh thần",
         "dental-exam": "Khám nha khoa"
     },
+    "home-section": {
+        "popular-specialty": "Chuyên khoa phổ biến",
+        "outstanding-medical-facility": "Cơ sở y tế nổi bật",
+        "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
+        "handbook": "Cẩm nang",
+        "see-more": "Xem thêm",
+        "search": "Tìm kiếm",
+        "all-post": "Tất cả bài viết",
+        "description": "...Ngôi đền đầu tiên do vua Solomon xây dựng vào khoảng thế kỷ 10 trước Công nguyên, là trung tâm phụng thờ của Do Thái giáo cổ. Ngôi đền này chính thức thay thế cho nơi mà Mô-sê hằng phụng thờ và những nơi khác tại Shiloh, Nov, và Givon, trở thành nơi tập trung cao độ của đức tin người Do Thái. Ngôi đền thứ nhất này bị phá hủy bởi những người Babylon vào năm 586 TCN, và được xây dựng lại (là ngôi đền thứ hai) bảy mươi năm sau tức 515 TCN...",
+        "copyright": "Bản quyền thuộc về Booking care"
+
+    },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",
@@ -64,6 +76,7 @@
         }
     },
     "manage-user": {
+        "manage-user": "Quản lí người dùng",
         "add": "Thêm người dùng mới",
         "email": "Email",
         "password": "Mật khẩu",
@@ -76,6 +89,14 @@
         "role": "Vai trò",
         "avatar": "Ảnh đại diện",
         "save": "Lưu user",
-        "update": "Lưu thay đổi"
+        "update": "Lưu thay đổi",
+        "action": "Thao tác"
+    },
+    "manage-doctor": {
+        "manage-doctor": "Quản lí bác sĩ",
+        "introduction": "Lời giới thiệu",
+        "choose-doctor": "Chọn bác sĩ",
+        "description": "Mô tả chi tiết",
+        "save": "Lưu thông tin"
     }
 }
