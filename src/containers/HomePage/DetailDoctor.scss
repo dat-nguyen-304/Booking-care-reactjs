@@ -30,4 +30,16 @@
             }
         }
     }
+
+    .doctor-detail {
+        img {
+            margin: 20px 0;
+            height: 400px;
+            display: block;
+            text-align: center;
+            width: 100%;
+            object-fit: contain;
+            object-position: left;
+        }
+    }
 }

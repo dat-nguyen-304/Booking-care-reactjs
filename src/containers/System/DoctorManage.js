@@ -6,14 +6,16 @@ import * as actions from '../../store/actions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { createMarkDown } from '../../services/userService';
+import { createMarkDown, updateMarkDown } from '../../services/userService';
 
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select'
-import { LANGUAGES } from '../../utils/constant';
+import { CRUD_ACTION, LANGUAGES } from '../../utils/constant';
 import './DoctorManage.scss';
+import { getDetailDoctorById } from '../../services/userService';
+import _ from 'lodash';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 class DoctorManage extends Component {
@@ -24,14 +26,8 @@ class DoctorManage extends Component {
         description: '',
         selectedDoctor: null,
         options: [],
+        action: CRUD_ACTION.CREATE,
     }
-
-    options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-    ]
-
     componentDidMount () {
         this.props.getAllDoctorStart();
     }
@@ -65,6 +61,20 @@ class DoctorManage extends Component {
         }
     }
 
+    handleUpdateContentMarkDown = async () => {
+        let res = await updateMarkDown({
+            contentHTML: this.state.contentHTML,
+            contentMarkDown: this.state.contentMarkDown,
+            description: this.state.description,
+            doctorId: this.state.selectedDoctor.value,
+        })
+        if (res && res.errCode === 0) {
+            toast.success('update markdown successfully');
+        } else {
+            toast.error(res.errMessage);
+        }
+    }
+
     handleEditorChange = ({ html, text }) => {
         this.setState({
             contentMarkDown: text,
@@ -80,14 +90,35 @@ class DoctorManage extends Component {
         })
     }
 
-    handleChange = (selectedDoctor) => {
-        this.setState({ selectedDoctor }, () =>
-            console.log(`Option selected:`, this.state.selectedDoctor)
-        );
+    handleChange = async (selectedDoctor) => {
+        let doctorId = selectedDoctor.value;
+        const res = await getDetailDoctorById(doctorId);
+        if (res && res.errCode === 0) {
+            let { description, contentHTML, contentMarkDown } = res.doctorInfo.MarkDown;
+            if (!description && !contentHTML && !contentMarkDown) {
+                this.setState({
+                    action: CRUD_ACTION.CREATE,
+                    selectedDoctor,
+                    contentHTML: '',
+                    contentMarkDown: '',
+                    description: '',
+                })
+            } else {
+                this.setState({
+                    action: CRUD_ACTION.UPDATE,
+                    selectedDoctor,
+                    contentHTML: contentHTML,
+                    contentMarkDown: contentMarkDown,
+                    description: description,
+                })
+            }
+        }
+        console.log(`Option selected:`, this.state.selectedDoctor)
+
     };
 
     render () {
-        const { selectedDoctor, options } = this.state;
+        const { selectedDoctor, options, action, contentMarkDown, description } = this.state;
         console.log('all doctors: ', options);
         return (
             <div className="manage-doctor-container">
@@ -97,7 +128,7 @@ class DoctorManage extends Component {
                         <label><FormattedMessage id="manage-doctor.introduction" /></label>
                         <textarea className="form-control "
                             onChange={ (e) => this.handleChangeDescription(e) }
-                            rows='4' value={ this.state.description }></textarea>
+                            rows='4' value={ description }></textarea>
                     </div>
 
                     <div className="doctor-select">
@@ -112,10 +143,20 @@ class DoctorManage extends Component {
                 </div>
                 <label><FormattedMessage id="manage-doctor.description" /></label>
 
-                <MdEditor style={ { height: '500px' } } renderHTML={ text => mdParser.render(text) } onChange={ this.handleEditorChange } />
-                <button class="submit-btn btn btn-primary" onClick={ () => this.handleSaveContentMarkDown() }>
-                    <FormattedMessage id="manage-doctor.save" />
-                </button>
+                <MdEditor style={ { height: '500px' } }
+                    renderHTML={ text => mdParser.render(text) }
+                    onChange={ this.handleEditorChange }
+                    value={ contentMarkDown ? contentMarkDown : '' }
+                />
+                { action === CRUD_ACTION.CREATE ?
+                    <button class="submit-btn btn btn-primary" onClick={ () => this.handleSaveContentMarkDown() }>
+                        <FormattedMessage id="manage-doctor.save" />
+                    </button>
+                    :
+                    <button class="submit-btn btn btn-primary" onClick={ () => this.handleUpdateContentMarkDown() }>
+                        <FormattedMessage id="manage-doctor.update" />
+                    </button>
+                }
             </div >
         )
     }

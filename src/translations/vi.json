@@ -73,6 +73,9 @@
             "manage-specialty": "Quản lí chuyên khoa",
             "handbook": "Cẩm nang",
             "manage-handbook": "Quản lí cẩm nang"
+        },
+        "doctor": {
+            "manage-schedule": "Quản lí lịch khám bệnh"
         }
     },
     "manage-user": {
@@ -97,6 +100,7 @@
         "introduction": "Lời giới thiệu",
         "choose-doctor": "Chọn bác sĩ",
         "description": "Mô tả chi tiết",
-        "save": "Lưu thông tin"
+        "save": "Lưu thông tin",
+        "update": "Lưu thay đổi"
     }
 }

@@ -9,7 +9,7 @@ import userIcon from '../../src/assets/images/user.svg';
 import passIcon from '../../src/assets/images/pass.svg';
 import './Login.scss';
 import { FormattedMessage } from 'react-intl';
-
+//redirectToSystemPage
 import adminService from '../services/adminService';
 
 class Login extends Component {
@@ -133,11 +133,13 @@ class Login extends Component {
                             />
                         </div>
 
-                        { loginError !== '' && (
-                            <div className='login-error'>
-                                <span className='login-error-message'>{ loginError }</span>
-                            </div>
-                        ) }
+                        { loginError !== '' &&
+                            (
+                                <div className='login-error'>
+                                    <span className='login-error-message'>{ loginError }</span>
+                                </div>
+                            )
+                        }
 
                         <div className="form-group login">
                             <input

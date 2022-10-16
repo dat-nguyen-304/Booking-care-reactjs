@@ -41,6 +41,10 @@ const createMarkDown = (markdown) => {
     return axios.post(`/api/create-markdown`, markdown);
 }
 
+const updateMarkDown = (markdown) => {
+    return axios.put(`/api/update-markdown`, markdown);
+}
+
 const getDetailDoctorById = (id) => {
     return axios.get(`/api/get-detail-doctor-by-id?id=${id}`);
 
@@ -49,5 +53,5 @@ const getDetailDoctorById = (id) => {
 
 export {
     handleLogin, handleLoginApi, getAllUsers, createUser, deleteUser,
-    editUser, getAllCode, getTopDoctorHome, getAllDoctors, createMarkDown, getDetailDoctorById
+    editUser, getAllCode, getTopDoctorHome, getAllDoctors, createMarkDown, updateMarkDown, getDetailDoctorById
 }

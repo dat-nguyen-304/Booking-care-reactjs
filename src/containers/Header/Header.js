@@ -4,10 +4,10 @@ import { FormattedMessage } from 'react-intl';
 
 import * as actions from "../../store/actions";
 import Navigator from '../../components/Navigator';
-import { adminMenu } from './menuApp';
+import { adminMenu, doctorMenu } from './menuApp';
 import './Header.scss';
 import { changeLanguageApp } from '../../store/actions/appActions';
-import { LANGUAGES } from '../../utils/constant';
+import { LANGUAGES, ROLES } from '../../utils/constant';
 
 class Header extends Component {
     changeLanguage = (language) => {
@@ -15,11 +15,12 @@ class Header extends Component {
     }
     render () {
         const { processLogout, userInfo } = this.props;
+        console.log('user Info: ', userInfo);
         return (
             <div className="header-container">
                 {/* thanh navigator */ }
                 <div className="header-tabs-container header-left-container">
-                    <Navigator menus={ adminMenu } />
+                    <Navigator menus={ userInfo && userInfo.roleId === ROLES.ADMIN ? adminMenu : doctorMenu } />
                 </div>
                 <div className="header-right-container">
                     <div className="welcome">

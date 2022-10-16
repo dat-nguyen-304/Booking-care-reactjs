@@ -42,3 +42,14 @@ export const adminMenu = [
         ]
     },
 ];
+
+export const doctorMenu = [
+    { //người dùng
+        name: 'menu.doctor.manage-schedule', menus: [
+            {
+                name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule'
+            },
+        ]
+    },
+
+];

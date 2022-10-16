@@ -36,11 +36,15 @@
             padding: 0;
 
             .menu {
-                width: 205px;
-                padding: 0 15px;
+                width: 100%;
+                padding: 0 24px;
                 height: 35px;
                 line-height: 35px;
                 text-transform: none;
+
+                &:hover {
+                    background-color: #ccc;
+                }
 
                 &.active {
                     background-color: #6288c1;
