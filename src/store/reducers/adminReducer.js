@@ -6,7 +6,8 @@ const initialState = {
     positions: [],
     users: [],
     topDoctors: [],
-    allDoctors: []
+    allDoctors: [],
+    allTimeTypes: [],
 }
 
 const appReducer = (state = initialState, action) => {
@@ -68,6 +69,16 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allDoctors: []
+            }
+        case actionTypes.FETCH_ALL_TIME_TYPE_SUCCESS:
+            return {
+                ...state,
+                allTimeTypes: action.allTimeTypes
+            }
+        case actionTypes.FETCH_ALL_TIME_TYPE_FAIL:
+            return {
+                ...state,
+                allTimeTypes: []
             }
         default:
             return state;

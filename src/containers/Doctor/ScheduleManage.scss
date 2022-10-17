@@ -1,0 +1,32 @@
+.manage-schedule-container {
+    margin: 50px 100px 0;
+
+    .range-time-container {
+        margin-top: 20px;
+
+        .range-time {
+            border: 1px solid #ccc;
+            text-align: center;
+            margin: 10px 16px;
+            padding: 12px 0;
+            cursor: pointer;
+            border-radius: 5px;
+
+            &:hover {
+                background-color: #ccc;
+                color: #fff;
+            }
+
+            &.active {
+                background-color: orange;
+                color: #333;
+            }
+        }
+    }
+
+    .submit-btn {
+        margin-top: 20px;
+        padding: 0 12px;
+        font-weight: 300;
+    }
+}

@@ -101,5 +101,11 @@
         "description": "Description",
         "save": "Save",
         "update": "Save changes"
+    },
+    "manage-schedule": {
+        "manage-schedule": "Manage doctor's plan",
+        "choose-doctor": "Choose doctor",
+        "choose-date": "Choose date",
+        "add-plan": "Add plan"
     }
 }

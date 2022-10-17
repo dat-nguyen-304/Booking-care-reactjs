@@ -5,23 +5,24 @@ import { ROLES } from '../utils/constant';
 class Home extends Component {
 
     render () {
-        // const { isLoggedIn, userInfo } = this.props;
-        // console.log('-------------------------', userInfo.roleId);
-        // let linkToRedirect = '';
-        // if (!isLoggedIn)
-        //     linkToRedirect = '/home';
-        // else {
-        //     linkToRedirect = userInfo.roleId === ROLES.ADMIN ? '/system/manage-user' : '/doctor/manage-schedule';
-        // }
-        // return (
-        //     <Redirect to={ linkToRedirect } />
-        // );
-        const { isLoggedIn } = this.props;
-        let linkToRedirect = isLoggedIn ? '/system/manage-user' : '/home';
-
+        const { isLoggedIn, userInfo } = this.props;
+        console.log('-------------------------', userInfo.roleId);
+        let linkToRedirect = '';
+        if (!isLoggedIn)
+            linkToRedirect = '/home';
+        else {
+            linkToRedirect = userInfo.roleId === ROLES.ADMIN ? '/system/manage-user' : '/doctor/manage-schedule';
+        }
         return (
             <Redirect to={ linkToRedirect } />
         );
+        // const { isLoggedIn } = this.props;
+        // let linkToRedirect = isLoggedIn ? '/system/manage-user' : '/home';
+        // let linkToRedirect = '/home'
+
+        // return (
+        //     <Redirect to={ '/home' } />
+        // );
     }
 
 }

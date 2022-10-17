@@ -119,7 +119,6 @@ class DoctorManage extends Component {
 
     render () {
         const { selectedDoctor, options, action, contentMarkDown, description } = this.state;
-        console.log('all doctors: ', options);
         return (
             <div className="manage-doctor-container">
                 <div className="text-center title" ><FormattedMessage id="manage-doctor.manage-doctor" /></div>

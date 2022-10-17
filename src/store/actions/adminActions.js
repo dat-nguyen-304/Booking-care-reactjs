@@ -86,6 +86,34 @@ export const fetchRoleFail = () => ({
     type: actionTypes.FETCH_ROLE_FAIL
 })
 
+// fetch time type
+export const fetchAllTimeTypeStart = () => {
+    return async (dispatch, getState) => {
+        // console.log('check getState: ', getState());
+        try {
+            let res = await getAllCode('TIME');
+            if (res && res.errCode === 0) {
+                dispatch(fetchAllTimeTypeSuccess(res.allCode));
+            } else {
+                dispatch(fetchAllTimeTypeFail());
+            }
+        } catch (e) {
+            dispatch(fetchRoleFail());
+            console.log('fetch role fail: ', e);
+        }
+    }
+}
+
+export const fetchAllTimeTypeSuccess = (allTimeTypes) => ({
+    type: actionTypes.FETCH_ALL_TIME_TYPE_SUCCESS,
+    allTimeTypes,
+
+})
+
+export const fetchAllTimeTypeFail = () => ({
+    type: actionTypes.FETCH_ALL_TIME_TYPE_FAIL
+})
+
 //fetch all user
 export const fetchAllUserStart = () => {
     return async (dispatch, getState) => {

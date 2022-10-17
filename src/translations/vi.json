@@ -102,5 +102,11 @@
         "description": "Mô tả chi tiết",
         "save": "Lưu thông tin",
         "update": "Lưu thay đổi"
+    },
+    "manage-schedule": {
+        "manage-schedule": "Quản lí kế hoạch bác sĩ",
+        "choose-doctor": "Chọn bác sĩ",
+        "choose-date": "Chọn ngày",
+        "add-plan": "Thêm kế hoạch"
     }
 }
