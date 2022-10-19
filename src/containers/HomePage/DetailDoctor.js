@@ -8,6 +8,7 @@ import './HomeFooter.scss';
 import HomeFooter from './HomeFooter';
 import { getDetailDoctorById } from '../../services/userService';
 import { LANGUAGES } from '../../utils/constant';
+import DoctorSchedule from '../Doctor/DoctorSchedule';
 class DetailDoctor extends Component {
     state = {
         firstName: '',
@@ -58,9 +59,7 @@ class DetailDoctor extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="doctor-schedule">
-
-                    </div>
+                    <DoctorSchedule doctorId={ this.props.match.params.id } />
                     <div className="doctor-detail">
                         <div dangerouslySetInnerHTML={ { __html: `${contentHTML ? contentHTML : ''}` } }></div>
                     </div>

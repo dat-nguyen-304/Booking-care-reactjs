@@ -33,6 +33,12 @@
         "description": "... The first temple built by King Solomon around the 10th century BC, was the center of worship of ancient Judaism. This temple officially replaced the place of worship of Moses and other places at Shiloh, Nov, and Givon, becoming the high concentration of Jewish faith. This first temple was destroyed by the Babylonians in 586 BC, and rebuilt (as the second temple) seventy years later or 515 BC...",
         "copyright": "Copyright belongs to Booking care"
     },
+    "detail-doctor": {
+        "choose-date": "Choose date",
+        "calendar": "Calendar",
+        "book-calendar": "Choose and book for free",
+        "no-schedule": "There is no schedule for this day"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
