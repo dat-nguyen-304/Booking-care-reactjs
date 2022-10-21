@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Header from '../containers/Header/Header';
 
 import { Redirect, Route, Switch } from 'react-router-dom';
-import ScheduleManage from '../containers/Doctor/ScheduleManage';
+import ScheduleManage from '../containers/System/ScheduleManage';
 
 
 class Doctor extends Component {

@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./ScheduleManage.scss";
 import { toast } from 'react-toastify';
 import { createBulkSchedule } from '../../services/userService';
+import './ScheduleManage.scss';
 class AdminManage extends Component {
     state = {
         selectedDoctor: null,

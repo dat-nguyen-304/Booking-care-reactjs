@@ -3,10 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import { LANGUAGES } from '../../utils/constant';
-import "./ScheduleManage.scss";
+import './DoctorSchedule.scss';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import { getSchedule } from '../../services/userService';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './DoctorSchedule.scss';
 import vi from "moment/locale/vi";
 class DoctorSchedule extends Component {
@@ -113,11 +114,11 @@ class DoctorSchedule extends Component {
                             return (
                                 <>
                                     { language === LANGUAGES.VI ?
-                                        <div className="schedule-vi">
+                                        <div className="schedule-vi" onClick={ this.props.toggleModal }>
                                             { schedule.timeData.valueVi }
                                         </div>
                                         :
-                                        <div className="schedule-en">
+                                        <div className="schedule-en" onClick={ this.props.toggleModal }>
                                             { schedule.timeData.valueEn }
                                         </div>
                                     }

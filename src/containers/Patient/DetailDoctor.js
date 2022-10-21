@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import HomeHeader from './HomeHeader';
+import HomeHeader from '../HomePage/HomeHeader';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './DetailDoctor.scss';
-import './HomeFooter.scss';
-import HomeFooter from './HomeFooter';
+import HomeFooter from '../HomePage/HomeFooter';
 import { getDetailDoctorById } from '../../services/userService';
 import { LANGUAGES } from '../../utils/constant';
-import DoctorSchedule from '../Doctor/DoctorSchedule';
-import DoctorInfo from '../Doctor/DoctorInfo';
+import DoctorSchedule from './DoctorSchedule';
+import DoctorInfo from './DoctorInfo';
+import ModalBooking from './ModalBooking';
+
 class DetailDoctor extends Component {
     state = {
         firstName: '',
@@ -18,6 +19,7 @@ class DetailDoctor extends Component {
         positionData: '',
         contentHTML: '',
         description: '',
+        openModal: false,
     }
     async componentDidMount () {
         let doctorId = this.props.match.params.id;
@@ -37,6 +39,14 @@ class DetailDoctor extends Component {
 
     componentDidUpdate () {
 
+    }
+
+    toggleModal = () => {
+        console.log('toggle: ', !this.state.openModal);
+        this.setState({
+            ...this.state,
+            openModal: !this.state.openModal,
+        })
     }
 
     render () {
@@ -62,7 +72,10 @@ class DetailDoctor extends Component {
                     </div>
                     <div class="schedule-container">
                         <div className="schedule-content-left">
-                            <DoctorSchedule doctorId={ this.props.match.params.id } />
+                            <DoctorSchedule
+                                doctorId={ this.props.match.params.id }
+                                toggleModal={ this.toggleModal }
+                            />
                         </div>
                         <div className="schedule-content-right">
                             <DoctorInfo doctorId={ this.props.match.params.id } />
@@ -75,6 +88,10 @@ class DetailDoctor extends Component {
                     </div>
                 </div>
                 <HomeFooter />
+                <ModalBooking
+                    toggleModal={ this.toggleModal }
+                    openModal={ this.state.openModal }
+                />
             </>
         );
     }
