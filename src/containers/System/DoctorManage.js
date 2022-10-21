@@ -6,7 +6,7 @@ import * as actions from '../../store/actions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { createMarkDown, updateMarkDown } from '../../services/userService';
+import { createMarkDown, updateMarkDown, createDoctorInfo, updateDoctorInfo } from '../../services/userService';
 
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
@@ -15,7 +15,8 @@ import Select from 'react-select'
 import { CRUD_ACTION, LANGUAGES } from '../../utils/constant';
 import './DoctorManage.scss';
 import { getDetailDoctorById } from '../../services/userService';
-import _ from 'lodash';
+import _, { add } from 'lodash';
+import { NumericFormat } from 'react-number-format';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 class DoctorManage extends Component {
@@ -24,54 +25,178 @@ class DoctorManage extends Component {
         contentMarkDown: '',
         contentHTML: '',
         description: '',
+        allDoctor: [],
+        allPayment: [],
+        allPrice: [],
+        allProvince: [],
         selectedDoctor: null,
-        options: [],
+        selectedPrice: null,
+        selectedPayment: null,
+        selectedProvince: null,
+        clinicName: '',
+        clinicAddress: '',
+        note: '',
         action: CRUD_ACTION.CREATE,
     }
     componentDidMount () {
         this.props.getAllDoctorStart();
+        this.props.fetchAllDoctorInfoCode();
     }
 
     componentDidUpdate (prevProps, prevState, snapshot) {
-        if (prevProps.allDoctors !== this.props.allDoctors) {
-            let { allDoctors, language } = this.props;
-            let options = allDoctors.map((doctor) => {
+        if (prevProps.allPrice !== this.props.allPrice || prevProps.language !== this.props.language) {
+            this.getAllOptions();
+        }
+        if (prevProps.allDoctor !== this.props.allDoctor) {
+            let { allDoctor, language } = this.props;
+            allDoctor = allDoctor.map((doctor) => {
                 return {
                     label: language === LANGUAGES.VI ? `${doctor.lastName} ${doctor.firstName}` : `${doctor.firstName} ${doctor.lastName}`,
-                    value: doctor.id
+                    value: doctor.id,
                 }
             })
             this.setState({
-                options
+                allDoctor,
             })
         }
+        console.log('component did update');
+
+    }
+
+    getAllOptions = () => {
+        let { allDoctor, allPrice, allProvince, allPayment, language } = this.props;
+        let { selectedDoctor, selectedPrice, selectedPayment, selectedProvince } = this.state;
+        allDoctor = allDoctor.map((doctor) => {
+            const label = language === LANGUAGES.VI ?
+                `${doctor.lastName} ${doctor.firstName}`
+                :
+                `${doctor.firstName} ${doctor.lastName}`;
+            if (selectedDoctor && doctor.id === selectedDoctor.value) {
+                selectedDoctor = {
+                    ...selectedDoctor,
+                    label: label,
+                }
+            }
+            return {
+                label: label,
+                value: doctor.id,
+            }
+        })
+
+        allPrice = allPrice.map((price) => {
+            const label = language === LANGUAGES.VI ?
+                new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price.valueVi)
+                :
+                new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'USD' }).format(price.valueEn);
+            if (selectedPrice && price.keyMap === selectedPrice.value) {
+                selectedPrice = {
+                    ...selectedPrice,
+                    label: label,
+                }
+            }
+            return {
+                label: label,
+                value: price.keyMap
+            }
+        })
+
+        allProvince = allProvince.map((province) => {
+            const label = language === LANGUAGES.VI ? province.valueVi : province.valueEn;
+            if (selectedProvince && province.keyMap === selectedProvince.value) {
+                selectedProvince = {
+                    ...selectedProvince,
+                    label: label,
+                }
+            }
+            return {
+                label: label,
+                value: province.keyMap
+            }
+        })
+
+        allPayment = allPayment.map((payment) => {
+            const label = language === LANGUAGES.VI ? payment.valueVi : payment.valueEn;
+            if (selectedPayment && payment.keyMap === selectedPayment.value) {
+                selectedPayment = {
+                    ...selectedPayment,
+                    label: label,
+                }
+            }
+            return {
+                label: label,
+                value: payment.keyMap
+            }
+        })
+        console.log('----------selectedPrice: ', selectedPrice);
+
+        this.setState({
+            ...this.state,
+            allDoctor,
+            allPayment,
+            allPrice,
+            allProvince,
+            selectedDoctor,
+            selectedPrice,
+            selectedPayment,
+            selectedProvince,
+        })
     }
 
     handleSaveContentMarkDown = async () => {
-        let res = await createMarkDown({
-            contentHTML: this.state.contentHTML,
-            contentMarkDown: this.state.contentMarkDown,
-            description: this.state.description,
-            doctorId: this.state.selectedDoctor.value,
-        })
-        if (res && res.errCode === 0) {
-            toast.success('Add new markdown successfully');
+        let { contentHTML, contentMarkDown, description, selectedDoctor, selectedPayment, selectedPrice, selectedProvince, clinicAddress, clinicName, note } = this.state;
+
+        if (contentHTML && contentMarkDown && description && selectedDoctor && selectedPayment && selectedPrice && selectedProvince) {
+            let resMarkDown = await createMarkDown({
+                doctorId: selectedDoctor.value,
+                contentHTML: contentHTML,
+                contentMarkDown: contentMarkDown,
+                description: description,
+            })
+            let resDoctorInfo = await createDoctorInfo({
+                doctorId: selectedDoctor.value,
+                priceId: selectedPrice.value,
+                provinceId: selectedProvince.value,
+                paymentId: selectedPayment.value,
+                nameClinic: clinicName,
+                addressClinic: clinicAddress,
+                note: note,
+            })
+            if (resMarkDown && resMarkDown.errCode === 0 && resDoctorInfo && resDoctorInfo.errCode === 0) {
+                toast.success('Add new doctor info successfully');
+                this.setState({
+                    ...this.state,
+                    action: CRUD_ACTION.UPDATE,
+                })
+            } else {
+                toast.error('Something wrong');
+            }
         } else {
-            toast.error(res.errMessage);
+            toast.error('Invalid parameters');
         }
     }
 
     handleUpdateContentMarkDown = async () => {
-        let res = await updateMarkDown({
-            contentHTML: this.state.contentHTML,
-            contentMarkDown: this.state.contentMarkDown,
-            description: this.state.description,
-            doctorId: this.state.selectedDoctor.value,
+        let { contentHTML, contentMarkDown, description, selectedDoctor, selectedPayment, selectedPrice, selectedProvince, clinicAddress, clinicName, note } = this.state;
+        let resMarkDown = await updateMarkDown({
+            contentHTML: contentHTML,
+            contentMarkDown: contentMarkDown,
+            description: description,
+            doctorId: selectedDoctor.value,
         })
-        if (res && res.errCode === 0) {
-            toast.success('update markdown successfully');
+        let resDoctorInfo = await updateDoctorInfo({
+            doctorId: selectedDoctor.value,
+            priceId: selectedPrice.value,
+            provinceId: selectedProvince.value,
+            paymentId: selectedPayment.value,
+            nameClinic: clinicName,
+            addressClinic: clinicAddress,
+            note: note,
+
+        })
+        if (resMarkDown && resMarkDown.errCode === 0 && resDoctorInfo && resDoctorInfo.errCode === 0) {
+            toast.success('Update doctor successfully');
         } else {
-            toast.error(res.errMessage);
+            toast.error('Something wrong');
         }
     }
 
@@ -80,81 +205,167 @@ class DoctorManage extends Component {
             contentMarkDown: text,
             contentHTML: html,
         })
-        console.log('handleEditorChange', html, text);
+        // console.log('handleEditorChange', html, text);
     }
 
     handleChangeDescription = (e) => {
-        console.log('change text area');
         this.setState({
             description: e.target.value,
         })
     }
 
-    handleChange = async (selectedDoctor) => {
+    handleChangeDoctor = async (selectedDoctor) => {
         let doctorId = selectedDoctor.value;
         const res = await getDetailDoctorById(doctorId);
         if (res && res.errCode === 0) {
             let { description, contentHTML, contentMarkDown } = res.doctorInfo.MarkDown;
-            if (!description && !contentHTML && !contentMarkDown) {
+            let { paymentData, provinceData, priceData, priceId, paymentId, provinceId, nameClinic, addressClinic, note } = res.doctorInfo.Doctor_Info;
+            if (!description && !contentHTML && !contentMarkDown && !paymentData.id && !provinceData.id && !priceData.id) {
                 this.setState({
                     action: CRUD_ACTION.CREATE,
                     selectedDoctor,
                     contentHTML: '',
                     contentMarkDown: '',
                     description: '',
+                    selectedPrice: null,
+                    selectedProvince: null,
+                    selectedPayment: null,
                 })
             } else {
+
+                let { language } = this.props;
+                let selectedPrice = {
+                    label: language === LANGUAGES.VI ? new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(priceData.valueVi) : new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'USD' }).format(priceData.valueEn),
+                    value: priceId
+                }
+                let selectedProvince = {
+                    label: language === LANGUAGES.VI ? provinceData.valueVi : provinceData.valueEn,
+                    value: provinceId
+                }
+
+                let selectedPayment = {
+                    label: language === LANGUAGES.VI ? paymentData.valueVi : paymentData.valueEn,
+                    value: paymentId
+                }
                 this.setState({
                     action: CRUD_ACTION.UPDATE,
                     selectedDoctor,
                     contentHTML: contentHTML,
                     contentMarkDown: contentMarkDown,
                     description: description,
+                    selectedPrice: selectedPrice,
+                    selectedProvince: selectedProvince,
+                    selectedPayment: selectedPayment,
+                    note: note,
+                    clinicName: nameClinic,
+                    clinicAddress: addressClinic
+
                 })
             }
         }
-        console.log(`Option selected:`, this.state.selectedDoctor)
+    }
 
-    };
+    handleChangeSelect = (type, selectedField) => {
+        this.setState({
+            ...this.state,
+            [type]: selectedField
+        })
+    }
+
+    handleChangeInput = (type, e) => {
+        this.setState({
+            ...this.state,
+            [type]: e.target.value
+        })
+        console.log(this.state);
+    }
 
     render () {
-        const { selectedDoctor, options, action, contentMarkDown, description } = this.state;
+        const { selectedDoctor, selectedPrice, selectedProvince, selectedPayment, clinicAddress, clinicName, note,
+            allDoctor, allPrice, allProvince, allPayment, action, contentMarkDown, description } = this.state;
+        console.log('selectedPrice at render : ', selectedPrice);
         return (
             <div className="manage-doctor-container">
                 <div className="text-center title" ><FormattedMessage id="manage-doctor.manage-doctor" /></div>
-                <div className="manage-doctor-input">
-                    <div className="doctor-description">
-                        <label><FormattedMessage id="manage-doctor.introduction" /></label>
-                        <textarea className="form-control "
-                            onChange={ (e) => this.handleChangeDescription(e) }
-                            rows='4' value={ description }></textarea>
-                    </div>
-
-                    <div className="doctor-select">
+                <div className="manage-doctor-input row">
+                    <div className="doctor-select col-6">
                         <label><FormattedMessage id="manage-doctor.choose-doctor" /></label>
                         <Select
                             value={ selectedDoctor }
-                            onChange={ this.handleChange }
-                            options={ options }
+                            onChange={ this.handleChangeDoctor }
+                            options={ allDoctor }
                         />
                     </div>
+                    { selectedDoctor &&
+                        <>
+                            <div className="doctor-description col-6">
+                                <label><FormattedMessage id="manage-doctor.introduction" /></label>
+                                <textarea className="form-control "
+                                    onChange={ (e) => this.handleChangeDescription(e) }
+                                    value={ description }></textarea>
+                            </div>
 
+                            <div className="price-select col-4">
+                                <label><FormattedMessage id="manage-doctor.price" /></label>
+                                <Select
+                                    value={ selectedPrice }
+                                    onChange={ (selectedPrice) => this.handleChangeSelect('selectedPrice', selectedPrice) }
+                                    options={ allPrice }
+                                />
+                            </div>
+
+                            <div className="payment-select col-4">
+                                <label><FormattedMessage id="manage-doctor.payment-method" /></label>
+                                <Select
+                                    value={ selectedPayment }
+                                    onChange={ (selectedPayment) => this.handleChangeSelect('selectedPayment', selectedPayment) }
+                                    options={ allPayment }
+                                />
+                            </div>
+
+                            <div className="province-select col-4">
+                                <label><FormattedMessage id="manage-doctor.province" /></label>
+                                <Select
+                                    value={ selectedProvince }
+                                    onChange={ (selectedProvince) => this.handleChangeSelect('selectedProvince', selectedProvince) }
+                                    options={ allProvince }
+                                />
+                            </div>
+
+                            <div className="clinic-name-select col-4">
+                                <label><FormattedMessage id="manage-doctor.clinic-name" /></label>
+                                <input type="text" value={ clinicName } className="form-control" onChange={ (e) => this.handleChangeInput('clinicName', e) } />
+                            </div>
+
+                            <div className="clinic-address-select col-4">
+                                <label><FormattedMessage id="manage-doctor.clinic-address" /></label>
+                                <input type="text" value={ clinicAddress } className="form-control" onChange={ (e) => this.handleChangeInput('clinicAddress', e) } />
+                            </div>
+
+                            <div className="note-select col-4">
+                                <label><FormattedMessage id="manage-doctor.note" /></label>
+                                <input type="text" value={ note } className="form-control" onChange={ (e) => this.handleChangeInput('note', e) } />
+                            </div>
+                        </> }
                 </div>
-                <label><FormattedMessage id="manage-doctor.description" /></label>
-
-                <MdEditor style={ { height: '500px' } }
-                    renderHTML={ text => mdParser.render(text) }
-                    onChange={ this.handleEditorChange }
-                    value={ contentMarkDown ? contentMarkDown : '' }
-                />
-                { action === CRUD_ACTION.CREATE ?
-                    <button class="submit-btn btn btn-primary" onClick={ () => this.handleSaveContentMarkDown() }>
-                        <FormattedMessage id="manage-doctor.save" />
-                    </button>
-                    :
-                    <button class="submit-btn btn btn-primary" onClick={ () => this.handleUpdateContentMarkDown() }>
-                        <FormattedMessage id="manage-doctor.update" />
-                    </button>
+                { selectedDoctor &&
+                    <>
+                        <label><FormattedMessage id="manage-doctor.description" /></label>
+                        <MdEditor style={ { height: '500px' } }
+                            renderHTML={ text => mdParser.render(text) }
+                            onChange={ this.handleEditorChange }
+                            value={ contentMarkDown ? contentMarkDown : '' }
+                        />
+                        { action === CRUD_ACTION.CREATE ?
+                            <button class="submit-btn btn btn-primary" onClick={ () => this.handleSaveContentMarkDown() }>
+                                <FormattedMessage id="manage-doctor.save" />
+                            </button>
+                            :
+                            <button class="submit-btn btn btn-primary" onClick={ () => this.handleUpdateContentMarkDown() }>
+                                <FormattedMessage id="manage-doctor.update" />
+                            </button>
+                        }
+                    </>
                 }
             </div >
         )
@@ -165,14 +376,54 @@ class DoctorManage extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        allDoctors: state.admin.allDoctors,
+        allDoctor: state.admin.allDoctor,
+        allPrice: state.admin.allPrice,
+        allProvince: state.admin.allProvince,
+        allPayment: state.admin.allPayment,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         getAllDoctorStart: () => dispatch(actions.fetchAllDoctorStart()),
+        fetchAllDoctorInfoCode: () => dispatch(actions.fetchAllDoctorInfoCode())
     };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DoctorManage);
+
+/**
+ 
+**Tiến sĩ, Bác sĩ Đào Đình Thi**
+* Trưởng khoa Nội soi - Bệnh viện Tai Mũi Họng Trung Ương (2018 - nay)
+* Giảng dạy tại Bộ môn Tai Mũi Họng, Khoa Y, trường Đại học Quốc Gia Hà Nội (2018 - nay)
+
+**Khám & điều trị**
+* Khám chuyên khoa Tai Mũi Họng
+* Nội soi Tai Mũi Họng
+* Chuyên khám và điều trị các bệnh về Tai Mũi Họng cả người lớn và trẻ em
+
+**Các bệnh về tai**
+
+* Ù tai, nghe kém, điếc đột ngột
+* Chẩy mủ tai, viêm tai giữa cấp, mạn
+* Vá màng nhĩ nội soi
+* Phát hiện sớm và điều trị tốt bệnh viêm tai giữa màng nhĩ đóng kín, không chẩy mủ ra ngoài
+
+**Các bệnh mũi xoang**
+
+* Viêm mũi xoang dị ứng, viêm mũi vận mạch
+* Viêm mũi ngạt tắc mũi mạn tính
+* Viêm đa xoang mạn lâu ngày khó khỏi, polyp mũi xoang
+* Nấm mũi xoang
+* Đau đầu mạn tính do mũi xoang…
+
+**Các bệnh về họng thanh quản**
+
+* Ở trẻ em viêm VA, viêm mũi họng mạn tính. Đặc biệt những biến chứng của viêm VA (như viêm tai thanh dịch, viêm tai giữa cấp, viêm thanh khí phế quản….)  nạo VA
+* Viêm amiđan  cấp, mạn
+
+**Khám nội soi Tai mũi họng**
+
+Bằng khám nội soi, bác sĩ có thể khám, quan sát sâu trong mũi, các khe mũi, hình ảnh rõ nét, trung thực, giúp cho chẩn đoán chính xác, phát hiện sớm các bệnh về tai mũi họng
+ */

@@ -37,7 +37,12 @@
         "choose-date": "Chọn bác sĩ",
         "calendar": "Lịch khám",
         "book-calendar": "Chọn và đặt lịch khám miễn phí",
-        "no-schedule": "Chưa có lịch khám bệnh trong ngày này"
+        "no-schedule": "Chưa có lịch khám bệnh trong ngày này",
+        "address": "Địa chỉ khám",
+        "price": "Giá khám",
+        "payment": "Bệnh nhân có thể thanh toán thông qua: ",
+        "show-detail": "Xem chi tiết",
+        "hide": "Ẩn bớt"
     },
     "common": {
         "add": "Thêm",
@@ -105,6 +110,12 @@
         "introduction": "Lời giới thiệu",
         "choose-doctor": "Chọn bác sĩ",
         "description": "Mô tả chi tiết",
+        "price": "Giá khám bệnh",
+        "payment-method": "Phương thức thanh toán",
+        "province": "Tỉnh thành",
+        "clinic-name": "Tên phòng khám",
+        "clinic-address": "Địa chỉ phòng khám",
+        "note": "Ghi chú",
         "save": "Lưu thông tin",
         "update": "Lưu thay đổi"
     },

@@ -41,8 +41,20 @@ const createMarkDown = (markdown) => {
     return axios.post(`/api/create-markdown`, markdown);
 }
 
+const createDoctorInfo = (doctorInfo) => {
+    return axios.post(`/api/create-doctor-info`, doctorInfo);
+}
+
 const updateMarkDown = (markdown) => {
     return axios.put(`/api/update-markdown`, markdown);
+}
+
+const updateDoctorInfo = (doctorInfo) => {
+    return axios.put(`/api/update-doctor-info`, doctorInfo);
+}
+
+const getDoctorInfo = (doctorId) => {
+    return axios.get(`/api/get-doctor-info?doctorId=${doctorId}`);
 }
 
 const getDetailDoctorById = (id) => {
@@ -55,10 +67,12 @@ const createBulkSchedule = (schedules) => {
 }
 
 const getSchedule = (date, doctorId) => {
-    return axios.get(`/api/get-schedules?id=${doctorId}&date=${date}`,);
+    return axios.get(`/api/get-schedules?id=${doctorId}&date=${date}`);
 }
+
+
 export {
     handleLogin, handleLoginApi, getAllUsers, createUser, deleteUser,
     editUser, getAllCode, getTopDoctorHome, getAllDoctors, createMarkDown, updateMarkDown,
-    getDetailDoctorById, createBulkSchedule, getSchedule
+    getDetailDoctorById, createBulkSchedule, getSchedule, createDoctorInfo, updateDoctorInfo, getDoctorInfo
 }

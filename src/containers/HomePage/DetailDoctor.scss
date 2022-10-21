@@ -1,7 +1,8 @@
 .detail-doctor-container {
-    margin: 78px 200px 0;
 
     .doctor-intro {
+        margin: 78px 200px 0;
+
         display: flex;
         padding: 24px 0;
 
@@ -31,7 +32,28 @@
         }
     }
 
+    .schedule-container {
+        margin: 78px 200px 0;
+
+        display: flex;
+        min-height: 240px;
+
+        .schedule-content-left {
+            flex: 1;
+            border-right: 1px solid #eee;
+        }
+
+        .schedule-content-right {
+            flex: 1;
+            padding: 0 32px;
+        }
+    }
+
     .doctor-detail {
+        margin-top: 20px;
+        padding: 20px 200px;
+        background-color: #f9f9f9;
+
         img {
             margin: 20px 0;
             height: 400px;

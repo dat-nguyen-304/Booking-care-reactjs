@@ -92,9 +92,6 @@ class AdminManage extends Component {
         const { selectedDoctor, options, allTimeTypes } = this.state;
         let minDate = new Date();
         minDate = minDate.setDate(minDate.getDate() + 1);
-        // console.log(selectedDoctor);
-        console.log('options: ', options);
-        console.log('selectedDoctor: ', selectedDoctor);
 
         return (
             <>

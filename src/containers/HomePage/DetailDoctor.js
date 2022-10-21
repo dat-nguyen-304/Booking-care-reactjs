@@ -9,6 +9,7 @@ import HomeFooter from './HomeFooter';
 import { getDetailDoctorById } from '../../services/userService';
 import { LANGUAGES } from '../../utils/constant';
 import DoctorSchedule from '../Doctor/DoctorSchedule';
+import DoctorInfo from '../Doctor/DoctorInfo';
 class DetailDoctor extends Component {
     state = {
         firstName: '',
@@ -59,12 +60,18 @@ class DetailDoctor extends Component {
                             </div>
                         </div>
                     </div>
-                    <DoctorSchedule doctorId={ this.props.match.params.id } />
+                    <div class="schedule-container">
+                        <div className="schedule-content-left">
+                            <DoctorSchedule doctorId={ this.props.match.params.id } />
+                        </div>
+                        <div className="schedule-content-right">
+                            <DoctorInfo doctorId={ this.props.match.params.id } />
+                        </div>
+                    </div>
                     <div className="doctor-detail">
                         <div dangerouslySetInnerHTML={ { __html: `${contentHTML ? contentHTML : ''}` } }></div>
                     </div>
                     <div className="doctor-feedback">
-
                     </div>
                 </div>
                 <HomeFooter />

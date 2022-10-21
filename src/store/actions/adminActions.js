@@ -171,7 +171,7 @@ export const fetchAllDoctorStart = () => {
             if (res && res.errCode === 0) {
                 dispatch({
                     type: actionTypes.FETCH_ALL_DOCTOR_SUCCESS,
-                    allDoctors: res.allDoctors
+                    allDoctor: res.allDoctors
                 })
             } else {
                 dispatch({
@@ -181,6 +181,34 @@ export const fetchAllDoctorStart = () => {
         } catch (e) {
             dispatch({
                 type: actionTypes.FETCH_ALL_DOCTOR_FAIL,
+            })
+        }
+    }
+}
+
+export const fetchAllDoctorInfoCode = () => {
+    return async (dispatch, getState) => {
+        try {
+            let priceRes = await getAllCode('PRICE');
+            let paymentRes = await getAllCode('PAYMENT');
+            let provinceRes = await getAllCode('PROVINCE');
+
+
+            if (priceRes && paymentRes && provinceRes && priceRes.errCode === 0 && paymentRes.errCode === 0 && provinceRes.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_DOCTOR_INFO_CODE_SUCCESS,
+                    allPrice: priceRes.allCode,
+                    allPayment: paymentRes.allCode,
+                    allProvince: provinceRes.allCode
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_DOCTOR_INFO_CODE_SUCCESS,
+                });
+            }
+        } catch (e) {
+            dispatch({
+                type: actionTypes.FETCH_ALL_DOCTOR_INFO_CODE_FAIL,
             })
         }
     }

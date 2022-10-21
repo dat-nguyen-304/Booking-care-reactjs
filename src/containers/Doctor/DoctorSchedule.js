@@ -98,44 +98,38 @@ class DoctorSchedule extends Component {
         const { selectedDay, options, allSchedules } = this.state;
         console.log('allSchedules: ', allSchedules.length);
         return (
-
-            <div class="schedule-container">
-                <div className="schedule-content-left">
-                    <label><FormattedMessage id="detail-doctor.choose-date" /></label>
-                    <Select
-                        className="select-day"
-                        value={ selectedDay }
-                        onChange={ this.handleChange }
-                        options={ language === LANGUAGES.VI ? options.viOptions : options.enOptions }
-                    />
-                    <p className="schedule-title"><i class="fas fa-calendar-alt"></i><FormattedMessage id="detail-doctor.calendar" /></p>
-                    <div class="schedule-list">
-                        { allSchedules && allSchedules.length > 0 ?
-                            allSchedules.map(schedule => {
-                                return (
-                                    <>
-                                        { language === LANGUAGES.VI ?
-                                            <div className="schedule-vi">
-                                                { schedule.timeData.valueVi }
-                                            </div>
-                                            :
-                                            <div className="schedule-en">
-                                                { schedule.timeData.valueEn }
-                                            </div>
-                                        }
-                                    </>
-                                )
-                            })
-                            :
-                            <p className="no-schedule"><FormattedMessage id="detail-doctor.no-schedule" /></p>
-                        }
-                    </div>
-                    <p className="book-schedule-text"><i class="far fa-hand-point-up"></i><FormattedMessage id="detail-doctor.book-calendar" /></p>
+            <>
+                <label><FormattedMessage id="detail-doctor.choose-date" /></label>
+                <Select
+                    className="select-day"
+                    value={ selectedDay }
+                    onChange={ this.handleChange }
+                    options={ language === LANGUAGES.VI ? options.viOptions : options.enOptions }
+                />
+                <p className="schedule-title"><i class="fas fa-calendar-alt"></i><FormattedMessage id="detail-doctor.calendar" /></p>
+                <div class="schedule-list">
+                    { allSchedules && allSchedules.length > 0 ?
+                        allSchedules.map(schedule => {
+                            return (
+                                <>
+                                    { language === LANGUAGES.VI ?
+                                        <div className="schedule-vi">
+                                            { schedule.timeData.valueVi }
+                                        </div>
+                                        :
+                                        <div className="schedule-en">
+                                            { schedule.timeData.valueEn }
+                                        </div>
+                                    }
+                                </>
+                            )
+                        })
+                        :
+                        <p className="no-schedule"><FormattedMessage id="detail-doctor.no-schedule" /></p>
+                    }
                 </div>
-                <div className="schedule-content-right">
-                </div>
-
-            </div >
+                <p className="book-schedule-text"><i class="far fa-hand-point-up"></i><FormattedMessage id="detail-doctor.book-calendar" /></p>
+            </>
         )
     }
 
