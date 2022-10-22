@@ -7,6 +7,8 @@ import moment from 'moment';
 import { toast } from 'react-toastify';
 import { Modal } from 'reactstrap';
 import './ModalBooking.scss';
+import { NumericFormat } from 'react-number-format';
+
 class ModalBooking extends Component {
     state = {
 
@@ -20,7 +22,11 @@ class ModalBooking extends Component {
     }
 
     render () {
-        const { language, toggleModal, openModal } = this.props;
+        let { language, toggleModal, openModal, fullName, description, image, price, time, date } = this.props;
+        price = price && (language === LANGUAGES.VI ? price.valueVi : price.valueEn);
+        let suffix = language === LANGUAGES.VI ? 'VNĐ' : '$';
+        console.log("date: ", date);
+        console.log("time: ", time);
         return (
             <Modal isOpen={ openModal }
                 size="lg"
@@ -30,12 +36,43 @@ class ModalBooking extends Component {
                     <div className="modal-header-title">
                         Thông tin đặt lịch khám bệnh
                     </div>
-                    <div className="modal-header-close" onClick={ toggleModal }>
+                    <div className="modal-header-close" onClick={ () => toggleModal() }>
                         <i class="far fa-times-circle"></i>
                     </div>
                 </div>
                 <div className="modal-body">
+                    <div className="doctor-intro">
+                        <img className="doctor-img" src={ image } />
+                        <div className="doctor-text">
+                            <p className="doctor-title">
+                                { fullName }
+                            </p>
+                            <p className="doctor-description">
+                                <p>{ description }</p>
+                                <p className="date-and-time">
+
+                                    { time &&
+                                        (language === LANGUAGES.VI ?
+                                            <div className="schedule-vi" >
+                                                Thời gian: { date }. Vào lúc { time.timeData.valueVi }
+                                            </div>
+                                            :
+                                            <div className="schedule-en" >
+                                                Thời gian: { date }. Vào lúc { time.timeData.valueEn }
+                                            </div>
+                                        )
+                                    }
+                                </p>
+                                <p className="price">
+                                    Giá khám: <NumericFormat displayType="text" value={ price } thousandSeparator={ true } suffix={ suffix } />
+                                </p>
+
+                            </p>
+                        </div>
+                    </div>
                     <div className="row">
+                        <div className="col-12">
+                        </div>
                         <div className="col-6">
                             <label>Họ tên</label>
                             <input type="text" className="form-control" />
@@ -67,8 +104,8 @@ class ModalBooking extends Component {
                     </div>
                 </div>
                 <div className="modal-footer">
-                    <div className="button-confirm" onClick={ toggleModal }>Đặt lịch</div>
-                    <div className="button-cancel" onClick={ toggleModal }>Hủy bỏ</div>
+                    <div className="button-confirm" onClick={ () => toggleModal() }>Đặt lịch</div>
+                    <div className="button-cancel" onClick={ () => toggleModal() }>Hủy bỏ</div>
                 </div>
             </Modal >
         )

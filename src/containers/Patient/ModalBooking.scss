@@ -24,6 +24,48 @@
     label {
         margin-top: 16px;
     }
+
+    .doctor-intro {
+        margin-top: 12px;
+        display: flex;
+
+        .doctor-img {
+            display: block;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center center;
+        }
+
+        .doctor-text {
+            display: inline-block;
+            flex: 1;
+            margin-left: 20px;
+            color: #333;
+
+            .doctor-title {
+                font-size: 16px;
+                font-weight: 700;
+            }
+
+            .doctor-description {
+                font-size: 12px;
+
+                .date-and-time {
+                    color: red;
+                }
+
+                .price {
+                    font-weight: 700;
+                    font-size: 14px;
+                    margin-top: 12px;
+                    padding-top: 12px;
+                    border-top: 1px solid #ccc;
+                }
+            }
+        }
+    }
 }
 
 .modal-footer {

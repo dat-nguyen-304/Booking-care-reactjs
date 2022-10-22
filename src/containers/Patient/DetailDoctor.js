@@ -15,11 +15,15 @@ class DetailDoctor extends Component {
     state = {
         firstName: '',
         lastName: '',
+        fullName: '',
         image: '',
         positionData: '',
+        priceData: '',
         contentHTML: '',
         description: '',
         openModal: false,
+        time: null,
+        date: null,
     }
     async componentDidMount () {
         let doctorId = this.props.match.params.id;
@@ -34,24 +38,47 @@ class DetailDoctor extends Component {
                 description: res.doctorInfo.MarkDown.description,
             })
         }
-        console.log(res);
+        this.getFullName();
     }
 
-    componentDidUpdate () {
-
+    componentDidUpdate (prevProps, prevState, snapshot) {
+        if (prevProps.language !== this.props.language) {
+            this.getFullName();
+        }
     }
 
-    toggleModal = () => {
-        console.log('toggle: ', !this.state.openModal);
+    getFullName = () => {
+        let { positionData, firstName, lastName } = this.state;
+        let { language } = this.props;
+        let fullName =
+            positionData && language === LANGUAGES.VI ?
+                `${positionData.valueVi}, ${lastName} ${firstName} `
+                :
+                `${positionData.valueEn}, ${firstName} ${lastName}  `;
+        this.setState({
+            ...this.state,
+            fullName: fullName
+        })
+    }
+
+    getPriceFromChild = (priceData) => {
+        this.setState({
+            ...this.state,
+            priceData: priceData,
+        })
+    }
+
+    toggleModal = (time = null, date = null) => {
         this.setState({
             ...this.state,
             openModal: !this.state.openModal,
+            time,
+            date,
         })
     }
 
     render () {
-        let { language } = this.props;
-        let { firstName, lastName, positionData, image, description, contentHTML } = this.state;
+        let { priceData, image, description, contentHTML, openModal, fullName, time, date } = this.state;
         return (
             <>
                 <HomeHeader />
@@ -60,10 +87,9 @@ class DetailDoctor extends Component {
                         <div className="doctor-avatar" style={ { backgroundImage: `url(${image})` } }></div>
                         <div className="doctor-intro-text">
                             <div className="doctor-name">
-                                { positionData && language === LANGUAGES.VI ?
-                                    `${positionData.valueVi}, ${lastName} ${firstName} `
-                                    :
-                                    `${positionData.valueEn}, ${firstName} ${lastName}  ` }
+                                {
+                                    fullName
+                                }
                             </div>
                             <div className="doctor-description">
                                 { description }
@@ -78,7 +104,7 @@ class DetailDoctor extends Component {
                             />
                         </div>
                         <div className="schedule-content-right">
-                            <DoctorInfo doctorId={ this.props.match.params.id } />
+                            <DoctorInfo doctorId={ this.props.match.params.id } getPriceFromChild={ this.getPriceFromChild } />
                         </div>
                     </div>
                     <div className="doctor-detail">
@@ -90,7 +116,13 @@ class DetailDoctor extends Component {
                 <HomeFooter />
                 <ModalBooking
                     toggleModal={ this.toggleModal }
-                    openModal={ this.state.openModal }
+                    openModal={ openModal }
+                    image={ image }
+                    description={ description }
+                    fullName={ fullName }
+                    price={ priceData }
+                    time={ time }
+                    date={ date }
                 />
             </>
         );

@@ -97,7 +97,7 @@ class DoctorSchedule extends Component {
     render () {
         const { language } = this.props;
         const { selectedDay, options, allSchedules } = this.state;
-        console.log('allSchedules: ', allSchedules.length);
+        console.log('selectedDay: ', selectedDay);
         return (
             <>
                 <label><FormattedMessage id="detail-doctor.choose-date" /></label>
@@ -114,11 +114,11 @@ class DoctorSchedule extends Component {
                             return (
                                 <>
                                     { language === LANGUAGES.VI ?
-                                        <div className="schedule-vi" onClick={ this.props.toggleModal }>
+                                        <div className="schedule-vi" onClick={ () => this.props.toggleModal(schedule, selectedDay.label) }>
                                             { schedule.timeData.valueVi }
                                         </div>
                                         :
-                                        <div className="schedule-en" onClick={ this.props.toggleModal }>
+                                        <div className="schedule-en" onClick={ () => this.props.toggleModal(schedule, selectedDay.label) }>
                                             { schedule.timeData.valueEn }
                                         </div>
                                     }

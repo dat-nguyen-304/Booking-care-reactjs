@@ -83,9 +83,6 @@ class AdminManage extends Component {
         })
         createBulkSchedule({ schedules: allTimeTypes });
         toast.success('Valid input parameter');
-
-        console.log(allTimeTypes);
-
     }
 
     render () {
@@ -93,7 +90,6 @@ class AdminManage extends Component {
         const { selectedDoctor, options, allTimeTypes } = this.state;
         let minDate = new Date();
         minDate = minDate.setDate(minDate.getDate() + 1);
-
         return (
             <>
                 <div className="text-center title"><FormattedMessage id="manage-schedule.manage-schedule" /></div>
@@ -154,7 +150,7 @@ class AdminManage extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        allDoctors: state.admin.allDoctors,
+        allDoctors: state.admin.allDoctor,
         allTimeTypes: state.admin.allTimeTypes,
     };
 };

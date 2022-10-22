@@ -22,7 +22,6 @@ class DoctorInfo extends Component {
 
     async componentDidMount () {
         let res = await getDoctorInfo(this.props.doctorId);
-        // console.log('-----------------------', res);
         if (res && res.errCode === 0) {
             this.setState({
                 clinicName: res.doctorInfo.nameClinic,
@@ -32,7 +31,8 @@ class DoctorInfo extends Component {
                 price: res.doctorInfo.priceData,
                 province: res.doctorInfo.provinceData,
                 payment: res.doctorInfo.paymentData,
-            })
+            });
+            this.props.getPriceFromChild(res.doctorInfo.priceData);
         }
     }
 
