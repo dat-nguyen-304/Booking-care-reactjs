@@ -13,6 +13,7 @@ import vi from "moment/locale/vi";
 class DoctorSchedule extends Component {
     state = {
         selectedDay: null,
+        selectedDayTimeStamp: new Date().setHours(0, 0, 0, 0),
         options: [],
         allSchedules: [],
     }
@@ -82,10 +83,12 @@ class DoctorSchedule extends Component {
         const doctorId = this.props.doctorId;
         const currentDay = new Date().setHours(0, 0, 0, 0);
         const index = selectedDay.value;
+        const selectedDayTimeStamp = index * 86400000 + currentDay;
         this.setState({
             selectedDay,
+            selectedDayTimeStamp
         })
-        let res = await getSchedule(index * 86400000 + currentDay, doctorId);
+        let res = await getSchedule(selectedDayTimeStamp, doctorId);
         console.log(res);
         if (res && res.errCode === 0) {
             this.setState({
@@ -96,8 +99,8 @@ class DoctorSchedule extends Component {
 
     render () {
         const { language } = this.props;
-        const { selectedDay, options, allSchedules } = this.state;
-        console.log('selectedDay: ', selectedDay);
+        const { selectedDay, options, allSchedules, selectedDayTimeStamp } = this.state;
+        console.log('selectedDayTimeStamp: ', selectedDayTimeStamp);
         return (
             <>
                 <label><FormattedMessage id="detail-doctor.choose-date" /></label>
@@ -114,11 +117,11 @@ class DoctorSchedule extends Component {
                             return (
                                 <>
                                     { language === LANGUAGES.VI ?
-                                        <div className="schedule-vi" onClick={ () => this.props.toggleModal(schedule, selectedDay.label) }>
+                                        <div className="schedule-vi" onClick={ () => this.props.toggleModal(schedule, selectedDay.label, selectedDayTimeStamp) }>
                                             { schedule.timeData.valueVi }
                                         </div>
                                         :
-                                        <div className="schedule-en" onClick={ () => this.props.toggleModal(schedule, selectedDay.label) }>
+                                        <div className="schedule-en" onClick={ () => this.props.toggleModal(schedule, selectedDay.label, selectedDayTimeStamp) }>
                                             { schedule.timeData.valueEn }
                                         </div>
                                     }

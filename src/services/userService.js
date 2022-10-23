@@ -34,7 +34,6 @@ const getTopDoctorHome = (limit) => {
 
 const getAllDoctors = () => {
     return axios.get(`/api/get-all-doctor`);
-
 }
 
 const createMarkDown = (markdown) => {

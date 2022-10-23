@@ -24,6 +24,7 @@ class DetailDoctor extends Component {
         openModal: false,
         time: null,
         date: null,
+        dayTimeStamp: 0,
     }
     async componentDidMount () {
         let doctorId = this.props.match.params.id;
@@ -68,17 +69,19 @@ class DetailDoctor extends Component {
         })
     }
 
-    toggleModal = (time = null, date = null) => {
+    toggleModal = (timeString = null, dateString = null, dayTimeStamp) => {
+
         this.setState({
             ...this.state,
             openModal: !this.state.openModal,
-            time,
-            date,
+            timeString,
+            dateString,
+            dayTimeStamp
         })
     }
 
     render () {
-        let { priceData, image, description, contentHTML, openModal, fullName, time, date } = this.state;
+        let { priceData, image, description, contentHTML, openModal, fullName, timeString, dateString, dayTimeStamp } = this.state;
         return (
             <>
                 <HomeHeader />
@@ -115,14 +118,16 @@ class DetailDoctor extends Component {
                 </div>
                 <HomeFooter />
                 <ModalBooking
+                    doctorId={ this.props.match.params.id }
                     toggleModal={ this.toggleModal }
                     openModal={ openModal }
                     image={ image }
                     description={ description }
                     fullName={ fullName }
                     price={ priceData }
-                    time={ time }
-                    date={ date }
+                    timeString={ timeString }
+                    dateString={ dateString }
+                    dayTimeStamp={ dayTimeStamp }
                 />
             </>
         );
