@@ -69,9 +69,14 @@ const getSchedule = (date, doctorId) => {
     return axios.get(`/api/get-schedules?id=${doctorId}&date=${date}`);
 }
 
+const verifyBooking = (doctorId, token) => {
+    return axios.post(`/api/verify-booking?doctorId=${doctorId}&token=${token}`);
+}
+
 
 export {
     handleLogin, handleLoginApi, getAllUsers, createUser, deleteUser,
     editUser, getAllCode, getTopDoctorHome, getAllDoctors, createMarkDown, updateMarkDown,
-    getDetailDoctorById, createBulkSchedule, getSchedule, createDoctorInfo, updateDoctorInfo, getDoctorInfo
+    getDetailDoctorById, createBulkSchedule, getSchedule, createDoctorInfo, updateDoctorInfo,
+    getDoctorInfo, verifyBooking
 }

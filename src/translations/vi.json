@@ -42,7 +42,18 @@
         "price": "Giá khám",
         "payment": "Bệnh nhân có thể thanh toán thông qua: ",
         "show-detail": "Xem chi tiết",
-        "hide": "Ẩn bớt"
+        "hide": "Ẩn bớt",
+        "modal": {
+            "title": "Thông tin đặt lịch khám bệnh",
+            "price": "Giá khám: ",
+            "full-name": "Họ và tên: ",
+            "phone": "Số điện thoại",
+            "reason": "Lý do khám",
+            "confirm": "Đặt lịch",
+            "cancel": "Hủy bỏ",
+            "date": "Thời gian: ",
+            "time": "vào lúc: "
+        }
     },
     "common": {
         "add": "Thêm",
@@ -124,5 +135,13 @@
         "choose-doctor": "Chọn bác sĩ",
         "choose-date": "Chọn ngày",
         "add-plan": "Thêm kế hoạch"
-    }
+    }, 
+    "verify-booking": {
+        "loading": "Đang tải...",
+        "server-error": "Lỗi server",
+        "not-found": "Không tim thấy kết quả",
+        "expired": "Liên kết đã hết hạn",
+        "success": "Xác nhận thành công. Cảm ơn bạn đã sử dụng dịch vụ.",
+        "nothing": " "
+      }
 }

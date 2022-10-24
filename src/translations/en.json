@@ -42,7 +42,18 @@
     "price": "Price",
     "payment": "Patients can pay through: ",
     "show-detail": "Show more",
-    "hide": "Hide"
+    "hide": "Hide",
+    "modal": {
+      "title": "Booking information",
+      "price": "Price: ",
+      "full-name": "Full Name: ",
+      "phone": "Phone",
+      "reason": "Reason",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "date": "Date: ",
+      "time": "At: "
+  }
   },
   "common": {
     "add": "Add",
@@ -124,5 +135,13 @@
     "choose-doctor": "Choose doctor",
     "choose-date": "Choose date",
     "add-plan": "Add plan"
+  },
+  "verify-booking": {
+    "loading": "Loading...",
+    "server-error": "Server error",
+    "not-found": "Not found",
+    "expired": "The link is expired",
+    "success": "Successfully confirmed. Thanks for using our service.",
+    "nothing": " "
   }
 }

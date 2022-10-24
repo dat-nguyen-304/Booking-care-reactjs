@@ -90,9 +90,7 @@ class DetailDoctor extends Component {
                         <div className="doctor-avatar" style={ { backgroundImage: `url(${image})` } }></div>
                         <div className="doctor-intro-text">
                             <div className="doctor-name">
-                                {
-                                    fullName
-                                }
+                                { fullName }
                             </div>
                             <div className="doctor-description">
                                 { description }
@@ -123,7 +121,7 @@ class DetailDoctor extends Component {
                     openModal={ openModal }
                     image={ image }
                     description={ description }
-                    fullName={ fullName }
+                    doctorFullName={ fullName }
                     price={ priceData }
                     timeString={ timeString }
                     dateString={ dateString }

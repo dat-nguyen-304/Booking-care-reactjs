@@ -33,11 +33,13 @@ class ModalBooking extends Component {
 
     submitBooking = async () => {
         let { patientFullName, phone, reason } = this.state;
-        let { doctorId, dayTimeStamp, user, timeString } = this.props;
+        let { language, doctorId, dayTimeStamp, user, timeString, doctorFullName, dateString } = this.props;
         if (!patientFullName || !phone || !reason) {
             toast.error('Invalid input parameter');
             return;
         }
+        let selector = language === LANGUAGES.VI ? ".date-and-time .schedule-vi" : ".date-and-time .schedule-en";
+        let dateAndTime = document.querySelector(selector).innerHTML;
         let res = await createBooking({
             doctorId,
             patientFullName,
@@ -46,6 +48,10 @@ class ModalBooking extends Component {
             date: dayTimeStamp,
             patientId: user.id,
             timeType: timeString.timeType,
+            doctorFullName,
+            patientEmail: user.email,
+            dateAndTime,
+            language,
         });
         if (res && res.errCode === 0) {
             toast.success('Book successfully')
@@ -56,9 +62,10 @@ class ModalBooking extends Component {
     }
 
     render () {
-        let { language, toggleModal, openModal, fullName, description, image, price, timeString, dateString } = this.props;
-        let { patientFullName, phone, reason } = this.state;
+        let { language, toggleModal, openModal, doctorFullName, description, image, price, dateString, timeString } = this.props;
+        let { patientFullName, phone, reason, dateAndTime } = this.state;
         price = price && (language === LANGUAGES.VI ? price.valueVi : price.valueEn);
+        console.log('this.props: ', this.props);
         let suffix = language === LANGUAGES.VI ? 'VNĐ' : '$';
         return (
             <Modal isOpen={ openModal }
@@ -67,7 +74,7 @@ class ModalBooking extends Component {
             >
                 <div className="modal-header-container">
                     <div className="modal-header-title">
-                        Thông tin đặt lịch khám bệnh
+                        <FormattedMessage id="detail-doctor.modal.title" />
                     </div>
                     <div className="modal-header-close" onClick={ () => toggleModal() }>
                         <i class="far fa-times-circle"></i>
@@ -78,26 +85,24 @@ class ModalBooking extends Component {
                         <img className="doctor-img" src={ image } />
                         <div className="doctor-text">
                             <p className="doctor-title">
-                                { fullName }
+                                { doctorFullName }
                             </p>
                             <p className="doctor-description">
                                 <p>{ description }</p>
                                 <p className="date-and-time">
-
-                                    { timeString &&
-                                        (language === LANGUAGES.VI ?
-                                            <div className="schedule-vi" >
-                                                Thời gian: { dateString }. Vào lúc { timeString.timeData.valueVi }
+                                    { timeString && (
+                                        language === LANGUAGES.VI ?
+                                            <div className="schedule-vi">
+                                                <FormattedMessage id="detail-doctor.modal.date" /> { dateString } < FormattedMessage id="detail-doctor.modal.time" />  { timeString.timeData.valueVi }
                                             </div>
                                             :
-                                            <div className="schedule-en" >
-                                                Thời gian: { dateString }. Vào lúc { timeString.timeData.valueEn }
+                                            <div className="schedule-en">
+                                                <FormattedMessage id="detail-doctor.modal.date" /> { dateString } < FormattedMessage id="detail-doctor.modal.time" />  { timeString.timeData.valueEn }
                                             </div>
-                                        )
-                                    }
+                                    ) }
                                 </p>
                                 <p className="price">
-                                    Giá khám: <NumericFormat displayType="text" value={ price } thousandSeparator={ true } suffix={ suffix } />
+                                    <FormattedMessage id="detail-doctor.modal.price" /><NumericFormat displayType="text" value={ price } thousandSeparator={ true } suffix={ suffix } />
                                 </p>
 
                             </p>
@@ -107,21 +112,21 @@ class ModalBooking extends Component {
                         <div className="col-12">
                         </div>
                         <div className="col-6">
-                            <label>Họ tên</label>
+                            <label><FormattedMessage id="detail-doctor.modal.full-name" /></label>
                             <input type="text" className="form-control"
                                 value={ patientFullName }
                                 onChange={ (e) => this.handleChange(e, 'patientFullName') }
                             />
                         </div>
                         <div className="col-6">
-                            <label>Số điện thoại</label>
+                            <label><FormattedMessage id="detail-doctor.modal.phone" /></label>
                             <input type="text" className="form-control"
                                 value={ phone }
                                 onChange={ (e) => this.handleChange(e, 'phone') }
                             />
                         </div>
                         <div className="col-12">
-                            <label>Lý do khám</label>
+                            <label><FormattedMessage id="detail-doctor.modal.reason" /></label>
                             <input type="text" className="form-control"
                                 value={ reason }
                                 onChange={ (e) => this.handleChange(e, 'reason') }
@@ -130,8 +135,8 @@ class ModalBooking extends Component {
                     </div>
                 </div>
                 <div className="modal-footer">
-                    <div className="button-confirm" onClick={ () => this.submitBooking() }>Đặt lịch</div>
-                    <div className="button-cancel" onClick={ () => toggleModal() }>Hủy bỏ</div>
+                    <div className="button-confirm" onClick={ () => this.submitBooking() }><FormattedMessage id="detail-doctor.modal.confirm" /></div>
+                    <div className="button-cancel" onClick={ () => toggleModal() }><FormattedMessage id="detail-doctor.modal.cancel" /></div>
                 </div>
             </Modal >
         )

@@ -15,7 +15,7 @@ import Login from './Auth/Login';
 import Header from './Header/Header';
 import System from '../routes/System';
 import Doctor from '../routes/Doctor';
-
+import VerifyBooking from '../routes/VerifyBooking';
 import { CustomToastCloseButton } from '../components/CustomToast';
 import HomePage from '../containers/HomePage/HomePage';
 import DetailDoctor from './Patient/DetailDoctor';
@@ -55,6 +55,7 @@ class App extends Component {
                                     <Route path={ path.DOCTOR } component={ userIsAuthenticated(Doctor) } />
                                     <Route path={ path.HOMEPAGE } exact component={ HomePage } />
                                     <Route path={ path.DETAIL_DOCTOR } component={ DetailDoctor } />
+                                    <Route path={ path.VERIFY_BOOKING } component={ VerifyBooking } />
                                 </Switch>
                             </div>
 
