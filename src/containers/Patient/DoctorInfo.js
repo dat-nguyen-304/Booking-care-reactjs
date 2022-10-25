@@ -73,7 +73,7 @@ class DoctorInfo extends Component {
                         <p className="payment-method"><FormattedMessage id="detail-doctor.payment" /> { payment && (language === LANGUAGES.VI ? payment.valueVi : payment.valueEn) }</p>
                     </div>
                 }
-                <div className="see-more" onClick={ () => this.setState({ ...this.state, showDetail: !showDetail }) }>
+                <div className="see-more" onClick={ () => this.setState({ showDetail: !showDetail }) }>
                     { showDetail ? <FormattedMessage id="detail-doctor.hide" /> : <FormattedMessage id="detail-doctor.show-detail" /> }
                 </div>
             </>

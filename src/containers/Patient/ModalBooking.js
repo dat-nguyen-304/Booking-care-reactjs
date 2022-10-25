@@ -26,7 +26,6 @@ class ModalBooking extends Component {
 
     handleChange = (e, key) => {
         this.setState({
-            ...this.state,
             [key]: e.target.value,
         })
     }

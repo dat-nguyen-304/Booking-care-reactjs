@@ -7,6 +7,7 @@ import UserManage from '../containers/System/UserManage';
 import UserRedux from '../containers/System/UserRedux';
 import DoctorManage from '../containers/System/DoctorManage';
 import AdminManage from '../containers/System/AdminManage';
+import SpecialtyManage from '../containers/System/SpecialtyManage';
 
 
 class System extends Component {
@@ -21,7 +22,7 @@ class System extends Component {
                         <Route path="/system/manage-user-redux" component={ UserRedux } />
                         <Route path="/system/manage-doctor" component={ DoctorManage } />
                         <Route path="/system/manage-admin" component={ AdminManage } />
-
+                        <Route path="/system/manage-specialty" component={ SpecialtyManage } />
                         {/* <Route path="/system/register-package-group-or-account" component={ RegisterPackageGroupOrAcc } /> */ }
                         <Route component={ () => { return (<Redirect to={ systemMenuPath } />) } } />
                     </Switch>

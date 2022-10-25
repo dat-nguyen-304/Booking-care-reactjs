@@ -1,19 +1,14 @@
-import axios from '../axios';
-import * as queryString from 'query-string';
+import axios from "../axios";
 
-const adminService = {
+const createSpecialty = (specialty) => {
+    return axios.post('/api/create-specialty', specialty);
+}
 
-    /**
-     * Đăng nhập hệ thống
-     * {
-     *  "username": "string",
-     *  "password": "string"
-     * }
-     */
-    login(loginBody) {
-        return axios.post(`/admin/login`, loginBody)
-    },
+const getAllSpecialty = () => {
+    return axios.get('/api/get-all-specialty');
+}
 
-};
-
-export default adminService;
+export {
+    createSpecialty,
+    getAllSpecialty
+}

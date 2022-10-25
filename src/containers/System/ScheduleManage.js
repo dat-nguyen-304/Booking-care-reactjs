@@ -58,13 +58,14 @@ class AdminManage extends Component {
     }
 
     handClickRangeTime = (index) => {
-        this.state.allTimeTypes[index].isSelected = !this.state.allTimeTypes[index].isSelected;
+        let copyState = this.state;
+        copyState.allTimeTypes[index].isSelected = !copyState.allTimeTypes[index].isSelected;
         this.setState({
-            ...this.state
+            ...copyState
         })
     }
 
-    handleSubmit = () => {
+    handleSubmit = async () => {
         let { selectedDoctor, date, allTimeTypes } = this.state;
         allTimeTypes = allTimeTypes.filter(timType => {
             return timType.isSelected === true;
@@ -81,8 +82,9 @@ class AdminManage extends Component {
                 maxNumber: 10,
             }
         })
-        createBulkSchedule({ schedules: allTimeTypes });
-        toast.success('Valid input parameter');
+        let res = await createBulkSchedule({ schedules: allTimeTypes });
+        if (res && res.errCode === 0)
+            toast.success('Add successfully');
     }
 
     render () {

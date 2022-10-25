@@ -57,14 +57,12 @@ class DetailDoctor extends Component {
                 :
                 `${positionData.valueEn}, ${firstName} ${lastName}  `;
         this.setState({
-            ...this.state,
             fullName: fullName
         })
     }
 
     getPriceFromChild = (priceData) => {
         this.setState({
-            ...this.state,
             priceData: priceData,
         })
     }
@@ -72,7 +70,6 @@ class DetailDoctor extends Component {
     toggleModal = (timeString = null, dateString = null, dayTimeStamp) => {
 
         this.setState({
-            ...this.state,
             openModal: !this.state.openModal,
             timeString,
             dateString,

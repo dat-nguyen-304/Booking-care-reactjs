@@ -1,0 +1,28 @@
+.container {
+    margin-top: 20px;
+    margin-bottom: 40px;
+
+    label {
+        margin-top: 20px;
+    }
+
+    .upload-img-container {
+        .upload-img-preview {
+            background-position: left;
+            height: 100px;
+        }
+
+        .upload-img {
+            margin: 0;
+            height: 36px;
+            line-height: 36px;
+        }
+    }
+
+    .submit-btn {
+        margin-top: 20px;
+        padding: 4px 8px;
+        height: auto;
+        font-weight: 300;
+    }
+}

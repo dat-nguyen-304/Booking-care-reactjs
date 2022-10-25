@@ -68,7 +68,7 @@
                     -webkit-box-shadow: 2px 2px 4px 0 $box-shadow-color;
                     position: absolute;
                     top: 0;
-                    left: 205px;
+                    left: calc(100%);
                     padding: 0;
 
                     .sub-menu {
@@ -76,6 +76,7 @@
                         height: 35px;
                         line-height: 35px;
                         white-space: nowrap;
+                        min-width: 100px;
 
                         &:hover {
                             background-color: darken($bg-menu-color, 5);

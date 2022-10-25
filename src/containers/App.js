@@ -16,6 +16,7 @@ import Header from './Header/Header';
 import System from '../routes/System';
 import Doctor from '../routes/Doctor';
 import VerifyBooking from '../routes/VerifyBooking';
+import Test from '../routes/Test';
 import { CustomToastCloseButton } from '../components/CustomToast';
 import HomePage from '../containers/HomePage/HomePage';
 import DetailDoctor from './Patient/DetailDoctor';
@@ -56,6 +57,7 @@ class App extends Component {
                                     <Route path={ path.HOMEPAGE } exact component={ HomePage } />
                                     <Route path={ path.DETAIL_DOCTOR } component={ DetailDoctor } />
                                     <Route path={ path.VERIFY_BOOKING } component={ VerifyBooking } />
+                                    <Route path='/test' component={ Test } />
                                 </Switch>
                             </div>
 

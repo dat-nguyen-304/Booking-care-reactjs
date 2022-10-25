@@ -1,5 +1,7 @@
 import actionTypes from './actionTypes';
 import { getAllCode, getAllUsers, getTopDoctorHome, getAllDoctors } from '../../services/userService';
+import { getAllSpecialty } from '../../services/adminService';
+
 
 
 //fetch gender
@@ -100,6 +102,29 @@ export const fetchAllTimeTypeStart = () => {
         } catch (e) {
             dispatch(fetchRoleFail());
             console.log('fetch role fail: ', e);
+        }
+    }
+}
+
+//fetch specialty 
+export const fetchAllSpecialty = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllSpecialty();
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.GET_ALL_SPECIALTY_SUCCESS,
+                    allSpecialty: res.allSpecialty
+                });
+            } else {
+                dispatch({
+                    type: actionTypes.GET_ALL_SPECIALTY_FAIL
+                });
+            }
+        } catch (e) {
+            dispatch({
+                type: actionTypes.GET_ALL_SPECIALTY_FAIL
+            });
         }
     }
 }

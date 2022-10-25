@@ -29,10 +29,12 @@ class DoctorManage extends Component {
         allPayment: [],
         allPrice: [],
         allProvince: [],
+        allSpecialty: [],
         selectedDoctor: null,
         selectedPrice: null,
         selectedPayment: null,
         selectedProvince: null,
+        selectedSpecialty: null,
         clinicName: '',
         clinicAddress: '',
         note: '',
@@ -64,7 +66,7 @@ class DoctorManage extends Component {
     }
 
     getAllOptions = () => {
-        let { allDoctor, allPrice, allProvince, allPayment, language } = this.props;
+        let { allDoctor, allPrice, allProvince, allPayment, language, allSpecialty } = this.props;
         let { selectedDoctor, selectedPrice, selectedPayment, selectedProvince } = this.state;
         allDoctor = allDoctor.map((doctor) => {
             const label = language === LANGUAGES.VI ?
@@ -127,14 +129,20 @@ class DoctorManage extends Component {
                 value: payment.keyMap
             }
         })
-        console.log('----------selectedPrice: ', selectedPrice);
+
+        allSpecialty = allSpecialty.map((specialty) => {
+            return {
+                label: specialty.name,
+                value: specialty.id,
+            }
+        })
 
         this.setState({
-            ...this.state,
             allDoctor,
             allPayment,
             allPrice,
             allProvince,
+            allSpecialty,
             selectedDoctor,
             selectedPrice,
             selectedPayment,
@@ -164,7 +172,7 @@ class DoctorManage extends Component {
             if (resMarkDown && resMarkDown.errCode === 0 && resDoctorInfo && resDoctorInfo.errCode === 0) {
                 toast.success('Add new doctor info successfully');
                 this.setState({
-                    ...this.state,
+
                     action: CRUD_ACTION.UPDATE,
                 })
             } else {
@@ -205,7 +213,6 @@ class DoctorManage extends Component {
             contentMarkDown: text,
             contentHTML: html,
         })
-        // console.log('handleEditorChange', html, text);
     }
 
     handleChangeDescription = (e) => {
@@ -232,7 +239,6 @@ class DoctorManage extends Component {
                     selectedPayment: null,
                 })
             } else {
-
                 let { language } = this.props;
                 let selectedPrice = {
                     label: language === LANGUAGES.VI ? new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(priceData.valueVi) : new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'USD' }).format(priceData.valueEn),
@@ -242,7 +248,6 @@ class DoctorManage extends Component {
                     label: language === LANGUAGES.VI ? provinceData.valueVi : provinceData.valueEn,
                     value: provinceId
                 }
-
                 let selectedPayment = {
                     label: language === LANGUAGES.VI ? paymentData.valueVi : paymentData.valueEn,
                     value: paymentId
@@ -259,7 +264,6 @@ class DoctorManage extends Component {
                     note: note,
                     clinicName: nameClinic,
                     clinicAddress: addressClinic
-
                 })
             }
         }
@@ -267,23 +271,19 @@ class DoctorManage extends Component {
 
     handleChangeSelect = (type, selectedField) => {
         this.setState({
-            ...this.state,
             [type]: selectedField
         })
     }
 
     handleChangeInput = (type, e) => {
         this.setState({
-            ...this.state,
             [type]: e.target.value
         })
-        console.log(this.state);
     }
 
     render () {
-        const { selectedDoctor, selectedPrice, selectedProvince, selectedPayment, clinicAddress, clinicName, note,
-            allDoctor, allPrice, allProvince, allPayment, action, contentMarkDown, description } = this.state;
-        console.log('selectedPrice at render : ', selectedPrice);
+        const { selectedDoctor, selectedPrice, selectedProvince, selectedPayment, selectedSpecialty, clinicAddress, clinicName, note,
+            allDoctor, allPrice, allProvince, allPayment, allSpecialty, action, contentMarkDown, description } = this.state;
         return (
             <div className="manage-doctor-container">
                 <div className="text-center title" ><FormattedMessage id="manage-doctor.manage-doctor" /></div>
@@ -303,6 +303,15 @@ class DoctorManage extends Component {
                                 <textarea className="form-control "
                                     onChange={ (e) => this.handleChangeDescription(e) }
                                     value={ description }></textarea>
+                            </div>
+
+                            <div className="payment-select col-4">
+                                <label>Chuyên khoa</label>
+                                <Select
+                                    value={ selectedSpecialty }
+                                    onChange={ (selectedSpecialty) => this.handleChangeSelect('selectedPayment', selectedSpecialty) }
+                                    options={ allSpecialty }
+                                />
                             </div>
 
                             <div className="price-select col-4">
@@ -380,6 +389,7 @@ const mapStateToProps = state => {
         allPrice: state.admin.allPrice,
         allProvince: state.admin.allProvince,
         allPayment: state.admin.allPayment,
+        allSpecialty: state.admin.allSpecialty
     };
 };
 
@@ -391,39 +401,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DoctorManage);
-
-/**
- 
-**Tiến sĩ, Bác sĩ Đào Đình Thi**
-* Trưởng khoa Nội soi - Bệnh viện Tai Mũi Họng Trung Ương (2018 - nay)
-* Giảng dạy tại Bộ môn Tai Mũi Họng, Khoa Y, trường Đại học Quốc Gia Hà Nội (2018 - nay)
-
-**Khám & điều trị**
-* Khám chuyên khoa Tai Mũi Họng
-* Nội soi Tai Mũi Họng
-* Chuyên khám và điều trị các bệnh về Tai Mũi Họng cả người lớn và trẻ em
-
-**Các bệnh về tai**
-
-* Ù tai, nghe kém, điếc đột ngột
-* Chẩy mủ tai, viêm tai giữa cấp, mạn
-* Vá màng nhĩ nội soi
-* Phát hiện sớm và điều trị tốt bệnh viêm tai giữa màng nhĩ đóng kín, không chẩy mủ ra ngoài
-
-**Các bệnh mũi xoang**
-
-* Viêm mũi xoang dị ứng, viêm mũi vận mạch
-* Viêm mũi ngạt tắc mũi mạn tính
-* Viêm đa xoang mạn lâu ngày khó khỏi, polyp mũi xoang
-* Nấm mũi xoang
-* Đau đầu mạn tính do mũi xoang…
-
-**Các bệnh về họng thanh quản**
-
-* Ở trẻ em viêm VA, viêm mũi họng mạn tính. Đặc biệt những biến chứng của viêm VA (như viêm tai thanh dịch, viêm tai giữa cấp, viêm thanh khí phế quản….)  nạo VA
-* Viêm amiđan  cấp, mạn
-
-**Khám nội soi Tai mũi họng**
-
-Bằng khám nội soi, bác sĩ có thể khám, quan sát sâu trong mũi, các khe mũi, hình ảnh rõ nét, trung thực, giúp cho chẩn đoán chính xác, phát hiện sớm các bệnh về tai mũi họng
- */

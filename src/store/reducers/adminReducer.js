@@ -11,6 +11,7 @@ const initialState = {
     allPayment: [],
     allProvince: [],
     allTimeTypes: [],
+    allSpecialty: [],
 }
 
 const appReducer = (state = initialState, action) => {
@@ -83,7 +84,6 @@ const appReducer = (state = initialState, action) => {
                 allTimeTypes: []
             }
         case actionTypes.FETCH_ALL_DOCTOR_INFO_CODE_SUCCESS:
-            console.log('đã vào fetch all doctor info success: ', action.allPrice);
             return {
                 ...state,
                 allPrice: action.allPrice,
@@ -96,6 +96,16 @@ const appReducer = (state = initialState, action) => {
                 allPrice: [],
                 allProvince: [],
                 allPayment: [],
+            }
+        case actionTypes.GET_ALL_SPECIALTY_SUCCESS:
+            return {
+                ...state,
+                allSpecialty: action.allSpecialty,
+            }
+        case actionTypes.GET_ALL_SPECIALTY_FAIL:
+            return {
+                ...state,
+                allSpecialty: [],
             }
         default:
             return state;

@@ -2,6 +2,25 @@
 
     &.section-specialty {
         background: #fafafa;
+        margin: 0 12px;
+
+        .specialty-item-container {
+            .specialty-item {
+                margin: 0 12px;
+                cursor: pointer;
+
+                .section-img {
+                    margin: 0;
+                }
+
+                p {
+                    margin: 8px 0 0;
+                    font-size: 14px;
+                    font-weight: lighter;
+                    color: #444;
+                }
+            }
+        }
     }
 
     &.section-doctor {

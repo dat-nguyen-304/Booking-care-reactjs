@@ -16,13 +16,7 @@ import CommonUtils from '../../utils/CommonUtils';
 
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
-// import style manually
 import 'react-markdown-editor-lite/lib/index.css';
-
-// Register plugins if required
-// MdEditor.use(YOUR_PLUGINS_HERE);
-
-// Initialize a markdown parser
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 // Finish!
@@ -91,13 +85,6 @@ class UserRedux extends Component {
         this.props.getPositionStart();
         this.props.getRoleStart();
         this.props.getAllUserStart();
-        // let allGender = await userService.getAllCode('GENDER');
-        // allGender && allGender.allCode &&
-        //     this.setState({
-        //         allGender: allGender.allCode
-        //     })
-        // console.log(this.state.allGender);
-
     }
 
     componentDidUpdate (prevProps, prevState, snapshot) {
@@ -142,9 +129,9 @@ class UserRedux extends Component {
             })
         }
     }
+
     handleChangeInput = (event, key) => {
         this.setState({
-            ...this.state,
             [key]: event.target.value
         })
     }
@@ -230,10 +217,8 @@ class UserRedux extends Component {
         let { allGender, allPosition, allRole, imgUrl, isOpen, email, password, firstName, lastName, phoneNumber, address, gender, positionId, roleId, action } = this.state;
         return (
             <>
-
                 <div className="title" ><FormattedMessage id="manage-user.manage-user" /></div>
                 <div className="container">
-
                     <div>
                         <div className="row">
                             <div className="col-3">
@@ -308,7 +293,6 @@ class UserRedux extends Component {
                                                 <Lightbox
                                                     mainSrc={ imgUrl }
                                                     onCloseRequest={ () => this.setState({ isOpen: false }) }
-
                                                 />
                                             ) }
                                         </div>

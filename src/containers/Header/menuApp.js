@@ -1,14 +1,13 @@
 export const adminMenu = [
     { //người dùng
         name: 'menu.admin.manage-user', menus: [
-            {
-                name: 'menu.admin.crud', link: '/system/manage-user'
-
-                // subMenus: [
-                //     { name: 'menu.system.system-administrator.user-manage', },
-                //     { name: 'menu.system.system-administrator.user-redux-manage', link: '/system/user-redux-manage' },
-                // ]
-            },
+            // {
+            //     name: 'menu.admin.crud', link: '/system/manage-user',
+            //     subMenus: [
+            //         { name: 'menu.system.system-administrator.user-manage', },
+            //         { name: 'menu.system.system-administrator.user-redux-manage', link: '/system/user-redux-manage' },
+            //     ]
+            // },
             {
                 name: 'menu.admin.crud-redux', link: '/system/manage-user-redux'
             },
@@ -30,7 +29,7 @@ export const adminMenu = [
     { //người dùng
         name: 'menu.admin.specialty', menus: [
             {
-                name: 'menu.admin.manage-specialty',
+                name: 'menu.admin.manage-specialty', link: '/system/manage-specialty',
             },
         ]
     },
