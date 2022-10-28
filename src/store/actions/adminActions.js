@@ -129,6 +129,29 @@ export const fetchAllSpecialty = () => {
     }
 }
 
+//fetch province
+export const fetchAllProvince = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCode('PROVINCE');
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.GET_ALL_PROVINCE_SUCCESS,
+                    allProvince: res.allCode
+                });
+            } else {
+                dispatch({
+                    type: actionTypes.GET_ALL_PROVINCE_FAIL
+                });
+            }
+        } catch (e) {
+            dispatch({
+                type: actionTypes.GET_ALL_PROVINCE_FAIL
+            });
+        }
+    }
+}
+
 export const fetchAllTimeTypeSuccess = (allTimeTypes) => ({
     type: actionTypes.FETCH_ALL_TIME_TYPE_SUCCESS,
     allTimeTypes,

@@ -8,7 +8,17 @@ const getAllSpecialty = () => {
     return axios.get('/api/get-all-specialty');
 }
 
+const getSpecialtyById = (specialtyId) => {
+    return axios.get(`/api/get-specialty?id=${specialtyId}`);
+}
+
+const getAllDoctorsOfSpecialty = (specialtyId) => {
+    return axios.get(`/api/get-all-doctors-of-specialty?id=${specialtyId}`);
+}
+
 export {
     createSpecialty,
-    getAllSpecialty
+    getAllSpecialty,
+    getSpecialtyById,
+    getAllDoctorsOfSpecialty
 }

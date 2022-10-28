@@ -1,0 +1,54 @@
+.doctor-item {
+    display: flex;
+    margin: 16px 0;
+    align-items: flex-start;
+    border-radius: 4px;
+    box-shadow: 1px 1px 10px #ccc;
+
+    &:first-child .no-doctor {
+        display: block;
+        padding: 12px 0;
+        margin: 0 auto;
+        color: red;
+    }
+
+    .no-doctor {
+        display: none;
+    }
+
+    .doctor-intro {
+        flex: 1;
+        margin: 0;
+        padding: 20px 16px;
+        border-right: 1px solid #ccc;
+        cursor: pointer;
+
+        .doctor-name {
+            font-size: 16px;
+        }
+
+        .doctor-description {
+            font-size: 13px;
+        }
+
+        &~.no-doctor {
+            display: none;
+        }
+    }
+
+    .doctor-schedule-container {
+        flex: 1;
+        padding: 20px 16px;
+    }
+
+    .schedule-en,
+    .schedule-vi {
+        border: none !important;
+        cursor: default;
+
+        &:hover {
+            border: none !important;
+            cursor: default;
+        }
+    }
+}

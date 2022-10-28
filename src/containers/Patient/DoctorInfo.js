@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import Select from 'react-select';
 import { LANGUAGES } from '../../utils/constant';
-import * as actions from '../../store/actions';
 import "./DoctorInfo.scss";
-import { toast } from 'react-toastify';
 import { getDoctorInfo } from '../../services/userService';
 import { NumericFormat } from 'react-number-format';
 class DoctorInfo extends Component {

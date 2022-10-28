@@ -53,7 +53,11 @@
       "cancel": "Cancel",
       "date": "Date: ",
       "time": "At: "
-  }
+    }
+  },
+  "detail-specialty": {
+    "show-less": "Show less",
+    "show-more": "Show more"
   },
   "common": {
     "add": "Add",
@@ -128,7 +132,8 @@
     "clinic-address": "Clinic address",
     "note": "Note",
     "save": "Save",
-    "update": "Save changes"
+    "update": "Save changes",
+    "specialty": "Specialty"
   },
   "manage-schedule": {
     "manage-schedule": "Manage doctor's plan",

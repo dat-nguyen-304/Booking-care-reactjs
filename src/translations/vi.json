@@ -34,7 +34,7 @@
         "copyright": "Bản quyền thuộc về Booking care"
     },
     "detail-doctor": {
-        "choose-date": "Chọn bác sĩ",
+        "choose-date": "Chọn ngày",
         "calendar": "Lịch khám",
         "book-calendar": "Chọn và đặt lịch khám miễn phí",
         "no-schedule": "Chưa có lịch khám bệnh trong ngày này",
@@ -55,6 +55,10 @@
             "time": "vào lúc: "
         }
     },
+    "detail-specialty": {
+        "show-less": "Ẩn bớt",
+        "show-more": "Xem thêm"
+      },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",
@@ -93,7 +97,8 @@
             "specialty":"Chuyên khoa",
             "manage-specialty": "Quản lí chuyên khoa",
             "handbook": "Cẩm nang",
-            "manage-handbook": "Quản lí cẩm nang"
+            "manage-handbook": "Quản lí cẩm nang",
+            "speciality": "Chuyên khoa"
         },
         "doctor": {
             "manage-schedule": "Quản lí lịch khám bệnh"
@@ -128,7 +133,9 @@
         "clinic-address": "Địa chỉ phòng khám",
         "note": "Ghi chú",
         "save": "Lưu thông tin",
-        "update": "Lưu thay đổi"
+        "update": "Lưu thay đổi",
+        "specialty": "Chuyên khoa"
+
     },
     "manage-schedule": {
         "manage-schedule": "Quản lí kế hoạch bác sĩ",

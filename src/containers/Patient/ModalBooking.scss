@@ -26,7 +26,8 @@
     }
 
     .doctor-intro {
-        margin-top: 12px;
+        margin: 12px 0 0;
+        padding: 0;
         display: flex;
 
         .doctor-img {
@@ -36,6 +37,17 @@
             border-radius: 50%;
             object-fit: cover;
             object-position: center center;
+        }
+
+        .doctor-intro-text {
+            .doctor-name {
+                font-size: 18px;
+            }
+
+            .doctor-description {
+                font-size: 13px;
+                margin-top: 4px;
+            }
         }
 
         .doctor-text {
@@ -55,16 +67,15 @@
                 .date-and-time {
                     color: red;
                 }
-
-                .price {
-                    font-weight: 700;
-                    font-size: 14px;
-                    margin-top: 12px;
-                    padding-top: 12px;
-                    border-top: 1px solid #ccc;
-                }
             }
         }
+    }
+
+    .price {
+        font-weight: 700;
+        font-size: 14px;
+        margin-top: 12px;
+        padding-top: 12px;
     }
 }
 

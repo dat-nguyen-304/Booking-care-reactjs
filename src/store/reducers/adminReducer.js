@@ -107,6 +107,16 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 allSpecialty: [],
             }
+        case actionTypes.GET_ALL_PROVINCE_SUCCESS:
+            return {
+                ...state,
+                allProvince: action.allProvince,
+            }
+        case actionTypes.GET_ALL_PROVINCE_FAIL:
+            return {
+                ...state,
+                allProvince: [],
+            }
         default:
             return state;
     }

@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import Select from 'react-select';
 import { LANGUAGES } from '../../utils/constant';
-import moment from 'moment';
 import { toast } from 'react-toastify';
 import { Modal } from 'reactstrap';
 import './ModalBooking.scss';
-import { NumericFormat } from 'react-number-format';
 import { createBooking } from '../../services/patientService';
-
+import IntroDoctor from '../../containers/Patient/IntroDoctor';
 class ModalBooking extends Component {
     state = {
         patientFullName: '',
@@ -61,11 +58,9 @@ class ModalBooking extends Component {
     }
 
     render () {
-        let { language, toggleModal, openModal, doctorFullName, description, image, price, dateString, timeString } = this.props;
+        let { language, toggleModal, openModal, doctorFullName, description, image, price, dateString, timeString, positionData, firstName, lastName } = this.props;
         let { patientFullName, phone, reason, dateAndTime } = this.state;
         price = price && (language === LANGUAGES.VI ? price.valueVi : price.valueEn);
-        console.log('this.props: ', this.props);
-        let suffix = language === LANGUAGES.VI ? 'VNĐ' : '$';
         return (
             <Modal isOpen={ openModal }
                 size="lg"
@@ -80,33 +75,16 @@ class ModalBooking extends Component {
                     </div>
                 </div>
                 <div className="modal-body">
-                    <div className="doctor-intro">
-                        <img className="doctor-img" src={ image } />
-                        <div className="doctor-text">
-                            <p className="doctor-title">
-                                { doctorFullName }
-                            </p>
-                            <p className="doctor-description">
-                                <p>{ description }</p>
-                                <p className="date-and-time">
-                                    { timeString && (
-                                        language === LANGUAGES.VI ?
-                                            <div className="schedule-vi">
-                                                <FormattedMessage id="detail-doctor.modal.date" /> { dateString } < FormattedMessage id="detail-doctor.modal.time" />  { timeString.timeData.valueVi }
-                                            </div>
-                                            :
-                                            <div className="schedule-en">
-                                                <FormattedMessage id="detail-doctor.modal.date" /> { dateString } < FormattedMessage id="detail-doctor.modal.time" />  { timeString.timeData.valueEn }
-                                            </div>
-                                    ) }
-                                </p>
-                                <p className="price">
-                                    <FormattedMessage id="detail-doctor.modal.price" /><NumericFormat displayType="text" value={ price } thousandSeparator={ true } suffix={ suffix } />
-                                </p>
+                    <IntroDoctor
+                        image={ image }
+                        description={ description }
+                        positionData={ positionData }
+                        firstName={ firstName }
+                        lastName={ lastName }
+                        passFullName={ this.passFullName }
+                        price={ price }
+                    />
 
-                            </p>
-                        </div>
-                    </div>
                     <div className="row">
                         <div className="col-12">
                         </div>
@@ -139,10 +117,7 @@ class ModalBooking extends Component {
                 </div>
             </Modal >
         )
-
-
     }
-
 }
 
 const mapStateToProps = state => {

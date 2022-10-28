@@ -43,6 +43,7 @@ class DoctorManage extends Component {
     componentDidMount () {
         this.props.getAllDoctorStart();
         this.props.fetchAllDoctorInfoCode();
+        this.props.fetchAllSpecialty();
     }
 
     componentDidUpdate (prevProps, prevState, snapshot) {
@@ -61,13 +62,11 @@ class DoctorManage extends Component {
                 allDoctor,
             })
         }
-        console.log('component did update');
-
     }
 
     getAllOptions = () => {
         let { allDoctor, allPrice, allProvince, allPayment, language, allSpecialty } = this.props;
-        let { selectedDoctor, selectedPrice, selectedPayment, selectedProvince } = this.state;
+        let { selectedDoctor, selectedPrice, selectedPayment, selectedProvince, selectedSpecialty } = this.state;
         allDoctor = allDoctor.map((doctor) => {
             const label = language === LANGUAGES.VI ?
                 `${doctor.lastName} ${doctor.firstName}`
@@ -151,7 +150,7 @@ class DoctorManage extends Component {
     }
 
     handleSaveContentMarkDown = async () => {
-        let { contentHTML, contentMarkDown, description, selectedDoctor, selectedPayment, selectedPrice, selectedProvince, clinicAddress, clinicName, note } = this.state;
+        let { contentHTML, contentMarkDown, description, selectedDoctor, selectedPayment, selectedPrice, selectedProvince, selectedSpecialty, clinicAddress, clinicName, note } = this.state;
 
         if (contentHTML && contentMarkDown && description && selectedDoctor && selectedPayment && selectedPrice && selectedProvince) {
             let resMarkDown = await createMarkDown({
@@ -168,6 +167,7 @@ class DoctorManage extends Component {
                 nameClinic: clinicName,
                 addressClinic: clinicAddress,
                 note: note,
+                specialtyId: selectedSpecialty.value,
             })
             if (resMarkDown && resMarkDown.errCode === 0 && resDoctorInfo && resDoctorInfo.errCode === 0) {
                 toast.success('Add new doctor info successfully');
@@ -184,7 +184,7 @@ class DoctorManage extends Component {
     }
 
     handleUpdateContentMarkDown = async () => {
-        let { contentHTML, contentMarkDown, description, selectedDoctor, selectedPayment, selectedPrice, selectedProvince, clinicAddress, clinicName, note } = this.state;
+        let { contentHTML, contentMarkDown, description, selectedDoctor, selectedPayment, selectedPrice, selectedProvince, selectedSpecialty, clinicAddress, clinicName, note } = this.state;
         let resMarkDown = await updateMarkDown({
             contentHTML: contentHTML,
             contentMarkDown: contentMarkDown,
@@ -199,7 +199,7 @@ class DoctorManage extends Component {
             nameClinic: clinicName,
             addressClinic: clinicAddress,
             note: note,
-
+            specialtyId: selectedSpecialty.value,
         })
         if (resMarkDown && resMarkDown.errCode === 0 && resDoctorInfo && resDoctorInfo.errCode === 0) {
             toast.success('Update doctor successfully');
@@ -226,7 +226,7 @@ class DoctorManage extends Component {
         const res = await getDetailDoctorById(doctorId);
         if (res && res.errCode === 0) {
             let { description, contentHTML, contentMarkDown } = res.doctorInfo.MarkDown;
-            let { paymentData, provinceData, priceData, priceId, paymentId, provinceId, nameClinic, addressClinic, note } = res.doctorInfo.Doctor_Info;
+            let { paymentData, provinceData, priceData, priceId, paymentId, provinceId, nameClinic, addressClinic, note, specialtyData, specialtyId } = res.doctorInfo.Doctor_Info;
             if (!description && !contentHTML && !contentMarkDown && !paymentData.id && !provinceData.id && !priceData.id) {
                 this.setState({
                     action: CRUD_ACTION.CREATE,
@@ -252,6 +252,10 @@ class DoctorManage extends Component {
                     label: language === LANGUAGES.VI ? paymentData.valueVi : paymentData.valueEn,
                     value: paymentId
                 }
+                let selectedSpecialty = {
+                    label: specialtyData.name,
+                    value: specialtyData.id,
+                }
                 this.setState({
                     action: CRUD_ACTION.UPDATE,
                     selectedDoctor,
@@ -261,6 +265,7 @@ class DoctorManage extends Component {
                     selectedPrice: selectedPrice,
                     selectedProvince: selectedProvince,
                     selectedPayment: selectedPayment,
+                    selectedSpecialty: selectedSpecialty,
                     note: note,
                     clinicName: nameClinic,
                     clinicAddress: addressClinic
@@ -306,10 +311,10 @@ class DoctorManage extends Component {
                             </div>
 
                             <div className="payment-select col-4">
-                                <label>Chuyên khoa</label>
+                                <label><FormattedMessage id="manage-doctor.specialty" /></label>
                                 <Select
                                     value={ selectedSpecialty }
-                                    onChange={ (selectedSpecialty) => this.handleChangeSelect('selectedPayment', selectedSpecialty) }
+                                    onChange={ (selectedSpecialty) => this.handleChangeSelect('selectedSpecialty', selectedSpecialty) }
                                     options={ allSpecialty }
                                 />
                             </div>
@@ -396,7 +401,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getAllDoctorStart: () => dispatch(actions.fetchAllDoctorStart()),
-        fetchAllDoctorInfoCode: () => dispatch(actions.fetchAllDoctorInfoCode())
+        fetchAllDoctorInfoCode: () => dispatch(actions.fetchAllDoctorInfoCode()),
+        fetchAllSpecialty: () => dispatch(actions.fetchAllSpecialty())
     };
 };
 

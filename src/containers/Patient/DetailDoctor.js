@@ -10,6 +10,7 @@ import { LANGUAGES } from '../../utils/constant';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorInfo from './DoctorInfo';
 import ModalBooking from './ModalBooking';
+import IntroDoctor from './IntroDoctor';
 
 class DetailDoctor extends Component {
     state = {
@@ -26,10 +27,11 @@ class DetailDoctor extends Component {
         date: null,
         dayTimeStamp: 0,
     }
+
     async componentDidMount () {
         let doctorId = this.props.match.params.id;
         let res = await getDetailDoctorById(doctorId);
-        if (res.errCode === 0) {
+        if (res && res.errCode === 0) {
             this.setState({
                 firstName: res.doctorInfo.firstName,
                 lastName: res.doctorInfo.lastName,
@@ -39,25 +41,11 @@ class DetailDoctor extends Component {
                 description: res.doctorInfo.MarkDown.description,
             })
         }
-        this.getFullName();
     }
 
-    componentDidUpdate (prevProps, prevState, snapshot) {
-        if (prevProps.language !== this.props.language) {
-            this.getFullName();
-        }
-    }
-
-    getFullName = () => {
-        let { positionData, firstName, lastName } = this.state;
-        let { language } = this.props;
-        let fullName =
-            positionData && language === LANGUAGES.VI ?
-                `${positionData.valueVi}, ${lastName} ${firstName} `
-                :
-                `${positionData.valueEn}, ${firstName} ${lastName}  `;
+    passFullName = (fullName) => {
         this.setState({
-            fullName: fullName
+            fullName
         })
     }
 
@@ -68,7 +56,6 @@ class DetailDoctor extends Component {
     }
 
     toggleModal = (timeString = null, dateString = null, dayTimeStamp) => {
-
         this.setState({
             openModal: !this.state.openModal,
             timeString,
@@ -78,38 +65,37 @@ class DetailDoctor extends Component {
     }
 
     render () {
-        let { priceData, image, description, contentHTML, openModal, fullName, timeString, dateString, dayTimeStamp } = this.state;
+        let { priceData, image, description, contentHTML, openModal, positionData, firstName, lastName, fullName, timeString, dateString, dayTimeStamp } = this.state;
         return (
             <>
                 <HomeHeader />
-                <div className="detail-doctor-container">
-                    <div className="doctor-intro">
-                        <div className="doctor-avatar" style={ { backgroundImage: `url(${image})` } }></div>
-                        <div className="doctor-intro-text">
-                            <div className="doctor-name">
-                                { fullName }
-                            </div>
-                            <div className="doctor-description">
-                                { description }
-                            </div>
-                        </div>
+                {/* <div className="detail-doctor-container"> */ }
+                <IntroDoctor
+                    image={ image }
+                    description={ description }
+                    positionData={ positionData }
+                    firstName={ firstName }
+                    lastName={ lastName }
+                    passFullName={ this.passFullName }
+                />
+                <div class="schedule-container">
+                    <div className="schedule-content-left">
+                        <DoctorSchedule
+                            doctorId={ this.props.match.params.id }
+                            toggleModal={ this.toggleModal }
+                        />
                     </div>
-                    <div class="schedule-container">
-                        <div className="schedule-content-left">
-                            <DoctorSchedule
-                                doctorId={ this.props.match.params.id }
-                                toggleModal={ this.toggleModal }
-                            />
-                        </div>
-                        <div className="schedule-content-right">
-                            <DoctorInfo doctorId={ this.props.match.params.id } getPriceFromChild={ this.getPriceFromChild } />
-                        </div>
+                    <div className="schedule-content-right">
+                        <DoctorInfo
+                            doctorId={ this.props.match.params.id }
+                            getPriceFromChild={ this.getPriceFromChild }
+                        />
                     </div>
-                    <div className="doctor-detail">
-                        <div dangerouslySetInnerHTML={ { __html: `${contentHTML ? contentHTML : ''}` } }></div>
-                    </div>
-                    <div className="doctor-feedback">
-                    </div>
+                </div>
+                <div className="doctor-detail">
+                    <div dangerouslySetInnerHTML={ { __html: `${contentHTML ? contentHTML : ''}` } }></div>
+                </div>
+                <div className="doctor-feedback">
                 </div>
                 <HomeFooter />
                 <ModalBooking
@@ -123,6 +109,9 @@ class DetailDoctor extends Component {
                     timeString={ timeString }
                     dateString={ dateString }
                     dayTimeStamp={ dayTimeStamp }
+                    positionData={ positionData }
+                    firstName={ firstName }
+                    lastName={ lastName }
                 />
             </>
         );
@@ -133,7 +122,7 @@ class DetailDoctor extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-        language: state.app.language,
+        language: state.app.language
     };
 };
 
