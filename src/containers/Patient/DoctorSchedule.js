@@ -101,7 +101,7 @@ class DoctorSchedule extends Component {
         const { language } = this.props;
         const { selectedDay, options, allSchedules, selectedDayTimeStamp } = this.state;
         return (
-            <div class="doctor-schedule-container">
+            <div class="doctor-schedule">
                 <label><FormattedMessage id="detail-doctor.choose-date" /></label>
                 <Select
                     className="select-day"

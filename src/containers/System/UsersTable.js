@@ -17,7 +17,6 @@ class UsersTable extends Component {
 
     handleDeleteUser = async (userId) => {
         try {
-            console.log(userId);
             let data = { data: { id: userId } };
             let response = await deleteUser(data);
             if (response && response.errCode === 0) {
@@ -30,9 +29,6 @@ class UsersTable extends Component {
             console.log('>>> catch: ' + e);
         }
     }
-
-
-
 
     render () {
         let { users } = this.props;
@@ -63,8 +59,6 @@ class UsersTable extends Component {
                                 </tr>
                             ))
                         }
-
-
                     </tbody>
                 </table>
             </>

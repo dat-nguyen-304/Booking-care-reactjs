@@ -42,7 +42,6 @@ class Specialty extends Component {
                             })
                         }
                     </Slider>
-
                 </div>
             </div >
         );

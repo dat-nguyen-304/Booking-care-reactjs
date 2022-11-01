@@ -30,7 +30,7 @@
         "see-more": "Xem thêm",
         "search": "Tìm kiếm",
         "all-post": "Tất cả bài viết",
-        "description": "...Ngôi đền đầu tiên do vua Solomon xây dựng vào khoảng thế kỷ 10 trước Công nguyên, là trung tâm phụng thờ của Do Thái giáo cổ. Ngôi đền này chính thức thay thế cho nơi mà Mô-sê hằng phụng thờ và những nơi khác tại Shiloh, Nov, và Givon, trở thành nơi tập trung cao độ của đức tin người Do Thái. Ngôi đền thứ nhất này bị phá hủy bởi những người Babylon vào năm 586 TCN, và được xây dựng lại (là ngôi đền thứ hai) bảy mươi năm sau tức 515 TCN...",
+        "description": "Nền tảng Y tế chăm sóc sức khỏe toàn diện kết nối người dùng đến với dịch vụ y tế - chăm sóc sức khỏe chất lượng, hiệu quả và tin cậy.",
         "copyright": "Bản quyền thuộc về Booking care"
     },
     "detail-doctor": {
@@ -57,7 +57,8 @@
     },
     "detail-specialty": {
         "show-less": "Ẩn bớt",
-        "show-more": "Xem thêm"
+        "show-more": "Xem thêm",
+        "no-doctor": "Không tìm thấy bác sĩ phù hợp"
       },
     "common": {
         "add": "Thêm",
@@ -87,17 +88,15 @@
     },
     "menu": {
         "admin": {
-            "manage-user": "Người dùng",
+            "manage-user": "Quản lí gười dùng",
             "manage-doctor": "Quản lí bác sĩ",
-            "manage-admin": "Quản lí admin",
+            "manage-schedule": "Quản lí lịch khám",
             "crud": "CRUD user",
             "crud-redux": "CRUD Redux",
             "clinic": "Phòng khám",
             "manage-clinic": "Quản lí phòng khám",
             "specialty":"Chuyên khoa",
             "manage-specialty": "Quản lí chuyên khoa",
-            "handbook": "Cẩm nang",
-            "manage-handbook": "Quản lí cẩm nang",
             "speciality": "Chuyên khoa"
         },
         "doctor": {
@@ -141,7 +140,21 @@
         "manage-schedule": "Quản lí kế hoạch bác sĩ",
         "choose-doctor": "Chọn bác sĩ",
         "choose-date": "Chọn ngày",
-        "add-plan": "Thêm kế hoạch"
+        "add-plan": "Thêm kế hoạch",
+        "update-plan": "Lưu thay đổi kế hoạch",
+        "index": "Số thứ tự",
+        "patient-full-name": "Tên bệnh nhân",
+        "phone": "Số điện thoại",
+        "time": "Thời gian",
+        "reason": "Lý do khám",
+        "status": "Trạng thái",
+        "action":"Thao tác",
+        "no-patient": "Chưa có bệnh nhân đăng ký!",
+        "send-invoice": "Gửi hóa đơn",
+        "upload-invoice": "Tải hóa đơn lên",
+        "confirm": "Xác nhận",
+        "cancel":"Hủy bỏ",
+        "done": "Đã khám xong"
     }, 
     "verify-booking": {
         "loading": "Đang tải...",

@@ -8,12 +8,13 @@ class About extends Component {
             <div className="section section-about">
                 <div className="section-content">
                     <div className="section-video">
-                        <iframe width="956" height="538"
-                            src="https://www.youtube.com/embed/ek-672uRnhQ"
-                            title="Worlds 2020 | Orchestral Theme - League of Legends"
-                            frameBorder="0"
+                        <iframe width="853" height="480"
+                            src="https://www.youtube.com/embed/8NBPLhyYlOw"
+                            title="Hướng dẫn sử dụng Kit Test Covid nước bọt LYHER"
+                            frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen>
+                            allowfullscreen>
+
                         </iframe>
                     </div>
                     <div className="section-about-description">

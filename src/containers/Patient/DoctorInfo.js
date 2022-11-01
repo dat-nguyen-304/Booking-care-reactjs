@@ -40,7 +40,7 @@ class DoctorInfo extends Component {
         price = price && (language === LANGUAGES.VI ? price.valueVi : price.valueEn);
         let suffix = language === LANGUAGES.VI ? 'VNĐ' : '$';
         return (
-            <>
+            <div class="doctor-info">
                 <div className="address-title">
                     <FormattedMessage id="detail-doctor.address" />
                 </div>
@@ -73,7 +73,7 @@ class DoctorInfo extends Component {
                 <div className="see-more" onClick={ () => this.setState({ showDetail: !showDetail }) }>
                     { showDetail ? <FormattedMessage id="detail-doctor.hide" /> : <FormattedMessage id="detail-doctor.show-detail" /> }
                 </div>
-            </>
+            </div>
         )
     }
 

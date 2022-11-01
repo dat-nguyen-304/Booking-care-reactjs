@@ -35,7 +35,7 @@ class OutstandingDoctor extends Component {
                                         </div>
                                         <div className="section-doctor-info">
                                             <p className="position-fullname">{ language === LANGUAGES.EN ? nameEn : nameVi }</p>
-                                            <p className="position-specialty">Cơ xương khớp</p>
+                                            <p className="position-specialty">{ doctor.Doctor_Info.specialtyData.name }</p>
                                         </div>
                                     </div>
                                 )

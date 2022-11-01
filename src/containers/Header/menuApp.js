@@ -9,35 +9,21 @@ export const adminMenu = [
             //     ]
             // },
             {
-                name: 'menu.admin.crud-redux', link: '/system/manage-user-redux'
+                name: 'menu.admin.manage-user', link: '/system/manage-user'
             },
             {
                 name: 'menu.admin.manage-doctor', link: '/system/manage-doctor'
-            },
-            {
-                name: 'menu.admin.manage-admin', link: '/system/manage-admin'
-            },
-        ]
-    },
-    { //phòng khám
-        name: 'menu.admin.clinic', menus: [
-            {
-                name: 'menu.admin.manage-clinic',
-            },
+            }
         ]
     },
     { //người dùng
-        name: 'menu.admin.specialty', menus: [
-            {
-                name: 'menu.admin.manage-specialty', link: '/system/manage-specialty',
-            },
+        name: 'menu.admin.manage-schedule', menus: [
+            { name: 'menu.admin.manage-schedule', link: '/system/manage-schedule' }
         ]
     },
     { //người dùng
-        name: 'menu.admin.handbook', menus: [
-            {
-                name: 'menu.admin.manage-handbook',
-            },
+        name: 'menu.admin.manage-specialty', menus: [
+            { name: 'menu.admin.manage-specialty', link: '/system/manage-specialty' }
         ]
     },
 ];

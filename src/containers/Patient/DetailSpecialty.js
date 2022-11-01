@@ -18,17 +18,23 @@ class DetailSpecialty extends Component {
         specialtyId: '',
         doctorIds: [],
         allProvince: [],
-        selectedProvince: 0,
+        selectedProvince: {
+            value: 0,
+            label: ''
+        },
         openModal: false,
+        contentHTML: '',
     }
 
     async componentDidMount () {
         this.props.getAllProvince();
         let specialtyId = this.props.match.params.id;
+        this.setState({
+            specialtyId
+        })
         let response = await getAllDoctorsOfSpecialty(specialtyId);
         if (response && response.errCode === 0) {
             this.setState({
-                specialtyId,
                 doctorIds: response.doctorIds,
             })
         }
@@ -58,7 +64,7 @@ class DetailSpecialty extends Component {
             allProvince.unshift({
                 ...firstOption
             })
-            if (selectedProvince === 0) {
+            if (selectedProvince && selectedProvince.value === 0) {
                 selectedProvince = {
                     ...firstOption
                 }
@@ -77,7 +83,8 @@ class DetailSpecialty extends Component {
     }
 
     render () {
-        let { doctorIds, specialtyId, selectedProvince, allProvince } = this.state;
+        let { doctorIds, specialtyId, selectedProvince, allProvince, contentHTML } = this.state;
+
         return (
             <>
                 <HomeHeader />
@@ -89,7 +96,7 @@ class DetailSpecialty extends Component {
                         onChange={ this.handleChange }
                         options={ allProvince }
                     />
-                    <div className="specialty-list-doctor">
+                    <div className="specialty-list-doctor" ref='test'>
                         { doctorIds && doctorIds.length > 0 &&
                             doctorIds.map(doctorId => {
                                 return (
@@ -99,6 +106,11 @@ class DetailSpecialty extends Component {
                                     />
                                 )
                             })
+                        }
+                        { doctorIds && doctorIds.length === 0 &&
+                            <div className="doctor-item">
+                                <p className="no-doctor"><FormattedMessage id="detail-specialty.no-doctor" /></p>
+                            </div >
                         }
                     </div>
                 </div >

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import HomeHeader from './HomeHeader';
 import Specialty from './Section/Specialty';
 import OutstandingDoctor from './Section/OutstandingDoctor';
-import MedicalFacility from './Section/MedicalFacility';
-import HandBook from './Section/HandBook';
 import About from './Section/About';
 import HomeFooter from './HomeFooter';
 import "slick-carousel/slick/slick.css";
@@ -27,9 +26,7 @@ class HomePage extends Component {
                 <HomeHeader />
                 <HomeBanner />
                 <Specialty settings={ settings } />
-                <MedicalFacility settings={ settings } />
                 <OutstandingDoctor settings={ settings } />
-                <HandBook settings={ settings } />
                 <About />
                 <HomeFooter />
             </div>
@@ -49,4 +46,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomePage));

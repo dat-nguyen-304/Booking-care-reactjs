@@ -10,19 +10,10 @@ import { CRUD_ACTION } from '../../utils/constant';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UsersTable from './UsersTable';
+import { withRouter } from 'react-router-dom';
 
 import * as actions from '../../store/actions';
 import CommonUtils from '../../utils/CommonUtils';
-
-import MarkdownIt from 'markdown-it';
-import MdEditor from 'react-markdown-editor-lite';
-import 'react-markdown-editor-lite/lib/index.css';
-const mdParser = new MarkdownIt(/* Markdown-it options */);
-
-// Finish!
-function handleEditorChange ({ html, text }) {
-    console.log('handleEditorChange', html, text);
-}
 
 class UserRedux extends Component {
 
@@ -42,8 +33,46 @@ class UserRedux extends Component {
         positionId: '',
         roleId: '',
         avatar: '',
-        action: CRUD_ACTION.CREATE
+        action: CRUD_ACTION.CREATE,
+        isLoading: false
     }
+
+    componentDidMount () {
+        this.setState({
+            isLoading: true,
+        })
+        this.props.getGenderStart();
+        this.props.getPositionStart();
+        this.props.getRoleStart();
+        this.props.getAllUserStart();
+        this.setState({
+            isLoading: false,
+        })
+    }
+
+    componentDidUpdate (prevProps, prevState, snapshot) {
+        if (prevProps.genders !== this.props.genders) {
+            this.setState({
+                allGender: this.props.genders,
+                gender: this.props.genders && this.props.genders.length > 0 ? this.props.genders[0].keyMap : ''
+            })
+        }
+
+        if (prevProps.positions !== this.props.positions) {
+            this.setState({
+                allPosition: this.props.positions,
+                positionId: this.props.positions && this.props.positions.length > 0 ? this.props.positions[0].keyMap : ''
+            })
+        }
+
+        if (prevProps.roles !== this.props.roles) {
+            this.setState({
+                allRole: this.props.roles,
+                roleId: this.props.roles && this.props.roles.length > 0 ? this.props.roles[0].keyMap : ''
+            })
+        }
+    }
+
     resetInput = () => {
         this.setState({
             email: '',
@@ -78,36 +107,6 @@ class UserRedux extends Component {
             action: CRUD_ACTION.UPDATE,
             imgUrl: imageBase64
         })
-    }
-
-    componentDidMount () {
-        this.props.getGenderStart();
-        this.props.getPositionStart();
-        this.props.getRoleStart();
-        this.props.getAllUserStart();
-    }
-
-    componentDidUpdate (prevProps, prevState, snapshot) {
-        if (prevProps.genders !== this.props.genders) {
-            this.setState({
-                allGender: this.props.genders,
-                gender: this.props.genders && this.props.genders.length > 0 ? this.props.genders[0].keyMap : ''
-            })
-        }
-
-        if (prevProps.positions !== this.props.positions) {
-            this.setState({
-                allPosition: this.props.positions,
-                positionId: this.props.positions && this.props.positions.length > 0 ? this.props.positions[0].keyMap : ''
-            })
-        }
-
-        if (prevProps.roles !== this.props.roles) {
-            this.setState({
-                allRole: this.props.roles,
-                roleId: this.props.roles && this.props.roles.length > 0 ? this.props.roles[0].keyMap : ''
-            })
-        }
     }
 
     getImgUrl = async (event) => {
@@ -212,9 +211,8 @@ class UserRedux extends Component {
     }
 
     render () {
-        console.log('this at render: ', this);
-        let { language, users } = this.props;
-        let { allGender, allPosition, allRole, imgUrl, isOpen, email, password, firstName, lastName, phoneNumber, address, gender, positionId, roleId, action } = this.state;
+        let { language, user, users } = this.props;
+        let { isLoading, allGender, allPosition, allRole, imgUrl, isOpen, email, password, firstName, lastName, phoneNumber, address, gender, positionId, roleId, action } = this.state;
         return (
             <>
                 <div className="title" ><FormattedMessage id="manage-user.manage-user" /></div>
@@ -314,7 +312,6 @@ class UserRedux extends Component {
                         </div>
                     </div>
                     <UsersTable changeFormUpdate={ this.changeFormUpdate } />
-                    <MdEditor style={ { height: '500px' } } renderHTML={ text => mdParser.render(text) } onChange={ handleEditorChange } />
                 </div>
             </>
         )
@@ -325,6 +322,7 @@ class UserRedux extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
+        isLoggedIn: state.user.isLoggedIn,
         genders: state.admin.genders,
         positions: state.admin.positions,
         roles: state.admin.roles,
@@ -342,4 +340,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserRedux);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserRedux));

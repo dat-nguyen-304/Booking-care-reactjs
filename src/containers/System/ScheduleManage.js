@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Select from 'react-select';
-import { LANGUAGES } from '../../utils/constant';
+import { CRUD_ACTION, LANGUAGES } from '../../utils/constant';
 import * as actions from '../../store/actions';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./ScheduleManage.scss";
 import { toast } from 'react-toastify';
-import { createBulkSchedule } from '../../services/userService';
+import ScheduleTable from './ScheduleTable';
+import { createBulkSchedule, getSchedule, updateBulkSchedule } from '../../services/userService';
 import './ScheduleManage.scss';
 class AdminManage extends Component {
     state = {
@@ -16,6 +17,7 @@ class AdminManage extends Component {
         options: [],
         date: '',
         allTimeTypes: [],
+        action: CRUD_ACTION.CREATE,
     }
 
     componentDidMount () {
@@ -51,10 +53,59 @@ class AdminManage extends Component {
         }
     }
 
-    handleChange = async (selectedDoctor) => {
+    handleChangeDoctor = async (selectedDoctor) => {
+        let { date } = this.state;
+        if (date) {
+            this.getScheduleStatus(selectedDoctor.value, date);
+        }
         this.setState({
             selectedDoctor,
         })
+    }
+
+    handleChangeDate = (date) => {
+        this.getScheduleStatus(this.state.selectedDoctor.value, date);
+        this.setState({
+            date
+        })
+    }
+
+    getScheduleStatus = async (doctorId, date) => {
+        let response = await getSchedule(date.getTime(), doctorId);
+        if (response && response.errCode === 0) {
+            let schedules = response.allSchedules;
+            if (schedules && schedules.length > 0) {
+                this.setState({
+                    action: CRUD_ACTION.UPDATE
+                })
+            } else {
+                this.setState({
+                    action: CRUD_ACTION.CREATE
+                })
+            }
+            let status = {};
+            schedules.forEach((schedule) => {
+                let key = schedule.timeType;
+                status = {
+                    ...status,
+                    [key]: true
+                }
+            })
+            schedules = this.state.allTimeTypes.map((schedule) => {
+                if (status[schedule.keyMap])
+                    return {
+                        ...schedule,
+                        isSelected: true,
+                    }
+                return {
+                    ...schedule,
+                    isSelected: false,
+                }
+            })
+            this.setState({
+                allTimeTypes: schedules
+            })
+        }
     }
 
     handClickRangeTime = (index) => {
@@ -79,7 +130,6 @@ class AdminManage extends Component {
                 timeType: timType.keyMap,
                 date: date.getTime(),
                 doctorId: selectedDoctor.value,
-                maxNumber: 10,
             }
         })
         let res = await createBulkSchedule({ schedules: allTimeTypes });
@@ -87,9 +137,30 @@ class AdminManage extends Component {
             toast.success('Add successfully');
     }
 
+    handleUpdate = async () => {
+        let { selectedDoctor, date, allTimeTypes } = this.state;
+        allTimeTypes = allTimeTypes.filter(timType => {
+            return timType.isSelected === true;
+        })
+        if (allTimeTypes.length === 0 || !selectedDoctor || !date) {
+            toast.error('Invalid input parameter');
+            return;
+        }
+        allTimeTypes = allTimeTypes.map(timType => {
+            return {
+                timeType: timType.keyMap,
+                date: date.getTime(),
+                doctorId: selectedDoctor.value,
+            }
+        })
+        let res = await updateBulkSchedule({ schedules: allTimeTypes });
+        if (res && res.errCode === 0)
+            toast.success('Update successfully');
+    }
+
     render () {
         const { language } = this.props;
-        const { selectedDoctor, options, allTimeTypes } = this.state;
+        const { selectedDoctor, options, allTimeTypes, date, action, openModal } = this.state;
         let minDate = new Date();
         minDate = minDate.setDate(minDate.getDate() + 1);
         return (
@@ -101,46 +172,65 @@ class AdminManage extends Component {
                             <label><FormattedMessage id="manage-schedule.choose-doctor" /></label>
                             <Select
                                 value={ selectedDoctor }
-                                onChange={ this.handleChange }
+                                onChange={ this.handleChangeDoctor }
                                 options={ options }
                             />
                         </div>
-                        <div className="col-6">
-                            <label><FormattedMessage id="manage-schedule.choose-date" /></label>
-                            <DatePicker className="form-control"
-                                selected={ this.state.date }
-                                onChange={ (date) => this.setState({
-                                    date
-                                }) }
-                                minDate={ new Date() }
-                            />
-                        </div>
-                        <div className="col-12 range-time-container">
-                            <div className="row">
-                                {
-                                    allTimeTypes && allTimeTypes.length > 0 &&
-                                    allTimeTypes.map((timType, index) => {
-                                        return (
-                                            <div
-                                                className={ timType.isSelected === false ? "range-time col-1" : "range-time col-1 active" }
-                                                onClick={ () => this.handClickRangeTime(index) }
-                                            >
-                                                { language === LANGUAGES.VI ? timType.valueVi : timType.valueEn }
-                                            </div>
-                                        )
-                                    })
-                                }
-
+                        { selectedDoctor &&
+                            <div className="col-6">
+                                <label><FormattedMessage id="manage-schedule.choose-date" /></label>
+                                <DatePicker className="form-control"
+                                    selected={ date }
+                                    onChange={ (date) => this.handleChangeDate(date) }
+                                    minDate={ new Date() }
+                                />
                             </div>
-                        </div>
-                        <div className="col-12">
-                            <button
-                                className="btn btn-primary submit-btn"
-                                onClick={ () => this.handleSubmit() }
-                            >
-                                <label><FormattedMessage id="manage-schedule.add-plan" /></label>
-                            </button>
-                        </div>
+                        }
+                        { (selectedDoctor && date) &&
+                            <>
+                                <div className="col-12 range-time-container">
+                                    {
+                                        allTimeTypes && allTimeTypes.length > 0 &&
+                                        allTimeTypes.map((timType, index) => {
+                                            return (
+                                                <div
+                                                    className={ timType.isSelected === false ? "range-time" : "range-time active" }
+                                                    onClick={ () => this.handClickRangeTime(index) }
+                                                >
+                                                    { language === LANGUAGES.VI ? timType.valueVi : timType.valueEn }
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                                <div className="col-12">
+                                    {
+                                        action === CRUD_ACTION.CREATE ?
+                                            <button
+                                                className="btn btn-primary submit-btn"
+                                                onClick={ () => this.handleSubmit() }
+                                            >
+                                                <label><FormattedMessage id="manage-schedule.add-plan" /></label>
+                                            </button>
+                                            :
+                                            <button
+                                                className="btn btn-primary submit-btn"
+                                                onClick={ () => this.handleUpdate() }
+                                            >
+                                                <label><FormattedMessage id="manage-schedule.update-plan" /></label>
+                                            </button>
+                                    }
+
+                                </div>
+                                <div className="schedule-table-container">
+                                    <ScheduleTable
+                                        doctorId={ selectedDoctor.value }
+                                        date={ date.getTime() }
+                                    />
+                                </div>
+
+                            </>
+                        }
                     </div>
                 </div>
             </>

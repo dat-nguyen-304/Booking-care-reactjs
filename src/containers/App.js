@@ -4,9 +4,6 @@ import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
-
-import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
-
 import { path } from '../utils'
 
 import Home from '../routes/Home';
@@ -17,11 +14,12 @@ import System from '../routes/System';
 import Doctor from '../routes/Doctor';
 import VerifyBooking from '../routes/VerifyBooking';
 import Test from '../routes/Test';
-import { CustomToastCloseButton } from '../components/CustomToast';
+
 import HomePage from '../containers/HomePage/HomePage';
 import DetailDoctor from './Patient/DetailDoctor';
 import DetailSpecialty from './Patient/DetailSpecialty';
 import CustomScrollbars from '../components/CustomScrollbars';
+import { Audio } from 'react-loader-spinner'
 class App extends Component {
 
     handlePersistorState = () => {
@@ -52,9 +50,9 @@ class App extends Component {
                             <div className="content-container">
                                 <Switch>
                                     <Route path={ path.HOME } exact component={ (Home) } />
-                                    <Route path={ path.LOGIN } component={ userIsNotAuthenticated(Login) } />
-                                    <Route path={ path.SYSTEM } component={ userIsAuthenticated(System) } />
-                                    <Route path={ path.DOCTOR } component={ userIsAuthenticated(Doctor) } />
+                                    <Route path={ path.LOGIN } component={ Login } />
+                                    <Route path={ path.SYSTEM } component={ System } />
+                                    <Route path={ path.DOCTOR } component={ Doctor } />
                                     <Route path={ path.HOMEPAGE } exact component={ HomePage } />
                                     <Route path={ path.DETAIL_DOCTOR } component={ DetailDoctor } />
                                     <Route path={ path.DETAIL_SPECIALTY } component={ DetailSpecialty } />

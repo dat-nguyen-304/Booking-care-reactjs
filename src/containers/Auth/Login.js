@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
+import { withRouter } from 'react-router-dom';
 
 import userIcon from '../../../src/assets/images/user.svg';
 import passIcon from '../../../src/assets/images/pass.svg';
@@ -52,7 +53,10 @@ class Login extends Component {
                     errMessage: response.message,
                 })
             } else if (response && response.errCode === 0) {
-                this.props.userLoginSuccess(response.user);
+                const user = response.user
+                this.props.userLoginSuccess(user);
+                if (user.roleId === 'R1') this.props.history.push('/system');
+                else this.props.history.push('/home');
             }
         } catch (e) {
             console.log(e);
@@ -64,15 +68,16 @@ class Login extends Component {
         }
     }
 
-    componentDidMount = () => {
-        console.log('fucntion did mount');
+    handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            this.handleLogin();
+        }
     }
 
     render () {
         return (
 
-            <div className="login-wrapper">
-
+            <div className="login-wrapper" onKeyDown={ (e) => this.handleKeyPress(e) }>
                 <div className="login-container">
                     <div className="form_login">
                         <h2 className="title">
@@ -135,4 +140,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

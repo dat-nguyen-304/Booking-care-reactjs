@@ -35,7 +35,7 @@ class SpecialtyInfo extends Component {
         const { showMore, image, contentHTML } = this.state;
         return (
             <>
-                <div className="doctor-info" >
+                <div className="specialty-info" >
                     <input type="checkbox" id="show-hide" />
                     <div className="specialty-content">
                         <div dangerouslySetInnerHTML={ { __html: `${contentHTML ? contentHTML : ''}` } }>

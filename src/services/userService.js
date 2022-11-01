@@ -58,11 +58,14 @@ const getDoctorInfo = (doctorId) => {
 
 const getDetailDoctorById = (id) => {
     return axios.get(`/api/get-detail-doctor-by-id?id=${id}`);
-
 }
 
 const createBulkSchedule = (schedules) => {
     return axios.post(`/api/create-bulk-schedules`, schedules);
+}
+
+const updateBulkSchedule = (schedules) => {
+    return axios.put(`/api/update-bulk-schedules`, schedules);
 }
 
 const getSchedule = (date, doctorId) => {
@@ -73,10 +76,17 @@ const verifyBooking = (doctorId, token) => {
     return axios.post(`/api/verify-booking?doctorId=${doctorId}&token=${token}`);
 }
 
+const getBooking = (doctorId, date) => {
+    return axios.get(`/api/get-booking?doctorId=${doctorId}&date=${date}`);
+}
+
+const changeBookingStatus = (doctorId, date, statusId) => {
+    return axios.put(`/api/update-booking-status`, { doctorId, date, statusId });
+}
 
 export {
     handleLogin, handleLoginApi, getAllUsers, createUser, deleteUser,
     editUser, getAllCode, getTopDoctorHome, getAllDoctors, createMarkDown, updateMarkDown,
-    getDetailDoctorById, createBulkSchedule, getSchedule, createDoctorInfo, updateDoctorInfo,
-    getDoctorInfo, verifyBooking
+    getDetailDoctorById, createBulkSchedule, updateBulkSchedule, getSchedule, createDoctorInfo, updateDoctorInfo,
+    getDoctorInfo, verifyBooking, getBooking, changeBookingStatus
 }

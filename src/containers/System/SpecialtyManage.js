@@ -76,7 +76,8 @@ class Doctor extends Component {
     render () {
         let { name, imgUrl, isOpen, contentHTML, contentMarkDown } = this.state;
         return (
-            <div className="container">
+            <div className="specialty-manager-container">
+                <div className="text-center title" ><FormattedMessage id="menu.admin.manage-specialty" /></div>
                 <div className="row">
                     <div className="col-6">
                         <label>Tên chuyên khoa</label>

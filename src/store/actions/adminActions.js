@@ -168,7 +168,6 @@ export const fetchAllUserStart = () => {
         try {
             let res = await getAllUsers('ALL');
             let res1 = await getTopDoctorHome(3);
-            console.log('check doctor: ', res1);
             if (res && res.errCode === 0) {
                 dispatch(fetchAllUserSuccess(res.users));
             } else {

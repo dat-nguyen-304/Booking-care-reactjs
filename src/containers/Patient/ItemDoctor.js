@@ -4,10 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { getDetailDoctorById } from '../../services/userService';
 import IntroDoctor from './IntroDoctor';
 import DoctorSchedule from './DoctorSchedule';
-
+import DoctorInfo from './DoctorInfo';
 import { withRouter } from 'react-router-dom';
-
-
 import './ItemDoctor.scss';
 
 class ItemDoctor extends Component {
@@ -51,20 +49,29 @@ class ItemDoctor extends Component {
                 <div className="doctor-item">
                     { (provinceId === selectedProvince || selectedProvince === 0) &&
                         <>
-                            <IntroDoctor
-                                image={ image }
-                                description={ description }
-                                positionData={ positionData }
-                                firstName={ firstName }
-                                lastName={ lastName }
-                                linkToDoctorDetail={ this.getDetailDoctorLink }
-                            />
-                            <DoctorSchedule
-                                doctorId={ doctorId }
-                                toggleModal={ () => 0 }
-                            />
-                        </> }
-                    <p className="no-doctor">Chưa có bác sĩ nào cho vị trí này</p>
+                            <div className="intro-doctor-container">
+                                <IntroDoctor
+                                    image={ image }
+                                    description={ description }
+                                    positionData={ positionData }
+                                    firstName={ firstName }
+                                    lastName={ lastName }
+                                    linkToDoctorDetail={ this.getDetailDoctorLink }
+                                />
+
+                                <DoctorInfo
+                                    doctorId={ doctorId }
+                                    getPriceFromChild={ () => 0 }
+                                />
+                            </div>
+                            <div className="doctor-schedule-container">
+                                <DoctorSchedule
+                                    doctorId={ doctorId }
+                                    toggleModal={ () => 0 }
+                                />
+                            </div>
+                        </>
+                    }
                 </div >
             </>
 

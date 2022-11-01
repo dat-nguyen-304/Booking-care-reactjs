@@ -48,25 +48,11 @@
                 font-size: 13px;
                 margin-top: 4px;
             }
-        }
 
-        .doctor-text {
-            display: inline-block;
-            flex: 1;
-            margin-left: 20px;
-            color: #333;
-
-            .doctor-title {
-                font-size: 16px;
-                font-weight: 700;
-            }
-
-            .doctor-description {
-                font-size: 12px;
-
-                .date-and-time {
-                    color: red;
-                }
+            .date-and-time {
+                margin-top: 2px;
+                color: red;
+                font-size: 13px;
             }
         }
     }
@@ -95,4 +81,18 @@
         border: 1px solid #ccc;
         cursor: pointer;
     }
+}
+
+.modal-booking-loading {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(#000, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10000;
 }

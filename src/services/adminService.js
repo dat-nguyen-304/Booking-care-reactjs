@@ -16,9 +16,14 @@ const getAllDoctorsOfSpecialty = (specialtyId) => {
     return axios.get(`/api/get-all-doctors-of-specialty?id=${specialtyId}`);
 }
 
+const sendInvoiceToEmail = (userEmail, patientFullName, invoiceImg) => {
+    return axios.post('/api/send-invoice-via-email', { userEmail, patientFullName, invoiceImg });
+}
+
 export {
     createSpecialty,
     getAllSpecialty,
     getSpecialtyById,
-    getAllDoctorsOfSpecialty
+    getAllDoctorsOfSpecialty,
+    sendInvoiceToEmail
 }

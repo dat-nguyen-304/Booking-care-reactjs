@@ -9,9 +9,11 @@ import overal from '../../assets/overal.png';
 import microscope from '../../assets/microscope.png';
 import mental from '../../assets/mental.png';
 import dental from '../../assets/dental.png';
-class HomePage extends Component {
+import { injectIntl } from 'react-intl';
 
+class HomeBanner extends Component {
     render () {
+        const placeholder = this.props.intl.formatMessage({ id: 'banner.search-doctor' });
         return (
             <div className="home-header-banner">
                 <div className="content-up">
@@ -19,7 +21,7 @@ class HomePage extends Component {
                     <div className="title2"><FormattedMessage id="banner.comprehensive-health" /></div>
                     <div className="search">
                         <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Tìm bác sĩ" />
+                        <input type="text" placeholder={ placeholder } />
                     </div>
                 </div>
                 <div className="content-down">
@@ -97,4 +99,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(HomeBanner));

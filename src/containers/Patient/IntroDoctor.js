@@ -40,7 +40,7 @@ class IntroDoctor extends Component {
     }
 
     render () {
-        let { image, description, price, language, linkToDoctorDetail, doctorId } = this.props;
+        let { image, description, price, language, linkToDoctorDetail, doctorId, timeString, dateString } = this.props;
         let { fullName } = this.state;
         let suffix = language === LANGUAGES.VI ? 'VNĐ' : '$';
         return (
@@ -49,7 +49,6 @@ class IntroDoctor extends Component {
                     <div className="doctor-avatar"
                         style={ { backgroundImage: `url(${image})` } }
                     />
-
                     <div className="doctor-intro-text">
                         <div className="doctor-name">
                             { fullName }
@@ -57,6 +56,18 @@ class IntroDoctor extends Component {
                         <div className="doctor-description">
                             { description }
                         </div>
+                        <p className="date-and-time">
+                            { timeString && (
+                                language === LANGUAGES.VI ?
+                                    <div className="schedule-vi">
+                                        <FormattedMessage id="detail-doctor.modal.date" /> { dateString } < FormattedMessage id="detail-doctor.modal.time" />  { timeString.timeData.valueVi }
+                                    </div>
+                                    :
+                                    <div className="schedule-en">
+                                        <FormattedMessage id="detail-doctor.modal.date" /> { dateString } < FormattedMessage id="detail-doctor.modal.time" />  { timeString.timeData.valueEn }
+                                    </div>
+                            ) }
+                        </p>
                         { price &&
                             <p className="price">
                                 <FormattedMessage id="detail-doctor.modal.price" /><NumericFormat displayType="text" value={ price } thousandSeparator={ true } suffix={ suffix } />

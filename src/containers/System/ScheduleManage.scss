@@ -3,8 +3,11 @@
 
     .range-time-container {
         margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
 
         .range-time {
+            flex: 1;
             border: 1px solid #ccc;
             text-align: center;
             margin: 10px 16px;
@@ -29,4 +32,11 @@
         padding: 0 12px;
         font-weight: 300;
     }
+
+    .schedule-table-container {
+        width: 100%;
+    }
+
+
+
 }

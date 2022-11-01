@@ -26,6 +26,7 @@ class DetailDoctor extends Component {
         time: null,
         date: null,
         dayTimeStamp: 0,
+        isLoading: false,
     }
 
     async componentDidMount () {
@@ -68,8 +69,8 @@ class DetailDoctor extends Component {
         let { priceData, image, description, contentHTML, openModal, positionData, firstName, lastName, fullName, timeString, dateString, dayTimeStamp } = this.state;
         return (
             <>
+
                 <HomeHeader />
-                {/* <div className="detail-doctor-container"> */ }
                 <IntroDoctor
                     image={ image }
                     description={ description }

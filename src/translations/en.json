@@ -30,7 +30,7 @@
     "see-more": "See more",
     "search": "Search",
     "all-post": "All posts",
-    "description": "... The first temple built by King Solomon around the 10th century BC, was the center of worship of ancient Judaism. This temple officially replaced the place of worship of Moses and other places at Shiloh, Nov, and Givon, becoming the high concentration of Jewish faith. This first temple was destroyed by the Babylonians in 586 BC, and rebuilt (as the second temple) seventy years later or 515 BC...",
+    "description": "A comprehensive healthcare platform that connects users to quality, effective and reliable healthcare - healthcare services.",
     "copyright": "Copyright belongs to Booking care"
   },
   "detail-doctor": {
@@ -57,7 +57,8 @@
   },
   "detail-specialty": {
     "show-less": "Show less",
-    "show-more": "Show more"
+    "show-more": "Show more",
+    "no-doctor": "No doctor found"
   },
   "common": {
     "add": "Add",
@@ -87,8 +88,9 @@
   },
   "menu": {
     "admin": {
-      "manage-user": "User",
+      "manage-user": "Manage user",
       "manage-doctor": "Manage Doctor",
+      "manage-schedule": "Manage Schedule",
       "manage-admin": "Manage Admin",
       "crud": "CRUD user",
       "crud-redux": "CRUD Redux",
@@ -139,7 +141,21 @@
     "manage-schedule": "Manage doctor's plan",
     "choose-doctor": "Choose doctor",
     "choose-date": "Choose date",
-    "add-plan": "Add plan"
+    "add-plan": "Add plan",
+    "update-plan": "Update plan",
+    "index": "Index",
+    "patient-full-name": "Patient Full Name",
+    "phone": "Phone",
+    "time": "Time",
+    "reason": "Reason",
+    "status": "Status",
+    "action":"Action",
+    "no-patient": "No Patient",
+    "send-invoice": "Send invoice",
+    "upload-invoice": "Upload invoice",
+    "confirm": "Confirm",
+    "cancel":"Cancel",
+    "done": "Done"
   },
   "verify-booking": {
     "loading": "Loading...",

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { withRouter } from 'react-router-dom';
 
 import * as actions from "../../store/actions";
 import Navigator from '../../components/Navigator';
@@ -13,9 +14,13 @@ class Header extends Component {
     changeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language);
     }
+
+    handleLogout = () => {
+        this.props.history.push('/login');
+        this.props.processLogout();
+    }
     render () {
-        const { processLogout, userInfo } = this.props;
-        console.log('user Info: ', userInfo);
+        const { userInfo } = this.props;
         return (
             <div className="header-container">
                 {/* thanh navigator */ }
@@ -31,7 +36,7 @@ class Header extends Component {
                         <span className={ this.props.language === LANGUAGES.EN ? "active" : "" } onClick={ () => this.changeLanguage(LANGUAGES.EN) }>EN</span>
                     </div>
                     {/* nút logout */ }
-                    <div className="btn btn-logout" onClick={ processLogout }>
+                    <div className="btn btn-logout" onClick={ this.handleLogout }>
                         <i className="fas fa-sign-out-alt"></i>
                     </div>
                 </div>
@@ -57,4 +62,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
