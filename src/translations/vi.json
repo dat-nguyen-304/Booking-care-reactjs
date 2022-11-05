@@ -8,7 +8,7 @@
         "choose-doctor": "Chọn bác sĩ giỏi",
         "fee": "Gói khám",
         "check-health": "Khám sức khỏe tổng quát",
-        "support": "Hỗ trợ",
+        "login": "Đăng nhập",
         "welcome": "Xin chào"
     },
     "banner": {
@@ -82,13 +82,16 @@
     },
     "login": {
         "login": "Đăng nhập",
+        "register": "Đăng ký",
         "username": "Tên đăng nhập",
         "password": "Mật khẩu",
-        "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!"
+        "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!",
+        "back-to-login": "Đến trang đăng nhập",
+        "have-no-account": "Bạn chưa có tài khoản?"
     },
     "menu": {
         "admin": {
-            "manage-user": "Quản lí gười dùng",
+            "manage-account": "Quản lí tài khoản",
             "manage-doctor": "Quản lí bác sĩ",
             "manage-schedule": "Quản lí lịch khám",
             "crud": "CRUD user",
@@ -97,6 +100,8 @@
             "manage-clinic": "Quản lí phòng khám",
             "specialty":"Chuyên khoa",
             "manage-specialty": "Quản lí chuyên khoa",
+            "add-specialty": "Thêm chuyên khoa",
+            "update-specialty": "Cập nhật chuyên khoa",
             "speciality": "Chuyên khoa"
         },
         "doctor": {
@@ -104,7 +109,7 @@
         }
     },
     "manage-user": {
-        "manage-user": "Quản lí người dùng",
+        "manage-account": "Quản lí tài khoản",
         "add": "Thêm người dùng mới",
         "email": "Email",
         "password": "Mật khẩu",

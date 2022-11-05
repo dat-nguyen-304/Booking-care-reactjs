@@ -8,7 +8,7 @@
     "choose-doctor": "Choose good doctor",
     "fee": "Checkup package",
     "check-health": "General health check",
-    "support": "Support",
+    "login": "Login",
     "welcome": "Welcome"
   },
   "banner": {
@@ -82,13 +82,16 @@
   },
   "login": {
     "login": "Login",
+    "register": "Register",
     "username": "Username",
     "password": "Password",
-    "userpass-wrong": "Invalid username or password!"
+    "userpass-wrong": "Invalid username or password!",
+    "back-to-login": "Back to login",
+    "have-no-account": "You have no account?"
   },
   "menu": {
     "admin": {
-      "manage-user": "Manage user",
+      "manage-account": "Manage account",
       "manage-doctor": "Manage Doctor",
       "manage-schedule": "Manage Schedule",
       "manage-admin": "Manage Admin",
@@ -98,6 +101,8 @@
       "manage-clinic": "Manage Clinic",
       "specialty": "Specialty",
       "manage-specialty": "Manage Specialty",
+      "add-specialty": "Add specialty",
+      "update-specialty": "Update specialty",
       "handbook": "Handbook",
       "manage-handbook": "Manage Handbook"
     },
@@ -106,7 +111,7 @@
     }
   },
   "manage-user": {
-    "manage-user": "Manage user",
+    "manage-account": "Manage account",
     "add": "Add new user",
     "email": "Email",
     "password": "Password",

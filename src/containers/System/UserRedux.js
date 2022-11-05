@@ -92,7 +92,7 @@ class UserRedux extends Component {
     changeFormUpdate = (user) => {
         let imageBase64 = '';
         if (user.image) {
-            imageBase64 = Buffer(user.image, 'base64').toString('binary');
+            imageBase64 = Buffer.from(user.image, 'base64').toString('binary');
         }
         this.setState({
             email: user.email,
@@ -136,7 +136,7 @@ class UserRedux extends Component {
     }
 
     checkValidInput () {
-        let keys = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'gender', 'positionId', 'roleId'];
+        let keys = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'gender', 'positionId'];
         for (let i = 0; i < keys.length; i++) {
             if (!this.state[keys[i]]) {
                 toast.error('must enter ' + keys[i]);
@@ -215,8 +215,8 @@ class UserRedux extends Component {
         let { isLoading, allGender, allPosition, allRole, imgUrl, isOpen, email, password, firstName, lastName, phoneNumber, address, gender, positionId, roleId, action } = this.state;
         return (
             <>
-                <div className="title" ><FormattedMessage id="manage-user.manage-user" /></div>
-                <div className="container">
+                <div className="title" ><FormattedMessage id="manage-user.manage-account" /></div>
+                <div className="manage-user-container">
                     <div>
                         <div className="row">
                             <div className="col-3">
@@ -256,18 +256,6 @@ class UserRedux extends Component {
                                 </select>
                             </div>
                             <div className="col-3">
-                                <label><FormattedMessage id="manage-user.position" /></label>
-                                <select value={ positionId } className="form-control" onChange={ (event) => this.handleChangeInput(event, 'positionId') }>
-                                    { allPosition &&
-                                        allPosition.map((position, index) => {
-                                            return (
-                                                <option key={ index } value={ position.keyMap }>{ this.props.language === LANGUAGES.VI ? position.valueVi : position.valueEn }</option>
-                                            )
-                                        })
-                                    }
-                                </select>
-                            </div>
-                            <div className="col-3">
                                 <label><FormattedMessage id="manage-user.role" /></label>
                                 <select value={ roleId } className="form-control" onChange={ (event) => this.handleChangeInput(event, 'roleId') }>
                                     { allRole &&
@@ -278,6 +266,22 @@ class UserRedux extends Component {
                                         })
                                     }
                                 </select>
+                            </div>
+                            <div className="col-3">
+                                { roleId === 'R2' &&
+                                    <>
+                                        <label><FormattedMessage id="manage-user.position" /></label>
+                                        <select value={ positionId } className="form-control" onChange={ (event) => this.handleChangeInput(event, 'positionId') }>
+                                            { allPosition &&
+                                                allPosition.map((position, index) => {
+                                                    return (
+                                                        <option key={ index } value={ position.keyMap }>{ this.props.language === LANGUAGES.VI ? position.valueVi : position.valueEn }</option>
+                                                    )
+                                                })
+                                            }
+                                        </select>
+                                    </>
+                                }
                             </div>
                             <div className="col-3">
                                 <label><FormattedMessage id="manage-user.avatar" /></label>
@@ -307,7 +311,6 @@ class UserRedux extends Component {
                                         <FormattedMessage id="manage-user.update" />
                                     </button>
                                 }
-
                             </div>
                         </div>
                     </div>
@@ -316,7 +319,6 @@ class UserRedux extends Component {
             </>
         )
     }
-
 }
 
 const mapStateToProps = state => {

@@ -5,6 +5,7 @@ import './HomeHeader.scss';
 import { LANGUAGES } from '../../utils/constant';
 import { changeLanguageApp } from '../../store/actions/appActions';
 import { withRouter } from 'react-router-dom';
+import * as actions from "../../store/actions";
 
 class HomeHeader extends Component {
     changeLanguage = (language) => {
@@ -13,6 +14,38 @@ class HomeHeader extends Component {
 
     backToHomePage = () => {
         this.props.history.push('/home');
+    }
+
+    handleLogout = () => {
+        this.props.history.push('/login');
+        this.props.processLogout();
+    }
+
+    goToLogin = () => {
+        this.props.history.push('/login');
+    }
+
+    getUserInfo = () => {
+        const { userInfo, language } = this.props;
+        return (
+            userInfo ?
+                <div className="logout">
+                    <img className="avatar"
+                        src={ Buffer.from(userInfo.image, 'base64').toString('binary') }
+                    />
+                    { language === LANGUAGES.EN ?
+                        (userInfo.firstName + " " + userInfo.lastName)
+                        :
+                        (userInfo.lastName + " " + userInfo.firstName)
+                    }
+                    <i class="fas fa-sign-in-alt" onClick={ this.handleLogout }></i>
+                </div>
+                :
+                <div className="login" onClick={ this.goToLogin }>
+                    <FormattedMessage id="homeHeader.login" />
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+        )
     }
 
     render () {
@@ -50,15 +83,13 @@ class HomeHeader extends Component {
                         </div>
                     </div>
                     <div className="right-content">
-                        <div className="support">
-                            <i className="fas fa-question"></i><FormattedMessage id="homeHeader.support" />
-                        </div>
                         <div className="language-vi">
                             <span className={ this.props.language === LANGUAGES.VI ? "active" : "" } onClick={ () => this.changeLanguage(LANGUAGES.VI) }>VN</span>
                         </div>
                         <div className="language-en">
                             <span className={ this.props.language === LANGUAGES.EN ? "active" : "" } onClick={ () => this.changeLanguage(LANGUAGES.EN) }>EN</span>
                         </div>
+                        { this.getUserInfo() }
                     </div>
                 </div>
             </div>
@@ -71,12 +102,14 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
+        userInfo: state.user.userInfo,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
+        processLogout: () => dispatch(actions.processLogout()),
     };
 };
 

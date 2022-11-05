@@ -4,6 +4,10 @@ const createSpecialty = (specialty) => {
     return axios.post('/api/create-specialty', specialty);
 }
 
+const updateSpecialty = (specialty) => {
+    return axios.put('/api/update-specialty', specialty);
+}
+
 const getAllSpecialty = () => {
     return axios.get('/api/get-all-specialty');
 }
@@ -22,6 +26,7 @@ const sendInvoiceToEmail = (userEmail, patientFullName, invoiceImg) => {
 
 export {
     createSpecialty,
+    updateSpecialty,
     getAllSpecialty,
     getSpecialtyById,
     getAllDoctorsOfSpecialty,

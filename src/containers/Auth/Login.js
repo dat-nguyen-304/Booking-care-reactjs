@@ -76,7 +76,6 @@ class Login extends Component {
 
     render () {
         return (
-
             <div className="login-wrapper" onKeyDown={ (e) => this.handleKeyPress(e) }>
                 <div className="login-container">
                     <div className="form_login">
@@ -94,7 +93,6 @@ class Login extends Component {
                                 onChange={ (e) => this.handleChangeUserName(e) }
                             />
                         </div>
-
                         <div id="phone-input-container" className="form-group icon-true">
                             <img className="icon" src={ passIcon } alt="this" />
                             <input
@@ -106,19 +104,14 @@ class Login extends Component {
                                 onChange={ (e) => this.handleChangePassword(e) }
                             />
                             <span className="hidden-btn" onClick={ () => this.showHidePassword() }>
-                                { this.state.isShowPassword ? 'Ẩn' : 'Hiện' }
+                                { this.state.isShowPassword ? <i class="fas fa-eye-slash"></i> : <i class="fas fa-eye"></i> }
                             </span>
                         </div>
                         <p style={ { color: "red", marginBottom: "12px" } }>{ this.state.errMessage }</p>
-                        <div className="form-group login">
-                            <input
-                                ref={ this.btnLogin }
-                                id="btnLogin"
-                                type="submit"
-                                className="btn"
-                                onClick={ () => this.handleLogin() }
-                            />
-                        </div>
+                        <button className="button-submit" onClick={ () => this.handleLogin() }><FormattedMessage id="login.login" /></button>
+                        {/* <div className="info">
+                            <p>Admin account: admin1@gmail.com - 123</p>
+                        </div> */}
                     </div>
                 </div>
             </div>

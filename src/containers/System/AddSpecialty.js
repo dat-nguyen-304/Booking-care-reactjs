@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { FormattedMessage } from 'react-intl';
 import { CRUD_ACTION, LANGUAGES } from '../../utils/constant';
-import './SpecialtyManage.scss';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import MarkdownIt from 'markdown-it';
@@ -12,10 +11,11 @@ import * as actions from '../../store/actions';
 import CommonUtils from '../../utils/CommonUtils';
 import { createSpecialty } from '../../services/adminService';
 import { toast } from 'react-toastify';
+import './SpecialtyManage.scss';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 
-class Doctor extends Component {
+class AddSpecialty extends Component {
     state = {
         name: '',
         contentHTML: '',
@@ -70,14 +70,13 @@ class Doctor extends Component {
         } else {
             toast.error('Something is wrong')
         }
-
     }
 
     render () {
         let { name, imgUrl, isOpen, contentHTML, contentMarkDown } = this.state;
         return (
             <div className="specialty-manager-container">
-                <div className="text-center title" ><FormattedMessage id="menu.admin.manage-specialty" /></div>
+                <div className="text-center title" ><FormattedMessage id="menu.admin.add-specialty" /></div>
                 <div className="row">
                     <div className="col-6">
                         <label>Tên chuyên khoa</label>
@@ -130,4 +129,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Doctor);
+export default connect(mapStateToProps, mapDispatchToProps)(AddSpecialty);

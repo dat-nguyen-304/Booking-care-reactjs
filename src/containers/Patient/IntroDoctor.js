@@ -40,6 +40,7 @@ class IntroDoctor extends Component {
     }
 
     render () {
+        console.log(this.props);
         let { image, description, price, language, linkToDoctorDetail, doctorId, timeString, dateString } = this.props;
         let { fullName } = this.state;
         let suffix = language === LANGUAGES.VI ? 'VNĐ' : '$';

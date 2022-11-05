@@ -11,7 +11,6 @@ import Home from '../routes/Home';
 import Login from './Auth/Login';
 import Header from './Header/Header';
 import System from '../routes/System';
-import Doctor from '../routes/Doctor';
 import VerifyBooking from '../routes/VerifyBooking';
 import Test from '../routes/Test';
 
@@ -46,13 +45,11 @@ class App extends Component {
                 <Router history={ history }>
                     <CustomScrollbars style={ { height: "100vh", with: '100%' } }>
                         <div className="main-container">
-                            {/* { this.props.isLoggedIn && <Header /> } */ }
                             <div className="content-container">
                                 <Switch>
                                     <Route path={ path.HOME } exact component={ (Home) } />
                                     <Route path={ path.LOGIN } component={ Login } />
                                     <Route path={ path.SYSTEM } component={ System } />
-                                    <Route path={ path.DOCTOR } component={ Doctor } />
                                     <Route path={ path.HOMEPAGE } exact component={ HomePage } />
                                     <Route path={ path.DETAIL_DOCTOR } component={ DetailDoctor } />
                                     <Route path={ path.DETAIL_SPECIALTY } component={ DetailSpecialty } />

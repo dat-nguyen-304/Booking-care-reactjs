@@ -20,6 +20,7 @@ class Specialty extends Component {
 
     render () {
         let { allSpecialty } = this.props;
+        console.log('all specialty: ', allSpecialty)
         return (
             <div className="section section-specialty">
                 <div className="section-content">

@@ -224,8 +224,9 @@ class DoctorManage extends Component {
     handleChangeDoctor = async (selectedDoctor) => {
         let doctorId = selectedDoctor.value;
         const res = await getDetailDoctorById(doctorId);
+        console.log('res: ', res);
         if (res && res.errCode === 0) {
-            let { description, contentHTML, contentMarkDown } = res.doctorInfo.MarkDown;
+            let { description, contentHTML, contentMarkDown } = res.doctorInfo.Markdown;
             let { paymentData, provinceData, priceData, priceId, paymentId, provinceId, nameClinic, addressClinic, note, specialtyData, specialtyId } = res.doctorInfo.Doctor_Info;
             if (!description && !contentHTML && !contentMarkDown && !paymentData.id && !provinceData.id && !priceData.id) {
                 this.setState({

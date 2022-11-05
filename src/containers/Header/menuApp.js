@@ -1,6 +1,6 @@
 export const adminMenu = [
     { //người dùng
-        name: 'menu.admin.manage-user', menus: [
+        name: 'menu.admin.manage-account', menus: [
             // {
             //     name: 'menu.admin.crud', link: '/system/manage-user',
             //     subMenus: [
@@ -9,7 +9,7 @@ export const adminMenu = [
             //     ]
             // },
             {
-                name: 'menu.admin.manage-user', link: '/system/manage-user'
+                name: 'menu.admin.manage-account', link: '/system/manage-user'
             },
             {
                 name: 'menu.admin.manage-doctor', link: '/system/manage-doctor'
@@ -23,7 +23,8 @@ export const adminMenu = [
     },
     { //người dùng
         name: 'menu.admin.manage-specialty', menus: [
-            { name: 'menu.admin.manage-specialty', link: '/system/manage-specialty' }
+            { name: 'menu.admin.add-specialty', link: '/system/add-specialty' },
+            { name: 'menu.admin.update-specialty', link: '/system/update-specialty' }
         ]
     },
 ];

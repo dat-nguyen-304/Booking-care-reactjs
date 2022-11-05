@@ -10,7 +10,7 @@ class Home extends Component {
         if (!isLoggedIn)
             linkToRedirect = '/home';
         else {
-            linkToRedirect = userInfo.roleId === ROLES.ADMIN ? '/system/manage-user' : '/doctor/manage-schedule';
+            linkToRedirect = userInfo.roleId === ROLES.ADMIN ? '/system/manage-user' : '/home';
         }
         return (
             <Redirect to={ linkToRedirect } />

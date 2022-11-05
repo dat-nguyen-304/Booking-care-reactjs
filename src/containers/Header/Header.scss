@@ -7,7 +7,9 @@
     background-color: $colormain;
     color: $common-text-color;
     height: 40px;
-    position: relative;
+    position: fixed;
+    width: 100%;
+    top: 0;
 
     .header-right-container {
         display: flex;

@@ -5,27 +5,33 @@ import { withRouter } from 'react-router-dom';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import UserRedux from '../containers/System/UserRedux';
 import DoctorManage from '../containers/System/DoctorManage';
-import SpecialtyManage from '../containers/System/SpecialtyManage';
+import AddSpecialty from '../containers/System/AddSpecialty';
+import UpdateSpecialty from '../containers/System/UpdateSpecialty';
 import ScheduleManage from '../containers/System/ScheduleManage';
+import { ROLES } from '../utils/constant';
 
 class System extends Component {
     render () {
-        let { systemMenuPath, isLoggedIn } = this.props;
+        let { systemMenuPath, isLoggedIn, userInfo } = this.props;
         return (
             <div className="system-container">
-                { isLoggedIn &&
+                { isLoggedIn && userInfo.roleId === ROLES.ADMIN ?
                     <>
                         <Header />
-                        <div className="system-list">
+                        <div className="system-list" style={ { marginTop: '60px' } }>
                             <Switch>
                                 <Route path="/system/manage-user" component={ UserRedux } />
                                 <Route path="/system/manage-doctor" component={ DoctorManage } />
                                 <Route path="/system/manage-schedule" component={ ScheduleManage } />
-                                <Route path="/system/manage-specialty" component={ SpecialtyManage } />
+                                <Route path="/system/add-specialty" component={ AddSpecialty } />
+                                <Route path="/system/update-specialty" component={ UpdateSpecialty } />
                                 <Route component={ () => { return (<Redirect to={ systemMenuPath } />) } } />
                             </Switch>
                         </div>
-                    </> }
+                    </>
+                    :
+                    <p>404 Not Found</p>
+                }
             </div>
         );
     }
@@ -34,7 +40,8 @@ class System extends Component {
 const mapStateToProps = state => {
     return {
         systemMenuPath: state.app.systemMenuPath,
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        userInfo: state.user.userInfo
     };
 };
 

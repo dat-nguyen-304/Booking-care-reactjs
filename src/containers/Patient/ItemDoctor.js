@@ -29,8 +29,8 @@ class ItemDoctor extends Component {
                     lastName: res.doctorInfo.lastName,
                     image: res.doctorInfo.image,
                     positionData: res.doctorInfo.positionData,
-                    contentHTML: res.doctorInfo.MarkDown.contentHTML,
-                    description: res.doctorInfo.MarkDown.description,
+                    contentHTML: res.doctorInfo.Markdown.contentHTML,
+                    description: res.doctorInfo.Markdown.description,
                     provinceId: res.doctorInfo.Doctor_Info.provinceData.id,
                 })
             }

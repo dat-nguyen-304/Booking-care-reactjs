@@ -1,15 +1,21 @@
 .specialty-manager-container {
-    margin-top: 20px;
-    margin-bottom: 40px;
+    margin: 20px 100px 40px;
 
     label {
         margin-top: 20px;
     }
 
     .upload-img-container {
+        display: flex;
+
         .upload-img-preview {
             background-position: left;
             height: 100px;
+            background-repeat: no-repeat;
+            flex: 1;
+            margin-left: 20px;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .upload-img {

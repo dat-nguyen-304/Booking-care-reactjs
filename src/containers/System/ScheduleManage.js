@@ -133,8 +133,12 @@ class AdminManage extends Component {
             }
         })
         let res = await createBulkSchedule({ schedules: allTimeTypes });
-        if (res && res.errCode === 0)
+        if (res && res.errCode === 0) {
+            this.setState({
+                action: CRUD_ACTION.UPDATE,
+            })
             toast.success('Add successfully');
+        }
     }
 
     handleUpdate = async () => {
