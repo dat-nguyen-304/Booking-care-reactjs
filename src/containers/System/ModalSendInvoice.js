@@ -42,13 +42,13 @@ class ModalSendInvoice extends Component {
     }
 
     sendInvoice = async () => {
-        let { changeStatus, toggleModal, userEmail } = this.props;
-        let { doctorId, patientFullName, index, date } = this.props.modalData;
+        let { changeStatus, toggleModal, language } = this.props;
+        let { doctorId, patientFullName, index, date, userEmail } = this.props.modalData;
         let { invoiceImg } = this.state;
         this.setState({
             isLoading: true
         })
-        await sendInvoiceToEmail(userEmail, patientFullName, invoiceImg);
+        await sendInvoiceToEmail(userEmail, patientFullName, invoiceImg, language);
         changeStatus(doctorId, date, 'S3', index);
         toggleModal();
         this.setState({

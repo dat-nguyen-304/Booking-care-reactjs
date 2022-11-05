@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import Select from 'react-select';
 import { CRUD_ACTION, LANGUAGES } from '../../utils/constant';
 import * as actions from '../../store/actions';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./ScheduleManage.scss";
 import { toast } from 'react-toastify';
-import ScheduleTable from './ScheduleTable';
 import { createBulkSchedule, getSchedule, updateBulkSchedule } from '../../services/adminService';
-import './ScheduleManage.scss';
-class AdminManage extends Component {
+import ScheduleTable from '../System/ScheduleTable';
+class MySchedule extends Component {
     state = {
-        selectedDoctor: null,
+        doctorId: 0,
         options: [],
         date: '',
         allTimeTypes: [],
@@ -21,24 +18,13 @@ class AdminManage extends Component {
     }
 
     componentDidMount () {
-        this.props.getAllDoctorStart();
         this.props.getAllTimeTypeStart();
+        this.setState({
+            doctorId: this.props.userInfo.id
+        })
     }
 
     componentDidUpdate (prevProps, prevState, snapshot) {
-        if (prevProps.allDoctors !== this.props.allDoctors) {
-            let { allDoctors, language } = this.props;
-            let options = allDoctors.map((doctor) => {
-                return {
-                    label: language === LANGUAGES.VI ? `${doctor.lastName} ${doctor.firstName}` : `${doctor.firstName} ${doctor.lastName}`,
-                    value: doctor.id
-                }
-            })
-            this.setState({
-                options
-            })
-        }
-
         if (prevProps.allTimeTypes !== this.props.allTimeTypes) {
             let { allTimeTypes } = this.props;
             allTimeTypes = allTimeTypes.map((timType) => {
@@ -53,18 +39,8 @@ class AdminManage extends Component {
         }
     }
 
-    handleChangeDoctor = async (selectedDoctor) => {
-        let { date } = this.state;
-        if (date) {
-            this.getScheduleStatus(selectedDoctor.value, date);
-        }
-        this.setState({
-            selectedDoctor,
-        })
-    }
-
     handleChangeDate = (date) => {
-        this.getScheduleStatus(this.state.selectedDoctor.value, date);
+        this.getScheduleStatus(this.state.doctorId, date);
         this.setState({
             date
         })
@@ -117,11 +93,11 @@ class AdminManage extends Component {
     }
 
     handleSubmit = async () => {
-        let { selectedDoctor, date, allTimeTypes } = this.state;
+        let { doctorId, date, allTimeTypes } = this.state;
         allTimeTypes = allTimeTypes.filter(timType => {
             return timType.isSelected === true;
         })
-        if (allTimeTypes.length === 0 || !selectedDoctor || !date) {
+        if (allTimeTypes.length === 0 || !doctorId || !date) {
             toast.error('Invalid input parameter');
             return;
         }
@@ -129,24 +105,24 @@ class AdminManage extends Component {
             return {
                 timeType: timType.keyMap,
                 date: date.getTime(),
-                doctorId: selectedDoctor.value,
+                doctorId
             }
         })
         let res = await createBulkSchedule({ schedules: allTimeTypes });
         if (res && res.errCode === 0) {
+            toast.success('Add successfully');
             this.setState({
                 action: CRUD_ACTION.UPDATE,
             })
-            toast.success('Add successfully');
         }
     }
 
     handleUpdate = async () => {
-        let { selectedDoctor, date, allTimeTypes } = this.state;
+        let { doctorId, date, allTimeTypes } = this.state;
         allTimeTypes = allTimeTypes.filter(timType => {
             return timType.isSelected === true;
         })
-        if (allTimeTypes.length === 0 || !selectedDoctor || !date) {
+        if (allTimeTypes.length === 0 || !date) {
             toast.error('Invalid input parameter');
             return;
         }
@@ -154,7 +130,7 @@ class AdminManage extends Component {
             return {
                 timeType: timType.keyMap,
                 date: date.getTime(),
-                doctorId: selectedDoctor.value,
+                doctorId
             }
         })
         let res = await updateBulkSchedule({ schedules: allTimeTypes });
@@ -164,33 +140,24 @@ class AdminManage extends Component {
 
     render () {
         const { language } = this.props;
-        const { selectedDoctor, options, allTimeTypes, date, action, openModal } = this.state;
+        const { allTimeTypes, date, action, doctorId } = this.state;
         let minDate = new Date();
         minDate = minDate.setDate(minDate.getDate() + 1);
         return (
             <>
-                <div className="text-center title"><FormattedMessage id="manage-schedule.manage-schedule" /></div>
+                <div className="text-center title"><FormattedMessage id="menu.doctor.my-schedule" /></div>
                 <div className="manage-schedule-container">
                     <div className="row">
                         <div className="col-6">
-                            <label><FormattedMessage id="manage-schedule.choose-doctor" /></label>
-                            <Select
-                                value={ selectedDoctor }
-                                onChange={ this.handleChangeDoctor }
-                                options={ options }
+                            <label><FormattedMessage id="manage-schedule.choose-date" /></label>
+                            <DatePicker className="form-control"
+                                selected={ date }
+                                onChange={ (date) => this.handleChangeDate(date) }
+                                minDate={ new Date() }
                             />
                         </div>
-                        { selectedDoctor &&
-                            <div className="col-6">
-                                <label><FormattedMessage id="manage-schedule.choose-date" /></label>
-                                <DatePicker className="form-control"
-                                    selected={ date }
-                                    onChange={ (date) => this.handleChangeDate(date) }
-                                    minDate={ new Date() }
-                                />
-                            </div>
-                        }
-                        { (selectedDoctor && date) &&
+
+                        { date &&
                             <>
                                 <div className="col-12 range-time-container">
                                     {
@@ -224,15 +191,13 @@ class AdminManage extends Component {
                                                 <label><FormattedMessage id="manage-schedule.update-plan" /></label>
                                             </button>
                                     }
-
                                 </div>
                                 <div className="schedule-table-container">
                                     <ScheduleTable
-                                        doctorId={ selectedDoctor.value }
+                                        doctorId={ doctorId }
                                         date={ date.getTime() }
                                     />
                                 </div>
-
                             </>
                         }
                     </div>
@@ -246,16 +211,15 @@ class AdminManage extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        allDoctors: state.admin.allDoctor,
         allTimeTypes: state.admin.allTimeTypes,
+        userInfo: state.user.userInfo
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllDoctorStart: () => dispatch(actions.fetchAllDoctorStart()),
         getAllTimeTypeStart: () => dispatch(actions.fetchAllTimeTypeStart()),
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminManage);
+export default connect(mapStateToProps, mapDispatchToProps)(MySchedule);

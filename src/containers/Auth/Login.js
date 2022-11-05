@@ -3,15 +3,12 @@ import { connect } from 'react-redux';
 import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import { withRouter } from 'react-router-dom';
-
-import userIcon from '../../../src/assets/images/user.svg';
-import passIcon from '../../../src/assets/images/pass.svg';
+import { LANGUAGES } from '../../utils/constant';
+import { changeLanguageApp } from '../../store/actions/appActions';
 import './Login.scss';
 import { FormattedMessage } from 'react-intl';
 
-import { handleLogin, handleLoginApi } from '../../services/userService';
-
-
+import { handleLogin, handleLoginApi } from '../../services/adminService';
 class Login extends Component {
     constructor (props) {
         super(props);
@@ -21,6 +18,10 @@ class Login extends Component {
             isShowPassword: false,
             errMessage: '',
         }
+    }
+
+    changeLanguage = (language) => {
+        this.props.changeLanguageAppRedux(language);
     }
 
     handleChangeUserName = (e) => {
@@ -41,6 +42,12 @@ class Login extends Component {
         })
     }
 
+    handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            this.handleLogin();
+        }
+    }
+
     handleLogin = async () => {
         this.setState({
             errMessage: ''
@@ -56,6 +63,7 @@ class Login extends Component {
                 const user = response.user
                 this.props.userLoginSuccess(user);
                 if (user.roleId === 'R1') this.props.history.push('/system');
+                else if (user.roleId === 'R2') this.props.history.push('/doctor');
                 else this.props.history.push('/home');
             }
         } catch (e) {
@@ -68,50 +76,49 @@ class Login extends Component {
         }
     }
 
-    handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            this.handleLogin();
-        }
-    }
-
     render () {
         return (
             <div className="login-wrapper" onKeyDown={ (e) => this.handleKeyPress(e) }>
-                <div className="login-container">
-                    <div className="form_login">
-                        <h2 className="title">
-                            <FormattedMessage id="login.login" />
-                        </h2>
-                        <div className="form-group icon-true">
-                            <img className="icon" src={ userIcon } alt="this" />
-                            <input
-                                id="username"
-                                name="username"
-                                type="text"
-                                className="form-control"
-                                value={ this.state.username }
-                                onChange={ (e) => this.handleChangeUserName(e) }
-                            />
+                <div class="form">
+                    <div class="form__box">
+                        <div class="form__left">
+                            <div class="form__padding"><img class="form__image" src="https://i.pinimg.com/originals/8b/44/51/8b4451665d6b2139e29f29b51ffb1829.png" /></div>
                         </div>
-                        <div id="phone-input-container" className="form-group icon-true">
-                            <img className="icon" src={ passIcon } alt="this" />
-                            <input
-                                id="password"
-                                name="password"
-                                type={ this.state.isShowPassword ? 'text' : 'password' }
-                                className="form-control"
-                                value={ this.state.password }
-                                onChange={ (e) => this.handleChangePassword(e) }
-                            />
-                            <span className="hidden-btn" onClick={ () => this.showHidePassword() }>
-                                { this.state.isShowPassword ? <i class="fas fa-eye-slash"></i> : <i class="fas fa-eye"></i> }
-                            </span>
+                        <div class="form__right">
+                            <div class="form__padding-right">
+                                <div className="languages">
+                                    <span className={ this.props.language === LANGUAGES.VI ? "active" : "" } onClick={ () => this.changeLanguage(LANGUAGES.VI) }>VN</span>
+                                    <span className={ this.props.language === LANGUAGES.EN ? "active" : "" } onClick={ () => this.changeLanguage(LANGUAGES.EN) }>EN</span>
+                                </div>
+                                <h1 class="form__title"><FormattedMessage id="manage-user.login" /></h1>
+                                <p className="error-message">{ this.state.errMessage }</p>
+                                <input class="form__email"
+                                    type="text"
+                                    placeholder="Email"
+                                    value={ this.state.username }
+                                    onChange={ (e) => this.handleChangeUserName(e) }
+                                />
+                                <div className="password">
+                                    <input
+                                        class="form__password"
+                                        placeholder="******"
+                                        type={ this.state.isShowPassword ? 'text' : 'password' }
+                                        value={ this.state.password }
+                                        onChange={ (e) => this.handleChangePassword(e) }
+                                    />
+                                    <span className="hidden-btn" onClick={ () => this.showHidePassword() }>
+                                        { this.state.isShowPassword ? <i class="fas fa-eye-slash"></i> : <i class="fas fa-eye"></i> }
+                                    </span>
+                                </div>
+                                <button class="form__submit-btn" type="submit" onClick={ () => this.handleLogin() }>
+                                    <FormattedMessage id="manage-user.login" />
+                                </button>
+
+                                <div class="form__link" onClick={ () => this.props.history.push('/register') }>
+                                    <FormattedMessage id="manage-user.have-no-account" />
+                                </div>
+                            </div>
                         </div>
-                        <p style={ { color: "red", marginBottom: "12px" } }>{ this.state.errMessage }</p>
-                        <button className="button-submit" onClick={ () => this.handleLogin() }><FormattedMessage id="login.login" /></button>
-                        {/* <div className="info">
-                            <p>Admin account: admin1@gmail.com - 123</p>
-                        </div> */}
                     </div>
                 </div>
             </div>
@@ -129,6 +136,7 @@ const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
         // userLoginFail: () => dispatch(actions.adminLoginFail()),
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
         userLoginSuccess: (user) => dispatch(actions.userLoginSuccess(user))
     };
 };

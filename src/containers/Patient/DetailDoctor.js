@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './DetailDoctor.scss';
 import HomeFooter from '../HomePage/HomeFooter';
-import { getDetailDoctorById } from '../../services/userService';
+import { getDetailDoctorById } from '../../services/adminService';
 import { LANGUAGES } from '../../utils/constant';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorInfo from './DoctorInfo';

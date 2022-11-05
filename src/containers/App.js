@@ -9,8 +9,10 @@ import { path } from '../utils'
 import Home from '../routes/Home';
 // import Login from '../routes/Login';
 import Login from './Auth/Login';
+import Register from './Auth/Register';
 import Header from './Header/Header';
 import System from '../routes/System';
+import Doctor from '../routes/Doctor';
 import VerifyBooking from '../routes/VerifyBooking';
 import Test from '../routes/Test';
 
@@ -49,7 +51,9 @@ class App extends Component {
                                 <Switch>
                                     <Route path={ path.HOME } exact component={ (Home) } />
                                     <Route path={ path.LOGIN } component={ Login } />
+                                    <Route path={ path.REGISTER } component={ Register } />
                                     <Route path={ path.SYSTEM } component={ System } />
+                                    <Route path={ path.DOCTOR } component={ Doctor } />
                                     <Route path={ path.HOMEPAGE } exact component={ HomePage } />
                                     <Route path={ path.DETAIL_DOCTOR } component={ DetailDoctor } />
                                     <Route path={ path.DETAIL_SPECIALTY } component={ DetailSpecialty } />

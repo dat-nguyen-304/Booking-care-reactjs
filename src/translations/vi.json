@@ -105,7 +105,9 @@
             "speciality": "Chuyên khoa"
         },
         "doctor": {
-            "manage-schedule": "Quản lí lịch khám bệnh"
+            "menu": "Menu",
+            "my-schedule": "Lịch khám của tôi",
+            "my-information": "Thông tin của tôi"
         }
     },
     "manage-user": {
@@ -113,6 +115,7 @@
         "add": "Thêm người dùng mới",
         "email": "Email",
         "password": "Mật khẩu",
+        "confirm-password": "Xác nhận mật khẩu",
         "first-name": "Tên",
         "last-name": "Họ",
         "phone-number": "Số điện thoại",
@@ -123,7 +126,12 @@
         "avatar": "Ảnh đại diện",
         "save": "Lưu user",
         "update": "Lưu thay đổi",
-        "action": "Thao tác"
+        "action": "Thao tác",
+        "upload-avatar": "Tải ảnh lên",
+        "login": "Đăng nhập",
+        "register": "Đăng ký tài khoản",
+        "back-to-login": "Quay về trang đăng nhập",
+        "have-no-account": "Chưa có tài khoản? Đăng ký ngay"
     },
     "manage-doctor": {
         "manage-doctor": "Quản lí bác sĩ",

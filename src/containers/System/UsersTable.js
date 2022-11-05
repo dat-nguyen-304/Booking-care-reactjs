@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { createUser, deleteUser, editUser } from '../../services/userService';
+import { createUser, deleteUser, editUser } from '../../services/adminService';
 import { CRUD_ACTION } from '../../utils/constant';
 import * as actions from '../../store/actions';
 import './UsersTable.scss';

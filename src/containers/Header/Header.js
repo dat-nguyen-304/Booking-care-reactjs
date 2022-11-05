@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import * as actions from "../../store/actions";
 import Navigator from '../../components/Navigator';
-import { adminMenu } from './menuApp';
+import { adminMenu, doctorMenu } from './menuApp';
 import './Header.scss';
 import { changeLanguageApp } from '../../store/actions/appActions';
 import { LANGUAGES, ROLES } from '../../utils/constant';
@@ -25,7 +25,7 @@ class Header extends Component {
             <div className="header-container">
                 {/* thanh navigator */ }
                 <div className="header-tabs-container header-left-container">
-                    <Navigator menus={ userInfo && adminMenu } />
+                    <Navigator menus={ userInfo && userInfo.roleId === 'R1' ? adminMenu : doctorMenu } />
                 </div>
                 <div className="header-right-container">
                     <div className="welcome">

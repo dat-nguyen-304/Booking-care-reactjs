@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { CRUD_ACTION, LANGUAGES } from '../../utils/constant';
 import * as actions from '../../store/actions';
 import { toast } from 'react-toastify';
-import { getBooking, changeBookingStatus } from '../../services/userService';
+import { getBooking, changeBookingStatus } from '../../services/adminService';
 import ModalSendInvoice from './ModalSendInvoice';
+import { getAllUsers } from '../../services/adminService'
 import './ScheduleTable.scss';
 class AdminManage extends Component {
     state = {
@@ -37,12 +38,10 @@ class AdminManage extends Component {
     changeStatus = async (doctorId, date, toStatus, index) => {
         let { bookings } = this.state;
         if (doctorId && date && toStatus) {
-            console.log('index: ', index);
             date = new Date(date).getTime();
             let response = await changeBookingStatus(doctorId, date, toStatus);
             if (response && response.errCode === 0) {
                 bookings[index] = response.booking;
-                console.log('response.booking: ', response.booking);
                 this.setState({ bookings })
                 toast.success('Update success');
             } else {
@@ -51,11 +50,15 @@ class AdminManage extends Component {
         }
     }
 
-    openModalSendInvoice = (doctorId, patientFullName, date, index) => {
-        console.log('user: ', this.props.user);
+    openModalSendInvoice = async (doctorId, patientId, patientFullName, date, index) => {
+        const response = await getAllUsers(patientId);
+        let userEmail = '';
+        if (response && response.errCode === 0) {
+            userEmail = response.users.email;
+        }
         this.setState({
             modalData: {
-                doctorId, patientFullName, date, index
+                doctorId, patientFullName, date, index, userEmail
             }
         })
         this.toggleModal();
@@ -88,7 +91,7 @@ class AdminManage extends Component {
                     <td>
                         <button
                             className="btn-success px-2 rounded-lg mr-2"
-                            onClick={ () => this.openModalSendInvoice(booking.doctorId, booking.patientFullName, booking.date, index) } >
+                            onClick={ () => this.openModalSendInvoice(booking.doctorId, booking.patientId, booking.patientFullName, booking.date, index) } >
                             <FormattedMessage id="manage-schedule.done" />
                         </button>
                         <button
@@ -160,7 +163,6 @@ class AdminManage extends Component {
                     openModal={ openModal }
                     modalData={ modalData }
                     changeStatus={ this.changeStatus }
-                    userEmail={ user.email }
                 />
             </>
         )

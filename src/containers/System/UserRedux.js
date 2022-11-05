@@ -5,7 +5,7 @@ import { LANGUAGES } from '../../utils/constant';
 import './UserRedux.scss';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-import { createUser, deleteUser, editUser } from '../../services/userService';
+import { createUser, deleteUser, editUser } from '../../services/adminService';
 import { CRUD_ACTION } from '../../utils/constant';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -136,7 +136,7 @@ class UserRedux extends Component {
     }
 
     checkValidInput () {
-        let keys = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'gender', 'positionId'];
+        let keys = ['email', 'password', 'firstName', 'lastName', 'phoneNumber', 'address', 'gender', 'positionId', 'avatar'];
         for (let i = 0; i < keys.length; i++) {
             if (!this.state[keys[i]]) {
                 toast.error('must enter ' + keys[i]);
@@ -287,7 +287,7 @@ class UserRedux extends Component {
                                 <label><FormattedMessage id="manage-user.avatar" /></label>
                                 <input type="file" id="upload-user-img" hidden onChange={ this.getImgUrl } />
                                 <div className="upload-img-container">
-                                    <label htmlFor="upload-user-img" className="upload-img btn btn-dark">Tải anh lên</label>
+                                    <label htmlFor="upload-user-img" className="upload-img btn btn-dark"><FormattedMessage id="manage-user.upload-avatar" /></label>
                                     {
                                         imgUrl &&
                                         <div className="upload-img-preview" style={ { backgroundImage: `url(${imgUrl})` } } onClick={ this.openLightbox }>

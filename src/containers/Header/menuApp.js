@@ -31,10 +31,9 @@ export const adminMenu = [
 
 export const doctorMenu = [
     { //người dùng
-        name: 'menu.doctor.manage-schedule', menus: [
-            {
-                name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule'
-            },
+        name: 'menu.doctor.menu', menus: [
+            { name: 'menu.doctor.my-schedule', link: '/doctor/manage-schedule' },
+            { name: 'menu.doctor.my-information', link: '/doctor/info' }
         ]
     },
 

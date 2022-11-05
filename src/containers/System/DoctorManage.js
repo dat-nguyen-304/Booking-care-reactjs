@@ -6,7 +6,7 @@ import * as actions from '../../store/actions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { createMarkDown, updateMarkDown, createDoctorInfo, updateDoctorInfo } from '../../services/userService';
+import { createMarkDown, updateMarkDown, createDoctorInfo, updateDoctorInfo } from '../../services/adminService';
 
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
@@ -14,7 +14,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select'
 import { CRUD_ACTION, LANGUAGES } from '../../utils/constant';
 import './DoctorManage.scss';
-import { getDetailDoctorById } from '../../services/userService';
+import { getDetailDoctorById } from '../../services/adminService';
 import _, { add } from 'lodash';
 import { NumericFormat } from 'react-number-format';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -224,7 +224,6 @@ class DoctorManage extends Component {
     handleChangeDoctor = async (selectedDoctor) => {
         let doctorId = selectedDoctor.value;
         const res = await getDetailDoctorById(doctorId);
-        console.log('res: ', res);
         if (res && res.errCode === 0) {
             let { description, contentHTML, contentMarkDown } = res.doctorInfo.Markdown;
             let { paymentData, provinceData, priceData, priceId, paymentId, provinceId, nameClinic, addressClinic, note, specialtyData, specialtyId } = res.doctorInfo.Doctor_Info;

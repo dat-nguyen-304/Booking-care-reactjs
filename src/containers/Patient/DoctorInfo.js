@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { LANGUAGES } from '../../utils/constant';
 import "./DoctorInfo.scss";
-import { getDoctorInfo } from '../../services/userService';
+import { getDoctorInfo } from '../../services/adminService';
 import { NumericFormat } from 'react-number-format';
 class DoctorInfo extends Component {
     state = {

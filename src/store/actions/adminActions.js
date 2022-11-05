@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { getAllCode, getAllUsers, getTopDoctorHome, getAllDoctors } from '../../services/userService';
+import { getAllCode, getAllUsers, getTopDoctorHome, getAllDoctors } from '../../services/adminService';
 import { getAllSpecialty } from '../../services/adminService';
 
 
@@ -35,7 +35,6 @@ export const fetchGenderFail = () => ({
 
 export const fetchPositionStart = () => {
     return async (dispatch, getState) => {
-        // console.log('check getState: ', getState());
         try {
             let res = await getAllCode('POSITION');
             if (res && res.errCode === 0) {
@@ -63,7 +62,6 @@ export const fetchPositionFail = () => ({
 //fetch role
 export const fetchRoleStart = () => {
     return async (dispatch, getState) => {
-        // console.log('check getState: ', getState());
         try {
             let res = await getAllCode('ROLE');
             if (res && res.errCode === 0) {
@@ -91,7 +89,6 @@ export const fetchRoleFail = () => ({
 // fetch time type
 export const fetchAllTimeTypeStart = () => {
     return async (dispatch, getState) => {
-        // console.log('check getState: ', getState());
         try {
             let res = await getAllCode('TIME');
             if (res && res.errCode === 0) {

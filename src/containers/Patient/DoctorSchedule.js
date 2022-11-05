@@ -6,7 +6,7 @@ import { LANGUAGES } from '../../utils/constant';
 import './DoctorSchedule.scss';
 import moment from 'moment';
 import { toast } from 'react-toastify';
-import { getSchedule } from '../../services/userService';
+import { getSchedule } from '../../services/adminService';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './DoctorSchedule.scss';
 import vi from "moment/locale/vi";
@@ -89,7 +89,6 @@ class DoctorSchedule extends Component {
             selectedDayTimeStamp
         })
         let res = await getSchedule(selectedDayTimeStamp, doctorId);
-        console.log(res);
         if (res && res.errCode === 0) {
             this.setState({
                 allSchedules: res.allSchedules

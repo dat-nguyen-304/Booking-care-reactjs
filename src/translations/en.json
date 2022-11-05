@@ -107,7 +107,9 @@
       "manage-handbook": "Manage Handbook"
     },
     "doctor": {
-      "manage-schedule": "Manage schedule"
+      "menu": "Menu",
+      "my-schedule": "My schedule",
+      "my-information": "My information"
     }
   },
   "manage-user": {
@@ -115,6 +117,7 @@
     "add": "Add new user",
     "email": "Email",
     "password": "Password",
+    "confirm-password": "Confirm password",
     "first-name": "First Name",
     "last-name": "Last Name",
     "phone-number": "Phone number",
@@ -125,7 +128,12 @@
     "avatar": "Avatar",
     "save": "Save",
     "update": "Save changes",
-    "action": "Action"
+    "action": "Action",
+    "upload-avatar": "Upload avatar",
+    "login": "Login",
+    "register": "Register account",
+    "back-to-login": "Back to login",
+    "have-no-account": "You have no account? Register now"
   },
   "manage-doctor": {
     "manage-doctor": "Manage Doctor",

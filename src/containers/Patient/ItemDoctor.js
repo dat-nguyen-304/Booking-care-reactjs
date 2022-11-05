@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { getDetailDoctorById } from '../../services/userService';
+import { getDetailDoctorById } from '../../services/adminService';
 import IntroDoctor from './IntroDoctor';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorInfo from './DoctorInfo';

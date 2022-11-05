@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import HomeHeader from '../containers/HomePage/HomeHeader';
-import { verifyBooking } from '../services/userService';
+import { verifyBooking } from '../services/adminService';
 import { FormattedMessage } from 'react-intl';
 
 
