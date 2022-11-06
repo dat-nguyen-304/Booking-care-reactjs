@@ -6,7 +6,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import ManageSchedule from '../containers/Doctor/ManageSchedule';
 import DoctorDetail from '../containers/Doctor/DoctorDetail';
 import { ROLES } from '../utils/constant';
-
+import errorPage from '../assets/404.jpg'
 class System extends Component {
     render () {
         let { isLoggedIn, userInfo } = this.props;
@@ -24,7 +24,7 @@ class System extends Component {
                         </div>
                     </>
                     :
-                    <p>404 Not Found</p>
+                    <img src={ errorPage } alt="/#" />
                 }
             </div>
         );

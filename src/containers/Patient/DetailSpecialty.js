@@ -6,12 +6,11 @@ import HomeHeader from '../HomePage/HomeHeader';
 import ItemDoctor from './ItemDoctor';
 import SpecialtyInfo from './SpecialtyInfo';
 import HomeFooter from '../HomePage/HomeFooter';
-
 import { getAllDoctorsOfSpecialty } from '../../services/adminService';
 import * as actions from '../../store/actions';
 import Select from 'react-select';
-import './DetailSpecialty.scss';
 import { LANGUAGES } from '../../utils/constant';
+import './DetailSpecialty.scss';
 
 class DetailSpecialty extends Component {
     state = {
@@ -83,7 +82,7 @@ class DetailSpecialty extends Component {
     }
 
     render () {
-        let { doctorIds, specialtyId, selectedProvince, allProvince, contentHTML } = this.state;
+        let { doctorIds, specialtyId, selectedProvince, allProvince } = this.state;
 
         return (
             <>

@@ -9,7 +9,7 @@ import AddSpecialty from '../containers/System/AddSpecialty';
 import UpdateSpecialty from '../containers/System/UpdateSpecialty';
 import ScheduleManage from '../containers/System/ScheduleManage';
 import { ROLES } from '../utils/constant';
-
+import errorPage from '../assets/404.jpg'
 class System extends Component {
     render () {
         let { systemMenuPath, isLoggedIn, userInfo } = this.props;
@@ -30,7 +30,7 @@ class System extends Component {
                         </div>
                     </>
                     :
-                    <p>404 Not Found</p>
+                    <img src={ errorPage } alt="/#" />
                 }
             </div>
         );

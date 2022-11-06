@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { CRUD_ACTION, LANGUAGES } from '../../utils/constant';
-import * as actions from '../../store/actions';
+import { LANGUAGES } from '../../utils/constant';
 import { toast } from 'react-toastify';
 import { getBooking, changeBookingStatus } from '../../services/adminService';
 import ModalSendInvoice from './ModalSendInvoice';
@@ -124,7 +123,7 @@ class AdminManage extends Component {
     }
 
     render () {
-        const { language, user } = this.props;
+        const { language } = this.props;
         const { bookings, openModal, modalData } = this.state;
         return (
             <>

@@ -5,10 +5,10 @@ import * as actions from "../../store/actions";
 import { withRouter } from 'react-router-dom';
 import { LANGUAGES } from '../../utils/constant';
 import { changeLanguageApp } from '../../store/actions/appActions';
-import './Login.scss';
 import { FormattedMessage } from 'react-intl';
-
-import { handleLogin, handleLoginApi } from '../../services/adminService';
+import { handleLogin } from '../../services/adminService';
+import defaultAvatar from '../../assets/defaultAvatar.jpg';
+import './Login.scss';
 class Login extends Component {
     constructor (props) {
         super(props);
@@ -82,7 +82,12 @@ class Login extends Component {
                 <div class="form">
                     <div class="form__box">
                         <div class="form__left">
-                            <div class="form__padding"><img class="form__image" src="https://i.pinimg.com/originals/8b/44/51/8b4451665d6b2139e29f29b51ffb1829.png" /></div>
+                            <div class="form__padding">
+                                <img class="form__image"
+                                    src="https://i.pinimg.com/originals/8b/44/51/8b4451665d6b2139e29f29b51ffb1829.png"
+                                    alt={ defaultAvatar }
+                                />
+                            </div>
                         </div>
                         <div class="form__right">
                             <div class="form__padding-right">

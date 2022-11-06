@@ -2,8 +2,6 @@ import actionTypes from './actionTypes';
 import { getAllCode, getAllUsers, getTopDoctorHome, getAllDoctors } from '../../services/adminService';
 import { getAllSpecialty } from '../../services/adminService';
 
-
-
 //fetch gender
 export const fetchGenderStart = () => {
     return async (dispatch, getState) => {
@@ -164,7 +162,6 @@ export const fetchAllUserStart = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllUsers('ALL');
-            let res1 = await getTopDoctorHome(3);
             if (res && res.errCode === 0) {
                 dispatch(fetchAllUserSuccess(res.users));
             } else {

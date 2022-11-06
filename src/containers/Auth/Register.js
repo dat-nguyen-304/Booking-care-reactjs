@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import { withRouter } from 'react-router-dom';
 import { LANGUAGES } from '../../utils/constant';
 import CommonUtils from '../../utils/CommonUtils';
 import { changeLanguageApp } from '../../store/actions/appActions';
-import { createUser, deleteUser, editUser } from '../../services/adminService';
+import { createUser } from '../../services/adminService';
 import { toast } from 'react-toastify';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-import './Register.scss';
 import { FormattedMessage } from 'react-intl';
+import './Register.scss';
 
 class Register extends Component {
     constructor (props) {
@@ -115,7 +114,7 @@ class Register extends Component {
 
     render () {
         let { allGender, imgUrl, isOpen, email, password, confirmPassword, firstName, lastName, phoneNumber, address, gender } = this.state;
-        let { language, user, users } = this.props;
+        let { language } = this.props;
         return (
             <div className="register-wrapper" >
                 <div class="form">

@@ -141,8 +141,6 @@ class MySchedule extends Component {
     render () {
         const { language } = this.props;
         const { allTimeTypes, date, action, doctorId } = this.state;
-        let minDate = new Date();
-        minDate = minDate.setDate(minDate.getDate() + 1);
         return (
             <>
                 <div className="text-center title"><FormattedMessage id="menu.doctor.my-schedule" /></div>

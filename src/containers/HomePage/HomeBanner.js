@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-
-import './HomeBanner.scss';
 import hospital from '../../assets/hospital.png';
 import phone from '../../assets/phone.png';
 import overal from '../../assets/overal.png';
@@ -10,6 +8,7 @@ import microscope from '../../assets/microscope.png';
 import mental from '../../assets/mental.png';
 import dental from '../../assets/dental.png';
 import { injectIntl } from 'react-intl';
+import './HomeBanner.scss';
 
 class HomeBanner extends Component {
     render () {

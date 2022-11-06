@@ -1,5 +1,5 @@
 export const adminMenu = [
-    { //người dùng
+    {
         name: 'menu.admin.manage-account', menus: [
             // {
             //     name: 'menu.admin.crud', link: '/system/manage-user',
@@ -16,12 +16,12 @@ export const adminMenu = [
             }
         ]
     },
-    { //người dùng
+    {
         name: 'menu.admin.manage-schedule', menus: [
             { name: 'menu.admin.manage-schedule', link: '/system/manage-schedule' }
         ]
     },
-    { //người dùng
+    {
         name: 'menu.admin.manage-specialty', menus: [
             { name: 'menu.admin.add-specialty', link: '/system/add-specialty' },
             { name: 'menu.admin.update-specialty', link: '/system/update-specialty' }
@@ -30,7 +30,7 @@ export const adminMenu = [
 ];
 
 export const doctorMenu = [
-    { //người dùng
+    {
         name: 'menu.doctor.menu', menus: [
             { name: 'menu.doctor.my-schedule', link: '/doctor/manage-schedule' },
             { name: 'menu.doctor.my-information', link: '/doctor/info' }

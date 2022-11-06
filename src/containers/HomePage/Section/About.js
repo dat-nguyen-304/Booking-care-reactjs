@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 class About extends Component {
     render () {
@@ -14,7 +13,6 @@ class About extends Component {
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
-
                         </iframe>
                     </div>
                     <div className="section-about-description">
@@ -24,17 +22,6 @@ class About extends Component {
             </div >
         );
     }
-
 }
 
-const mapStateToProps = state => {
-    return {
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(About);
+export default About;

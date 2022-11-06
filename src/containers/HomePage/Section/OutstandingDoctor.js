@@ -21,7 +21,7 @@ class OutstandingDoctor extends Component {
             <div className="section section-doctor">
                 <div className="section-content"><div className="section-header">
                     <div className="section-title"><FormattedMessage id="home-section.outstanding-doctor" /></div>
-                    <a href="#" className="section-button"><FormattedMessage id="home-section.search" /></a>
+                    <a href="/#" className="section-button"><FormattedMessage id="home-section.search" /></a>
                 </div>
 
                     <Slider { ...this.props.settings }>
@@ -46,7 +46,6 @@ class OutstandingDoctor extends Component {
             </div >
         );
     }
-
 }
 
 const mapStateToProps = state => {

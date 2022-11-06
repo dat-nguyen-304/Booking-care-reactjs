@@ -12,8 +12,8 @@ class HomeFooter extends Component {
                     &#169; <FormattedMessage id="home-section.copyright" />
                 </div>
                 <div className="home-footer-right">
-                    <a href="#"><i className="facebook-link fab fa-facebook-square"></i></a>
-                    <a href="#"><i className="youtube-link fab fa-youtube"></i></a>
+                    <a href="/#"><i className="facebook-link fab fa-facebook-square"></i></a>
+                    <a href="/#"><i className="youtube-link fab fa-youtube"></i></a>
                 </div>
             </div>
         );

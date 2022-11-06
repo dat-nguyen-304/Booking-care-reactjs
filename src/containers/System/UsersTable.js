@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { createUser, deleteUser, editUser } from '../../services/adminService';
-import { CRUD_ACTION } from '../../utils/constant';
+import { deleteUser } from '../../services/adminService';
 import * as actions from '../../store/actions';
-import './UsersTable.scss';
 import { toast } from 'react-toastify';
+import './UsersTable.scss';
 class UsersTable extends Component {
 
     state = {

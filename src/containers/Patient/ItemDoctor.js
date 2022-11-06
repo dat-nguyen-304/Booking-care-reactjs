@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { getDetailDoctorById } from '../../services/adminService';
 import IntroDoctor from './IntroDoctor';
 import DoctorSchedule from './DoctorSchedule';
@@ -42,7 +41,7 @@ class ItemDoctor extends Component {
     }
 
     render () {
-        let { image, description, contentHTML, openModal, positionData, firstName, lastName, provinceId } = this.state;
+        let { image, description, positionData, firstName, lastName, provinceId } = this.state;
         let { doctorId, selectedProvince } = this.props;
         return (
             <>

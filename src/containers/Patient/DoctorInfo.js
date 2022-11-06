@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { LANGUAGES } from '../../utils/constant';
-import "./DoctorInfo.scss";
 import { getDoctorInfo } from '../../services/adminService';
 import { NumericFormat } from 'react-number-format';
+import './DoctorInfo.scss';
 class DoctorInfo extends Component {
     state = {
         clinicName: '',
@@ -35,7 +35,7 @@ class DoctorInfo extends Component {
 
 
     render () {
-        let { clinicAddress, clinicName, note, price, province, payment, showDetail } = this.state;
+        let { clinicAddress, clinicName, note, price, payment, showDetail } = this.state;
         let { language } = this.props;
         price = price && (language === LANGUAGES.VI ? price.valueVi : price.valueEn);
         let suffix = language === LANGUAGES.VI ? 'VNĐ' : '$';

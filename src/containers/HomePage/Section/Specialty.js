@@ -26,7 +26,7 @@ class Specialty extends Component {
                 <div className="section-content">
                     <div className="section-header">
                         <div className="section-title"><FormattedMessage id="home-section.popular-specialty" /></div>
-                        <a href="#" className="section-button"><FormattedMessage id="home-section.see-more" /></a>
+                        <a href="/#" className="section-button"><FormattedMessage id="home-section.see-more" /></a>
                     </div>
                     <Slider { ...this.props.settings }>
                         {

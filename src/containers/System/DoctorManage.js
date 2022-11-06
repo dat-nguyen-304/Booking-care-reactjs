@@ -2,21 +2,16 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
-
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import { createMarkDown, updateMarkDown, createDoctorInfo, updateDoctorInfo } from '../../services/adminService';
-
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select'
 import { CRUD_ACTION, LANGUAGES } from '../../utils/constant';
-import './DoctorManage.scss';
 import { getDetailDoctorById } from '../../services/adminService';
-import _, { add } from 'lodash';
-import { NumericFormat } from 'react-number-format';
+import { createMarkDown, updateMarkDown, createDoctorInfo, updateDoctorInfo } from '../../services/adminService';
+import './DoctorManage.scss';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 class DoctorManage extends Component {
@@ -66,7 +61,7 @@ class DoctorManage extends Component {
 
     getAllOptions = () => {
         let { allDoctor, allPrice, allProvince, allPayment, language, allSpecialty } = this.props;
-        let { selectedDoctor, selectedPrice, selectedPayment, selectedProvince, selectedSpecialty } = this.state;
+        let { selectedDoctor, selectedPrice, selectedPayment, selectedProvince } = this.state;
         allDoctor = allDoctor.map((doctor) => {
             const label = language === LANGUAGES.VI ?
                 `${doctor.lastName} ${doctor.firstName}`
@@ -226,7 +221,7 @@ class DoctorManage extends Component {
         const res = await getDetailDoctorById(doctorId);
         if (res && res.errCode === 0) {
             let { description, contentHTML, contentMarkDown } = res.doctorInfo.Markdown;
-            let { paymentData, provinceData, priceData, priceId, paymentId, provinceId, nameClinic, addressClinic, note, specialtyData, specialtyId } = res.doctorInfo.Doctor_Info;
+            let { paymentData, provinceData, priceData, priceId, paymentId, provinceId, nameClinic, addressClinic, note, specialtyData } = res.doctorInfo.Doctor_Info;
             if (!description && !contentHTML && !contentMarkDown && !paymentData.id && !provinceData.id && !priceData.id) {
                 this.setState({
                     action: CRUD_ACTION.CREATE,

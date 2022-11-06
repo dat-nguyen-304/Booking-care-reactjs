@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { LANGUAGES } from '../../utils/constant';
-import { toast } from 'react-toastify';
 import { Modal } from 'reactstrap';
 import { ThreeDots } from 'react-loader-spinner'
 import CommonUtils from '../../utils/CommonUtils';
@@ -57,7 +55,7 @@ class ModalSendInvoice extends Component {
     }
 
     render () {
-        let { language, openModal, toggleModal } = this.props;
+        let { openModal, toggleModal } = this.props;
         let { isLoading, imgUrl, isOpen } = this.state;
         return (
             <div className="modal-send-invoice">

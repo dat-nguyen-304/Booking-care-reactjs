@@ -2,21 +2,16 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
-
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import { createMarkDown, updateMarkDown, createDoctorInfo, updateDoctorInfo } from '../../services/adminService';
-
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select'
 import { CRUD_ACTION, LANGUAGES } from '../../utils/constant';
 import { getDetailDoctorById } from '../../services/adminService';
-import _, { add } from 'lodash';
-import { NumericFormat } from 'react-number-format';
-const mdParser = new MarkdownIt(/* Markdown-it options */);
+const mdParser = new MarkdownIt();
 
 class DoctorManage extends Component {
 
@@ -55,7 +50,7 @@ class DoctorManage extends Component {
 
     getAllOptions = () => {
         let { allPrice, allProvince, allPayment, language, allSpecialty } = this.props;
-        let { selectedPrice, selectedPayment, selectedProvince, selectedSpecialty } = this.state;
+        let { selectedPrice, selectedPayment, selectedProvince } = this.state;
         allPrice = allPrice.map((price) => {
             const label = language === LANGUAGES.VI ?
                 new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price.valueVi)
@@ -195,7 +190,7 @@ class DoctorManage extends Component {
         const res = await getDetailDoctorById(doctorId);
         if (res && res.errCode === 0) {
             let { description, contentHTML, contentMarkDown } = res.doctorInfo.Markdown;
-            let { paymentData, provinceData, priceData, priceId, paymentId, provinceId, nameClinic, addressClinic, note, specialtyData, specialtyId } = res.doctorInfo.Doctor_Info;
+            let { paymentData, provinceData, priceData, priceId, paymentId, provinceId, nameClinic, addressClinic, note, specialtyData } = res.doctorInfo.Doctor_Info;
             let { language } = this.props;
             let selectedPrice = {
                 label: language === LANGUAGES.VI ? new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(priceData.valueVi) : new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'USD' }).format(priceData.valueEn),

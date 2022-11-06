@@ -25,7 +25,7 @@ class ModalBooking extends Component {
 
     submitBooking = async () => {
         let { patientFullName, phone, reason } = this.state;
-        let { language, doctorId, dayTimeStamp, user, timeString, doctorFullName, dateString } = this.props;
+        let { language, doctorId, dayTimeStamp, user, timeString, doctorFullName } = this.props;
         if (!patientFullName || !phone || !reason) {
             toast.error('Invalid input parameter');
             return;
@@ -64,7 +64,7 @@ class ModalBooking extends Component {
 
     render () {
         let { language, toggleModal, openModal, doctorFullName, description, image, price, dateString, timeString, positionData, firstName, lastName } = this.props;
-        let { patientFullName, phone, reason, dateAndTime, isLoading } = this.state;
+        let { patientFullName, phone, reason, isLoading } = this.state;
         price = price && (language === LANGUAGES.VI ? price.valueVi : price.valueEn);
         return (
             <>

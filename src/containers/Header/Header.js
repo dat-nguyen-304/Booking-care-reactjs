@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
-
 import * as actions from "../../store/actions";
 import Navigator from '../../components/Navigator';
 import { adminMenu, doctorMenu } from './menuApp';
 import './Header.scss';
 import { changeLanguageApp } from '../../store/actions/appActions';
-import { LANGUAGES, ROLES } from '../../utils/constant';
+import { LANGUAGES } from '../../utils/constant';
 
 class Header extends Component {
     changeLanguage = (language) => {

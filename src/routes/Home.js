@@ -15,15 +15,7 @@ class Home extends Component {
         return (
             <Redirect to={ linkToRedirect } />
         );
-        // const { isLoggedIn } = this.props;
-        // let linkToRedirect = isLoggedIn ? '/system/manage-user' : '/home';
-        // let linkToRedirect = '/home'
-
-        // return (
-        //     <Redirect to={ '/home' } />
-        // );
     }
-
 }
 
 const mapStateToProps = state => {

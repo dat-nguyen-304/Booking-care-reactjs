@@ -211,8 +211,8 @@ class UserRedux extends Component {
     }
 
     render () {
-        let { language, user, users } = this.props;
-        let { isLoading, allGender, allPosition, allRole, imgUrl, isOpen, email, password, firstName, lastName, phoneNumber, address, gender, positionId, roleId, action } = this.state;
+        let { language } = this.props;
+        let { allGender, allPosition, allRole, imgUrl, isOpen, email, password, firstName, lastName, phoneNumber, address, gender, positionId, roleId, action } = this.state;
         return (
             <>
                 <div className="title" ><FormattedMessage id="manage-user.manage-account" /></div>

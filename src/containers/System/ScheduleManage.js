@@ -164,9 +164,7 @@ class AdminManage extends Component {
 
     render () {
         const { language } = this.props;
-        const { selectedDoctor, options, allTimeTypes, date, action, openModal } = this.state;
-        let minDate = new Date();
-        minDate = minDate.setDate(minDate.getDate() + 1);
+        const { selectedDoctor, options, allTimeTypes, date, action } = this.state;
         return (
             <>
                 <div className="text-center title"><FormattedMessage id="manage-schedule.manage-schedule" /></div>

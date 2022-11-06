@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import HomeHeader from '../HomePage/HomeHeader';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { LANGUAGES } from '../../utils/constant';
 import { NumericFormat } from 'react-number-format';
 import { FormattedMessage } from 'react-intl';
-
 import './IntroDoctor.scss';
 class IntroDoctor extends Component {
     state = {
@@ -41,7 +39,7 @@ class IntroDoctor extends Component {
 
     render () {
         console.log(this.props);
-        let { image, description, price, language, linkToDoctorDetail, doctorId, timeString, dateString } = this.props;
+        let { image, description, price, language, linkToDoctorDetail, timeString, dateString } = this.props;
         let { fullName } = this.state;
         let suffix = language === LANGUAGES.VI ? 'VNĐ' : '$';
         return (

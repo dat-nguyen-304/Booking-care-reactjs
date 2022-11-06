@@ -5,9 +5,7 @@ import Select from 'react-select';
 import { LANGUAGES } from '../../utils/constant';
 import './DoctorSchedule.scss';
 import moment from 'moment';
-import { toast } from 'react-toastify';
 import { getSchedule } from '../../services/adminService';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './DoctorSchedule.scss';
 import vi from "moment/locale/vi";
 class DoctorSchedule extends Component {

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import './HomeHeader.scss';
 import { LANGUAGES } from '../../utils/constant';
 import { changeLanguageApp } from '../../store/actions/appActions';
 import { withRouter } from 'react-router-dom';
 import * as actions from "../../store/actions";
+import defaultAvatar from '../../assets/defaultAvatar.jpg';
+import './HomeHeader.scss';
 
 class HomeHeader extends Component {
     changeLanguage = (language) => {
@@ -32,6 +33,7 @@ class HomeHeader extends Component {
                 <div className="logout">
                     <img className="avatar"
                         src={ Buffer.from(userInfo.image, 'base64').toString('binary') }
+                        alt={ defaultAvatar }
                     />
                     { language === LANGUAGES.EN ?
                         (userInfo.firstName + " " + userInfo.lastName)

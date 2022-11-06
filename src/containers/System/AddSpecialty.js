@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { FormattedMessage } from 'react-intl';
-import { CRUD_ACTION, LANGUAGES } from '../../utils/constant';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
-import * as actions from '../../store/actions';
 import CommonUtils from '../../utils/CommonUtils';
 import { createSpecialty } from '../../services/adminService';
 import { toast } from 'react-toastify';
@@ -73,7 +71,7 @@ class AddSpecialty extends Component {
     }
 
     render () {
-        let { name, imgUrl, isOpen, contentHTML, contentMarkDown } = this.state;
+        let { name, imgUrl, isOpen, contentMarkDown } = this.state;
         return (
             <div className="specialty-manager-container">
                 <div className="text-center title" ><FormattedMessage id="menu.admin.add-specialty" /></div>

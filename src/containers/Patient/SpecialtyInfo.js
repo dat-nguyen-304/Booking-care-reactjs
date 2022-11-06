@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import './SpecialtyInfo.scss';
 import { getSpecialtyById } from '../../services/adminService'
-import _ from 'lodash';
 
 class SpecialtyInfo extends Component {
     state = {

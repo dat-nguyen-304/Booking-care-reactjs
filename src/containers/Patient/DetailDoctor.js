@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import HomeHeader from '../HomePage/HomeHeader';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import './DetailDoctor.scss';
 import HomeFooter from '../HomePage/HomeFooter';
 import { getDetailDoctorById } from '../../services/adminService';
-import { LANGUAGES } from '../../utils/constant';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorInfo from './DoctorInfo';
 import ModalBooking from './ModalBooking';
 import IntroDoctor from './IntroDoctor';
+import './DetailDoctor.scss';
 
 class DetailDoctor extends Component {
     state = {
